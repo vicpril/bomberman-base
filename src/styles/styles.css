@@ -1,0 +1,6 @@
+@import "./constants.css";
+
+h1 {
+  color: var(--errorRed);
+  text-align: center;
+}
