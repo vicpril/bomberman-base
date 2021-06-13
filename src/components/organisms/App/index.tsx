@@ -1,3 +1,3 @@
-import App from './App';
+import { AppComponent } from './App';
 
-export default App;
+export const App = AppComponent;

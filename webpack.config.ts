@@ -1,14 +1,20 @@
-import * as webpack from 'webpack';
+import { Configuration as WebpackConfiguration } from 'webpack';
+import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server';
 import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 
-const config: webpack.Configuration = {
+type Configuration = WebpackConfiguration & {
+  devServer?: WebpackDevServerConfiguration
+};
+
+const config: Configuration = {
   entry: './src/index.tsx',
   output: {
     path: path.join(__dirname, '/dist'),
     filename: 'bundle.js',
   },
   resolve: {
+    modules: [path.resolve(__dirname, './src'), 'node_modules'],
     extensions: ['.tsx', '.ts', '.js'],
   },
   module: {
@@ -23,6 +29,9 @@ const config: webpack.Configuration = {
         use: ['style-loader', 'css-loader', 'postcss-loader'],
       },
     ],
+  },
+  devServer: {
+    historyApiFallback: true,
   },
   plugins: [
     new HtmlWebpackPlugin({
