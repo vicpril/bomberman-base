@@ -1,3 +1,1 @@
-import { GameComponent } from './Game';
-
-export const Game = GameComponent;
+export { GameComponent as Game } from './Game';

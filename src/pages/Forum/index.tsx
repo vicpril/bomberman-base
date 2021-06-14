@@ -1,3 +1,1 @@
-import { ForumComponent } from './Forum';
-
-export const Forum = ForumComponent;
+export { ForumComponent as Forum } from './Forum';

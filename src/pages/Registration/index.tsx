@@ -1,3 +1,1 @@
-import { RegistrationComponent } from './Registration';
-
-export const Registration = RegistrationComponent;
+export { RegistrationComponent as Registration } from './Registration';

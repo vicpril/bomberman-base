@@ -1,3 +1,1 @@
-import { LoginComponent } from './Login';
-
-export const Login = LoginComponent;
+export { LoginComponent as Login } from './Login';

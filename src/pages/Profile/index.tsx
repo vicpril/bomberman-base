@@ -1,3 +1,1 @@
-import { ProfileComponent } from './Profile';
-
-export const Profile = ProfileComponent;
+export { ProfileComponent as Profile } from './Profile';

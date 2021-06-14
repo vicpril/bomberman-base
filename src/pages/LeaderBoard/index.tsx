@@ -1,3 +1,1 @@
-import { LeaderBoardComponent } from './LeaderBoard';
-
-export const LeaderBoard = LeaderBoardComponent;
+export { LeaderBoardComponent as LeaderBoard } from './LeaderBoard';
