@@ -2,6 +2,7 @@ import { Configuration as WebpackConfiguration } from 'webpack';
 import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-server';
 import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import CopyPlugin from 'copy-webpack-plugin';
 
 type Configuration = WebpackConfiguration & {
   devServer?: WebpackDevServerConfiguration
@@ -28,6 +29,10 @@ const config: Configuration = {
         test: /\.css$/,
         use: ['style-loader', 'css-loader', 'postcss-loader'],
       },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        type: 'asset/resource',
+      },
     ],
   },
   devServer: {
@@ -36,6 +41,11 @@ const config: Configuration = {
   plugins: [
     new HtmlWebpackPlugin({
       template: './www/index.html',
+    }),
+    new CopyPlugin({
+      patterns: [
+        { from: './src/locales', to: 'locales' },
+      ],
     }),
   ],
 };

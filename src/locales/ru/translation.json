@@ -1,0 +1,10 @@
+{
+    "login": "логин",
+    "registration": "регистрация",
+    "forum": "форум",
+    "leaderboard": "лидерборд",
+    "game": "игра",
+    "submit": "отправить",
+    "back": "назад",
+    "type_your_login": "введите логин"
+}

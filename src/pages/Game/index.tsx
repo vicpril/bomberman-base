@@ -1,1 +1,1 @@
-export { GameComponent as Game } from './Game';
+export { Game } from './Game';

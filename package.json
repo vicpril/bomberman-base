@@ -22,11 +22,13 @@
   },
   "homepage": "https://github.com/06-turin/gamedev#readme",
   "devDependencies": {
+    "@types/copy-webpack-plugin": "^8.0.0",
     "@types/node": "^15.12.2",
     "@types/webpack": "^5.28.0",
     "@types/webpack-dev-server": "^3.11.4",
     "@typescript-eslint/eslint-plugin": "^4.26.1",
     "@typescript-eslint/parser": "^4.26.1",
+    "copy-webpack-plugin": "^9.0.0",
     "css-loader": "^5.2.6",
     "eslint": "^7.28.0",
     "eslint-config-airbnb": "^18.2.1",
@@ -39,6 +41,7 @@
     "path": "^0.12.7",
     "postcss": "^8.3.2",
     "postcss-loader": "^6.1.0",
+    "postcss-nested": "^5.0.5",
     "postcss-preset-env": "^6.7.0",
     "style-loader": "^2.0.0",
     "stylelint": "^13.13.1",
@@ -54,10 +57,16 @@
     "@types/react": "^17.0.11",
     "@types/react-dom": "^17.0.7",
     "@types/react-router-dom": "^5.1.7",
+    "classnames": "^2.3.1",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "i18next": "^20.3.1",
+    "i18next-browser-languagedetector": "^6.1.1",
+    "i18next-http-backend": "^1.2.6",
+    "normalize.css": "^8.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-i18next": "^11.11.0",
     "react-router-dom": "^5.2.0"
   }
 }

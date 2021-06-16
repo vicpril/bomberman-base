@@ -1,1 +1,1 @@
-export { LeaderBoardComponent as LeaderBoard } from './LeaderBoard';
+export { LeaderBoard } from './LeaderBoard';

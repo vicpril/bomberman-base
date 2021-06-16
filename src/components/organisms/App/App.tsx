@@ -1,3 +1,4 @@
+import './App.css';
 import React, { FC } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Forum } from 'pages/Forum';
@@ -7,14 +8,13 @@ import { Login } from 'pages/Login';
 import { Profile } from 'pages/Profile';
 import { Registration } from 'pages/Registration';
 import { Error } from 'pages/Error';
-import './App.css';
 
-export const AppComponent: FC = () => (
+export const App: FC = () => (
   <BrowserRouter>
     <Switch>
       <Route exact path="/">
         <div>
-          <h1>Здесь будет игра</h1>
+          <h1>Bomberman</h1>
         </div>
       </Route>
       <Route path="/login" component={Login} />

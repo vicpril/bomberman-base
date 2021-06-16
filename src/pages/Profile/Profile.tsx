@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 
-export const ProfileComponent: FC = () => (
+export const Profile: FC = () => (
   <div>
-    <h1>Профиль</h1>
+    <h1>Profile</h1>
   </div>
 );

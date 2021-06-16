@@ -1,0 +1,10 @@
+{
+    "login": "login",
+    "registration": "registration",
+    "forum": "forum",
+    "leaderboard": "leaderboard",
+    "game": "game",
+    "submit": "submit",
+    "back": "back",
+    "type_your_login": "type your login"
+}

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 
-export const GameComponent: FC = () => (
+export const Game: FC = () => (
   <div>
-    <h1>Игра</h1>
+    <h1>Game</h1>
   </div>
 );

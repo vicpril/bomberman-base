@@ -1,0 +1,53 @@
+.btn {
+  box-shadow: none;
+  margin-top: 18px;
+  color: var(--white);
+  background-color: transparent;
+  text-transform: uppercase;
+
+  &.size_l {
+    font-size: 32px;
+    padding: 8px 22px 6px 22px;
+    border-radius: 12px;
+  }
+
+  &.size_m {
+    font-size: 24px;
+    padding: 8px 22px 6px 22px;
+    border-radius: 12px;
+  }
+
+  &.size_s {
+    font-size: 18px;
+    padding: 4px 12px;
+    border-radius: 6px;
+  }
+
+  &-primary {
+    border: 2px solid var(--white);
+
+    &:hover {
+      background-color: var(--white);
+      border-color: var(--activityColor);
+      color: var(--appBackground);
+    }
+
+    &:active {
+      background-color: var(--activityColor);
+      border-color: var(--activityColor);
+      color: var(--appBackground);
+    }
+  }
+
+  &-secondary {
+    border: none;
+
+    &:hover {
+      color: var(--activityColor);
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+}

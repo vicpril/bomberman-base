@@ -1,0 +1,19 @@
+.input-label {
+  color: var(--white);
+  font-size: 26px;
+  margin-bottom: 18px;
+}
+
+.input-field_standard {
+  background-color: transparent;
+  margin-left: 12px;
+  box-shadow: none;
+  border: none;
+  border-bottom: 2px solid var(--white);
+  color: var(--white);
+  text-transform: uppercase;
+
+  &:focus-visible {
+    outline: none;
+  }
+}

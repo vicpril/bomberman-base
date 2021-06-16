@@ -1,1 +1,1 @@
-export { ForumComponent as Forum } from './Forum';
+export { Forum } from './Forum';

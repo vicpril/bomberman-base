@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 
-export const ErrorComponent: FC = () => (
+export const Error: FC = () => (
   <div>
-    <h1>Ошибка</h1>
+    <h1>Error 404</h1>
   </div>
 );
