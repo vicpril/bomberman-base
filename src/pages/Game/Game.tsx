@@ -1,7 +1,6 @@
-import React, { FC } from 'react';
+import React from 'react';
+import { Game as GameComponent } from 'components/organisms/Game/Game';
 
-export const Game: FC = () => (
-  <div>
-    <h1>Game</h1>
-  </div>
+export const Game = () => (
+  <GameComponent />
 );

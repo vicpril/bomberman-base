@@ -2,7 +2,7 @@ import './App.css';
 import React, { FC } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Forum } from 'pages/Forum';
-import { Game } from 'pages/Game';
+import { Game } from 'pages/Game/Game';
 import { LeaderBoard } from 'pages/LeaderBoard';
 import { Login } from 'pages/Login';
 import { Profile } from 'pages/Profile';
