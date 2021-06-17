@@ -1,4 +1,5 @@
 {
+    "main": "main",
     "login": "login",
     "registration": "registration",
     "forum": "forum",
@@ -6,5 +7,9 @@
     "game": "game",
     "submit": "submit",
     "back": "back",
-    "type_your_login": "type your login"
+    "profile": "profile",
+    "type_your_login": "type your login",
+    "break_everything": "break everything",
+    "something_is_wrong": "something is wrong",
+    "error": "error"
 }

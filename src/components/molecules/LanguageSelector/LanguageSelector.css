@@ -1,0 +1,36 @@
+.language-selector {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 30px;
+  padding-right: 90px;
+}
+
+.language-selector__button {
+  padding: 6px 16px 4px;
+  border: none;
+  border: 2px solid var(--appBackground);
+  margin-right: 6px;
+  box-shadow: none;
+  background-color: var(--notActiveColor);
+  border-radius: 6px;
+  font-size: 18px;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    cursor: pointer;
+    background-color: var(--white);
+    border-color: var(--activityColor);
+    color: var(--appBackground);
+  }
+
+  &_active {
+    background-color: var(--activityColor);
+    color: var(--white);
+    border-color: var(--activityColor);
+
+    &:hover {
+      background-color: var(--activityColor);
+      color: var(--white);
+    }
+  }
+}

@@ -15,6 +15,7 @@ html {
 h1 {
   color: var(--activityColor);
   text-align: center;
+  text-transform: uppercase;
 }
 
 .pt-10 {

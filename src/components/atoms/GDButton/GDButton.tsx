@@ -1,6 +1,6 @@
 import './styles.css';
 import React, { FC, MouseEventHandler } from 'react';
-import classnames from 'classnames';
+import classNames from 'classnames';
 
 export type GDButtonProps = {
   title: string
@@ -22,7 +22,7 @@ export const GDButton: FC<GDButtonProps> = ({
   <button
     type={type}
     onClick={onClick}
-    className={classnames(['btn', `btn-${styleOption}`, `size_${size}`, className])}
+    className={classNames(['btn', `btn-${styleOption}`, `size_${size}`, className])}
   >
     {title}
   </button>

@@ -1,4 +1,4 @@
-import './Canvas.css'
+import './Canvas.css';
 import React, { FC, useEffect, useRef } from 'react';
 import { Game } from '../core/classes/Game';
 

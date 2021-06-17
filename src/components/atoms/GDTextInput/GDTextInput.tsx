@@ -1,6 +1,6 @@
 import './styles.css';
 import React, { ChangeEventHandler, FC, FocusEventHandler } from 'react';
-import classnames from 'classnames';
+import classNames from 'classnames';
 
 export type GDTextInputProps = {
   id: string
@@ -19,11 +19,11 @@ export const GDTextInput: FC<GDTextInputProps> = ({
 }) => {
   const titleString = `${title}:`;
   return (
-    <label htmlFor={id} className={classnames('input-label')}>
+    <label htmlFor={id} className={classNames('input-label')}>
       {titleString}
       <input
         placeholder={placeholder}
-        className={classnames(['input-field_standard', className])}
+        className={classNames(['input-field_standard', className])}
         type={type}
         id={id}
         name={name || title}

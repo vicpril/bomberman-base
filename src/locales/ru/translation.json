@@ -1,4 +1,5 @@
 {
+    "main": "главная",
     "login": "логин",
     "registration": "регистрация",
     "forum": "форум",
@@ -6,5 +7,9 @@
     "game": "игра",
     "submit": "отправить",
     "back": "назад",
-    "type_your_login": "введите логин"
+    "profile": "профиль",
+    "type_your_login": "введите логин",
+    "break_everything": "сломать всё",
+    "something_is_wrong": "что-то пошло не так",
+    "error": "ошибка"
 }

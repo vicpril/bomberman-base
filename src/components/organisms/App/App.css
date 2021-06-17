@@ -10,7 +10,7 @@
   height: 100vh;
   max-width: 1440px;
   max-height: 1024px;
-  background-color: var(--mainBackColor);
+  background-color: var(--appBackground);
   color: var(--mainTextColor);
   font-family: var(--mainTextFontFamily);
 }
