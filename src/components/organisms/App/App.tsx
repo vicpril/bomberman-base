@@ -8,6 +8,7 @@ import { Login } from 'pages/Login';
 import { Profile } from 'pages/Profile';
 import { Registration } from 'pages/Registration';
 import { Error } from 'pages/Error';
+import { Start } from 'pages/Start';
 
 export const App: FC = () => (
   <BrowserRouter>
@@ -18,6 +19,7 @@ export const App: FC = () => (
         </div>
       </Route>
       <Route path="/login" component={Login} />
+      <Route path="/start" component={Start} />
       <Route path="/registration" component={Registration} />
       <Route path="/forum" component={Forum} />
       <Route path="/game" component={Game} />

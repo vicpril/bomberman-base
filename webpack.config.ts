@@ -33,6 +33,10 @@ const config: Configuration = {
         test: /\.(woff|woff2|eot|ttf|otf)$/i,
         type: 'asset/resource',
       },
+      {
+        test: /\.(svg|png|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
+      },
     ],
   },
   devServer: {

@@ -142,4 +142,7 @@ psd
 thumb
 sketch
 
+# IDE
+*.idea
+
 # End of https://www.toptal.com/developers/gitignore/api/react,node

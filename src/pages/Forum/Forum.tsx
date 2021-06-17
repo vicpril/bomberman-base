@@ -1,6 +1,6 @@
 import './Forum.css';
 import React, { FC, useCallback } from 'react';
-import { GDButton } from 'components/atoms/GDButton';
+import { GDButton } from 'components/atoms/GDButton/GDButton';
 import classNames from 'classnames';
 import { GDTextInput } from 'components/atoms/GDTextInput';
 import { useTranslation } from 'react-i18next';

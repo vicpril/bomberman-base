@@ -2,9 +2,11 @@ import './styles.css';
 import React, { ChangeEventHandler, FC, FocusEventHandler } from 'react';
 import classnames from 'classnames';
 
-type GDTextInputProps = {
+export type GDTextInputProps = {
   id: string
   title: string
+  name?: string
+  type?: string
   className?: string
   placeholder?: string
   value?: string
@@ -13,7 +15,7 @@ type GDTextInputProps = {
 }
 
 export const GDTextInput: FC<GDTextInputProps> = ({
-  className, placeholder, title, id, value, onChange, onBlur,
+  className, placeholder, title, id, name, type, value, onChange, onBlur,
 }) => {
   const titleString = `${title}:`;
   return (
@@ -22,14 +24,13 @@ export const GDTextInput: FC<GDTextInputProps> = ({
       <input
         placeholder={placeholder}
         className={classnames(['input-field_standard', className])}
-        type="text"
+        type={type}
         id={id}
-        name={title}
+        name={name || title}
         value={value}
         onChange={onChange}
         onBlur={onBlur}
       />
-
     </label>
   );
 };

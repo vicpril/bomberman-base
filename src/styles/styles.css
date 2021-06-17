@@ -1,4 +1,5 @@
 @import "./constants.css";
+@import "fonts.css";
 @import 'normalize.css';
 @import url('http://fonts.cdnfonts.com/css/pixeboy');
 @import url('https://fonts.googleapis.com/css2?family=Russo+One&display=swap');
@@ -18,4 +19,8 @@ h1 {
 
 .pt-10 {
   padding-top: 10px;
+}
+
+body {
+  margin: 0;
 }

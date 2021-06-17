@@ -1,0 +1,27 @@
+.logo {
+  display: flex;
+  flex-direction: column;
+  max-width: 475px;
+  min-width: fit-content;
+  width: 100vw;
+  color: var(--mainTextColor);
+  font-family: var(--mainTextFontFamily), serif;
+}
+
+.logo__image {
+  height: 0.7em;
+}
+
+.logo__text {
+  white-space: nowrap;
+  line-height: 0.7em;
+}
+
+.logo__text_big {
+  font-size: 150px;
+}
+
+.logo__text_small {
+  align-self: flex-end;
+  font-size: 75px;
+}
