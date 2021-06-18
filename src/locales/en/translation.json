@@ -11,5 +11,14 @@
     "type_your_login": "type your login",
     "break_everything": "break everything",
     "something_is_wrong": "something is wrong",
-    "error": "error"
+    "error": "error",
+    "start_game": "start game",
+    "game_over": "game over",
+    "play_again": "play again",
+    "bombs": "bombs",
+    "timer": "timer",
+    "score": "score",
+    "stage": "stage",
+    "victory": "victory",
+    "continue": "continue"
 }

@@ -1,4 +1,3 @@
-import './styles.css';
 import React, { FC } from 'react';
 import { GDButton, GDButtonProps } from 'components/atoms/GDButton';
 import classnames from 'classnames';

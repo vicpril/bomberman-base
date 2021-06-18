@@ -36,6 +36,7 @@ export class Game {
 
     end() {
       cancelAnimationFrame(this.requestID);
+      this.BF.destroy();
     }
 
     private step = (timestamp: number) => {

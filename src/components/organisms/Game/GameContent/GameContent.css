@@ -1,8 +1,20 @@
 .game-content {
-  height: 100%;
+  min-height: 704px;
   margin: 0;
   background: black;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  > .content-wrapper {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+
+    & p {
+      font-size: 38px;
+      color: var(--white);
+    }
+  }
 }

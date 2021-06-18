@@ -134,7 +134,12 @@ export class BattleField {
     gameService.stopGame();
   }
 
-  private destroy() {
+  winStage() {
+    this.destroy();
+    gameService.stopGame(true);
+  }
+
+  destroy() {
     this.findPlayers().forEach((p) => p.destroy());
     this.cells = [];
     this.entities = [];

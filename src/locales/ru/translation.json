@@ -8,8 +8,17 @@
     "submit": "отправить",
     "back": "назад",
     "profile": "профиль",
-    "type_your_login": "введите логин",
     "break_everything": "сломать всё",
     "something_is_wrong": "что-то пошло не так",
-    "error": "ошибка"
+    "error": "ошибка",
+    "type_your_login": "введите логин",
+    "start_game": "начать игру",
+    "game_over": "игра закончена",
+    "play_again": "играть снова",
+    "bombs": "бомбы",
+    "timer": "время",
+    "score": "счет",
+    "stage": "уровень",
+    "victory": "победа",
+    "continue": "продолжить"
 }

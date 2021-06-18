@@ -4,8 +4,8 @@ import classNames from 'classnames';
 
 export type GDButtonProps = {
   title: string
-  styleOption: 'primary' | 'secondary'
-  onClick: MouseEventHandler<HTMLButtonElement>
+  styleOption?: 'primary' | 'secondary'
+  onClick?: MouseEventHandler<HTMLButtonElement>
   className?: string
   size?: 's' | 'm' | 'l' | 'h',
   type?: 'submit' | 'reset' | 'button';
@@ -14,7 +14,7 @@ export type GDButtonProps = {
 export const GDButton: FC<GDButtonProps> = ({
   title,
   onClick,
-  styleOption,
+  styleOption = 'primary',
   className,
   size = 'm',
   type = 'button',

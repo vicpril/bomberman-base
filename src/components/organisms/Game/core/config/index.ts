@@ -11,3 +11,5 @@ export const DEGREE_360 = 2 * Math.PI;
 
 export const PLAYER_HAS_BOMBS = 2;
 export const PLAYER_BOMB_BLOWS_SIZE = 3;
+
+export const SCORE_WIN_PER_STAGE = 5;

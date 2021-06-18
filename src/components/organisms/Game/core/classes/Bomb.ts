@@ -1,4 +1,4 @@
-import { DEGREE_360, GRID } from '../config';
+import { DEGREE_360, GRID, SCORE_WIN_PER_STAGE } from '../config';
 import { EntitiesTypes } from '../types/EntitiesTypes';
 import { DIRECTIONS, DirectionType } from '../types/DirectionsType';
 import { IEntity } from '../interfaces/IEntity';
@@ -57,6 +57,7 @@ export class Bomb implements IEntity {
     if (!this.alive) return;
 
     this.alive = false;
+    this.owner.addBombToPlayer();
 
     const BF = getBattleField();
 
@@ -100,6 +101,11 @@ export class Bomb implements IEntity {
 
         if (cell === EntitiesTypes.WALL_SOFT) {
           gameService.increaseScore(1);
+        }
+
+        const scoreToWin = SCORE_WIN_PER_STAGE * gameService.stage.get();
+        if (gameService.score.get() >= scoreToWin) {
+          BF.winStage(); return;
         }
 
         if (cell !== EntitiesTypes.EMPTY

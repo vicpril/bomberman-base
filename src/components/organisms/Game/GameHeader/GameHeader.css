@@ -2,4 +2,9 @@
   display: flex;
   justify-content: space-around;
   color: var(--white);
+  margin: 15px 0;
+
+  & span {
+    font-size: 32px;
+  }
 }

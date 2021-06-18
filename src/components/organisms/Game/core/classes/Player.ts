@@ -10,6 +10,7 @@ import { IEntity } from '../interfaces/IEntity';
 import { Position } from '../types/PositionType';
 import { Bomb } from './Bomb';
 import { getBattleField } from './BattleField';
+import { gameService } from '../../services/gameService';
 
 export class Player implements IEntity {
   type = EntitiesTypes.PLAYER;
@@ -21,7 +22,7 @@ export class Player implements IEntity {
     y: 1,
   };
 
-  hasBombs = PLAYER_HAS_BOMBS;
+  private hasBombs = PLAYER_HAS_BOMBS;
 
   bombBlownSize = PLAYER_BOMB_BLOWS_SIZE;
 
@@ -32,12 +33,23 @@ export class Player implements IEntity {
     this.init();
   }
 
+  addBombToPlayer() {
+    this.hasBombs += 1;
+    gameService.setBombs(this.hasBombs);
+  }
+
+  removeBombFromPlayer() {
+    this.hasBombs -= 1;
+    gameService.setBombs(this.hasBombs);
+  }
+
   get bombs(): Bomb[] {
     const BF = getBattleField();
     return BF.findBombs(this);
   }
 
   init() {
+    gameService.setBombs(this.hasBombs);
     document.addEventListener('keydown', this.handleKeyEvent as () => {});
   }
 
@@ -71,13 +83,14 @@ export class Player implements IEntity {
   }
 
   placeBomb(): void {
-    if (this.bombs.length >= this.hasBombs) return;
+    if (this.hasBombs <= 0) return;
 
     const BF = getBattleField();
     if (BF.getCell(this.pos) === EntitiesTypes.PLAYER) {
       const bomb = new Bomb(this.canvasCtx, this.pos, this, this.bombBlownSize);
       BF.addEntity(bomb);
       BF.setCell(this.pos, EntitiesTypes.BOMB);
+      this.removeBombFromPlayer();
     }
   }
 
