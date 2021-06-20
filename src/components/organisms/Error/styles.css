@@ -1,0 +1,37 @@
+.error-page {
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  padding-top: 90px;
+
+  &-info {
+    &__bomb-image {
+      height: 0.9em;
+      margin-left: 6px;
+      margin-bottom: -20px;
+      margin-right: -20px;
+    }
+
+    &__helptext {
+      font-size: 62px;
+      color: var(--mainTextColor);
+      text-align: center;
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+
+    &__number {
+      font-size: 182px;
+      color: var(--mainTextColor);
+      text-align: center;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: center;
+    margin-top: 70px;
+  }
+}

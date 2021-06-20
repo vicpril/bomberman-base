@@ -10,7 +10,6 @@
     "profile": "profile",
     "type_your_login": "type your login",
     "break_everything": "break everything",
-    "something_is_wrong": "something is wrong",
     "error": "error",
     "start_game": "start game",
     "game_over": "game over",
@@ -20,5 +19,10 @@
     "score": "score",
     "stage": "stage",
     "victory": "victory",
-    "continue": "continue"
+    "continue": "continue",
+    "on_no": "oh no",
+    "this_page_was_destroyed": "this page was destroyed",
+    "oops": "oops",
+    "something_went_wrong": "something went wrong",
+    "we_are_looking_to_see_what_happened": "we are looking to see what happened"
 }

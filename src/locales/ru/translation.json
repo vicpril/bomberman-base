@@ -9,7 +9,6 @@
     "back": "назад",
     "profile": "профиль",
     "break_everything": "сломать всё",
-    "something_is_wrong": "что-то пошло не так",
     "error": "ошибка",
     "type_your_login": "введите логин",
     "start_game": "начать игру",
@@ -20,5 +19,10 @@
     "score": "счет",
     "stage": "уровень",
     "victory": "победа",
-    "continue": "продолжить"
+    "continue": "продолжить",
+    "on_no": "о нет",
+    "this_page_was_destroyed": "эта страница была уничтожена",
+    "oops": "упс",
+    "something_went_wrong": "что-то пошло не так",
+    "we_are_looking_to_see_what_happened": "мы уже разбираемся"
 }

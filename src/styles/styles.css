@@ -7,14 +7,18 @@
 html {
   background-color: var(--appBackground);
   font-family: 'Pixeboy', 'Russo One', sans-serif;
-  font-weight: normal;
-  font-style: normal;
   box-sizing: border-box;
+}
+
+#root {
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 h1 {
   color: var(--activityColor);
-  text-align: center;
   text-transform: uppercase;
 }
 

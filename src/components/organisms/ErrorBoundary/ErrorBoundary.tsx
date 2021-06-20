@@ -1,3 +1,5 @@
+import './styles.css';
+import classNames from 'classnames';
 import React, { Component, ErrorInfo, ReactNode } from 'react';
 import { withTranslation, WithTranslation } from 'react-i18next';
 
@@ -29,8 +31,9 @@ class ErrorBoundaryBeforeTranslation extends Component<ErrorBoundaryProps, Error
     const { children, t } = this.props;
 
     if (hasError) {
-      // TODO: Сделать красиво вместе с версткой ошибок 404 и 5**
-      return <h1>{t('something_is_wrong')}</h1>;
+      return (
+        <h1 className={classNames('render-error__text')}>{t('something_went_wrong')}</h1>
+      );
     }
 
     return children;
