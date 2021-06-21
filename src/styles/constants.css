@@ -1,10 +1,15 @@
 :root {
-  --errorRed: #d41f1f;
-  --white: #fff;
-  --appBackground: #000;
   --activityColor: #ff6b00;
   --dangerColor: #d41f1f;
   --mainTextColor: #fff;
-  --mainTextFontFamily: 'Pixeboy';
+  --mainTextFontFamily: 'Pixeboy', 'Russo One', sans-serif;
   --notActiveColor: #b0b0b0;
+  --appBackgroundColor: #000;
+  --mainTextWeight: 700;
+  --subTextWeight: 500;
+
+  --largeFontSize: 73px;
+  --mediumFontSize: 38px;
+  --smallFontSize: 32px;
+  --xsmallFontSize: 18px;
 }

@@ -1,7 +1,7 @@
 .game-header {
   display: flex;
   justify-content: space-around;
-  color: var(--white);
+  color: var(--mainTextColor);
   margin: 15px 0;
 
   & span {

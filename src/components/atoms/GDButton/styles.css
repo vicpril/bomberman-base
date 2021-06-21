@@ -1,7 +1,7 @@
 .btn {
   box-shadow: none;
   margin-top: 18px;
-  color: var(--white);
+  color: var(--mainTextColor);
   background-color: transparent;
   text-transform: uppercase;
 
@@ -30,18 +30,18 @@
   }
 
   &-primary {
-    border: 2px solid var(--white);
+    border: 2px solid var(--mainTextColor);
 
     &:hover {
-      background-color: var(--white);
+      background-color: var(--mainTextColor);
       border-color: var(--activityColor);
-      color: var(--appBackground);
+      color: var(--appBackgroundColor);
     }
 
     &:active {
       background-color: var(--activityColor);
       border-color: var(--activityColor);
-      color: var(--appBackground);
+      color: var(--appBackgroundColor);
     }
   }
 

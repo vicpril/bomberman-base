@@ -6,10 +6,6 @@
   font-size: 38px;
 }
 
-.form__input {
-  font-family: var(--mainTextFontFamily);
-}
-
 .form__error-label {
   justify-self: center;
   align-self: center;

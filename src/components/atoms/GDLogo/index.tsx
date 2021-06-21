@@ -1,1 +1,0 @@
-export { GDLogo } from './GDLogo';

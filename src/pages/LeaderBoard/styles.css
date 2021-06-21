@@ -1,0 +1,26 @@
+.leaderboard-page {}
+
+.leaderboard-page__list {
+  list-style-type: none;
+  font-size: 40px;
+}
+
+.leaderboard-page__list-item {
+  display: grid;
+  grid-template-areas: "nick dots score";
+  grid-template-columns: 1fr fit-content(100%) 1fr;
+  grid-gap: 7px;
+  justify-content: center;
+}
+
+.leaderboard-page__list-dots {
+  grid-area: dots;
+}
+
+.leaderboard-page__list-nickname {
+  grid-area: nick;
+}
+
+.leaderboard-page__list-score {
+  grid-area: score;
+}

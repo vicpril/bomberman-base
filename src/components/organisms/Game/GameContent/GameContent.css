@@ -14,7 +14,7 @@
 
     & p {
       font-size: 38px;
-      color: var(--white);
+      color: var(--mainTextColor);
     }
   }
 }

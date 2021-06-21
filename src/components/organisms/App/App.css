@@ -10,37 +10,31 @@
   height: 100vh;
   max-width: 1440px;
   max-height: 1024px;
-  background-color: var(--appBackground);
+  background-color: var(--appBackgroundColor);
   color: var(--mainTextColor);
   font-family: var(--mainTextFontFamily);
 }
 
-.main-font-family {
-  font-family: var(--mainTextFontFamily);
-}
-
-.page__header {
+.page__content {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100%;
-  height: 15vh;
+  height: 100%;
 }
 
 .page__title {
   font-size: 73px;
+  font-weight: 500;
   color: var(--mainTextColor);
 }
 
-.page__footer {
+.page__footer-buttons {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: auto;
   width: 100%;
   height: 15vh;
-}
-
-.page__footer-item {
-  font-family: var(--mainTextFontFamily);
+  margin-top: auto;
 }

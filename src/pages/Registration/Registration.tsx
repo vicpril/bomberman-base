@@ -1,11 +1,14 @@
 import './styles.css';
 import React, { FC } from 'react';
-import { GDButton } from 'components/atoms/GDButton';
-import { Form } from 'components/molecules/Form';
+import { GDButton } from 'components/atoms/GDButton/GDButton';
+import { Form } from 'components/molecules/Form/Form';
+import classnames from 'classnames';
+import { useTranslation } from 'react-i18next';
+import { BackButton } from 'components/molecules/BackButton/BackButton';
 
 const loginFormFields = [
   { id: 'first_name', title: 'name' },
-  { id: 'second_name', title: 'last name' },
+  { id: 'second_name', title: 'last_name' },
   { id: 'email', title: 'e-mail', type: 'email' },
   { id: 'phone', title: 'phone', type: 'tel' },
   { id: 'login', title: 'login' },
@@ -13,27 +16,31 @@ const loginFormFields = [
   { id: 'verify_password', title: 'repeat', type: 'password' },
 ];
 
-export const Registration: FC = () => (
-  <div className="page">
-    <div className="page__header">
-      <h1 className="page__title">registration</h1>
-    </div>
-    <Form className="register-form" fields={loginFormFields} />
-    <GDButton
-      className="page__footer-item"
-      title="submit"
-      styleOption="primary"
-      size="l"
-      onClick={() => null}
-    />
-    <div className="page__footer">
+export type RegistrationPageProps = {
+  className?: string
+}
+
+export const Registration: FC<RegistrationPageProps> = ({ className }) => {
+  const { t } = useTranslation();
+
+  loginFormFields.forEach((field) => {
+    field.title = t(field.title);
+  });
+
+  return (
+    <div className={classnames(['page', className])}>
+      <h1 className="page__title">{t('registration')}</h1>
+      <Form className="register-form" fields={loginFormFields} />
       <GDButton
-        className="page__footer-item"
-        title="back"
-        styleOption="secondary"
+        title={t('submit')}
+        styleOption="primary"
         size="l"
         onClick={() => null}
       />
+
+      <div className="page__footer-buttons">
+        <BackButton />
+      </div>
     </div>
-  </div>
-);
+  );
+};

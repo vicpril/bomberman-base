@@ -1,0 +1,14 @@
+.menu {
+  display: flex;
+  margin: 0;
+}
+
+.menu-vertical {
+  flex-direction: column;
+  margin: 0;
+}
+
+.menu__item {
+  margin: 0;
+  padding: 0;
+}

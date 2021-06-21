@@ -1,79 +1,52 @@
-import './Forum.css';
-import React, { ChangeEventHandler, FC, useState } from 'react';
+import './styles.css';
+import React, { FC } from 'react';
 import { GDButton } from 'components/atoms/GDButton/GDButton';
 import classNames from 'classnames';
-import { GDTextInput } from 'components/atoms/GDTextInput/GDTextInput';
 import { useTranslation } from 'react-i18next';
+import { BackButton } from 'components/molecules/BackButton/BackButton';
+import { useHistory } from 'react-router-dom';
+import { dummyTopics, topicsListHeader } from 'pages/Forum/constants';
 
-export const Forum: FC = () => {
+export type ForumPageProps = {
+  className?: string
+}
+
+export const Forum: FC<ForumPageProps> = ({ className }) => {
   const { t } = useTranslation();
-
-  // TODO: Delete all showcase functions and state when Forum page is ready
-  const [showcaseIsBroken, showcaseSetIsBroken] = useState(false);
-
-  const showcaseButtonClick = (buttonId: number) => () => {
-    // eslint-disable-next-line no-console
-    console.log(`click ${buttonId}`);
-  };
-
-  const showcaseHandleInputChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    // eslint-disable-next-line no-console
-    console.log(e.target.value);
-  };
-
-  const showcaseHandleInputBlur: ChangeEventHandler<HTMLInputElement> = (e) => {
-    // eslint-disable-next-line no-console
-    console.log(e.target.value);
-  };
-
-  const showcaseHandleBreakingEverything = () => {
-    showcaseSetIsBroken(true);
-  };
-
-  const showcaseRenderingError = () => {
-    if (showcaseIsBroken) {
-      throw new Error('crash!');
-    }
-    return <></>;
-  };
+  const listHeader = topicsListHeader.map((item) => t(item));
+  const history = useHistory();
 
   return (
-    <div>
-      {showcaseRenderingError()}
+    <div className={classNames(['page', className])}>
+      <h1 className="page__title">{t('forum')}</h1>
 
-      <h1>{t('forum')}</h1>
-
-      <div className={classNames('form-container')}>
-        <GDTextInput
-          id="login"
-          title={t('login')}
-          placeholder={t('type_your_login')}
-          onChange={showcaseHandleInputChange}
-          onBlur={showcaseHandleInputBlur}
-        />
-
-        <GDButton
-          title={t('submit')}
-          styleOption="primary"
-          onClick={showcaseButtonClick(1)}
-          size="l"
-        />
-
-        <GDButton
-          title={t('back')}
-          styleOption="secondary"
-          onClick={showcaseButtonClick(2)}
-          size="m"
-        />
-
-        <GDButton
-          title={t('break_everything')}
-          styleOption="secondary"
-          onClick={showcaseHandleBreakingEverything}
-          size="m"
-        />
+      <div className="forum">
+        <span className="forum__header">
+          {listHeader.map((item) => <GDButton title={item} styleOption="secondary" size="l" />)}
+        </span>
+        <div className="forum__topics-list">
+          {dummyTopics.map(({
+            topic,
+            author,
+            postCount,
+            viewsCount,
+            lastReplay,
+          }) => (
+            <span className="forum__topic-list-item">
+              <span className="forum__topic-list-item_align-left">{topic}</span>
+              <span>{author}</span>
+              <span>{postCount}</span>
+              <span>{viewsCount}</span>
+              <time>{lastReplay}</time>
+            </span>
+          ))}
+        </div>
       </div>
 
+      <div className="page__footer-buttons">
+        <BackButton />
+        <GDButton title={t('start_new_topic')} styleOption="secondary" size="l" onClick={() => history.push('/topic')}/>
+      </div>
     </div>
   );
 };
