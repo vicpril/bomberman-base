@@ -25,7 +25,7 @@ export const LanguageSelector: FC = () => {
   ), [i18n, changeLanguage]);
 
   return (
-    <div className={classNames('language-selector')}>
+    <div>
       { renderLanguageButton('en') }
       { renderLanguageButton('ru') }
     </div>
