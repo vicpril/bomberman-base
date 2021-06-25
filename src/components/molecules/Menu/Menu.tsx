@@ -28,6 +28,7 @@ export const Menu: FC<MenuProps> = ({
         size={itemsSize}
         styleOption={itemsStyleOption}
         onClick={onClick}
+        key={title}
       />
     ))}
   </div>

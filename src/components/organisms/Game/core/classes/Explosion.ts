@@ -15,7 +15,7 @@ export class Explosion implements IEntity {
     private canvasCtx: CanvasRenderingContext2D,
     public pos: Position,
     public direction: DirectionType,
-    private center: Boolean,
+    private center: boolean,
   ) {}
 
   refresh(dt: number) {

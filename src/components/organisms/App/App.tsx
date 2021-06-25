@@ -6,16 +6,16 @@ import { Game } from 'pages/Game/Game';
 import { LeaderBoard } from 'pages/LeaderBoard/LeaderBoard';
 import { Login } from 'pages/Login/Login';
 import { Profile } from 'pages/Profile/Profile';
+import { ProfileEdit } from 'pages/ProfileEdit/ProfileEdit';
 import { Registration } from 'pages/Registration/Registration';
 import { Error } from 'pages/Error/Error';
-import { ProfileEdit } from 'pages/ProfileEdit/ProfileEdit';
 import { ProfilePasswordEdit } from 'pages/ProfilePasswordEdit/ProfilePasswordEdit';
 import { Topic } from 'pages/Topic/Topic';
 import { NewPost } from 'pages/NewPost/NewPost';
 import { Main } from 'pages/Main/Main';
 import { NavHeader } from 'components/organisms/NavHeader/NavHeader';
 import classNames from 'classnames';
-import { ErrorBoundary } from '../ErrorBoundary/ErrorBoundary';
+import { ErrorBoundary } from 'components/organisms/ErrorBoundary/ErrorBoundary';
 
 export const App: FC = () => {
   const [isAltThemeOn, setIsAltThemeOn] = useState(false);

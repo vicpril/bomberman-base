@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Observable } from '../helpers/Observable';
 
-export function useObservable<T>(observable: Observable<T>) {
+export const useObservable = <T>(observable: Observable<T>) => {
   const [value, setValue] = useState(observable.get());
 
   useEffect(() => {
@@ -10,4 +10,4 @@ export function useObservable<T>(observable: Observable<T>) {
   }, [observable]);
 
   return value;
-}
+};

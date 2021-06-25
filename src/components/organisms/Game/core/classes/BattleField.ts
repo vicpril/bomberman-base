@@ -27,7 +27,7 @@ const template = [
 export class BattleField {
   static instance: BattleField | null = null;
 
-  private isInitialized: Boolean = false;
+  private isInitialized: boolean = false;
 
   private cells: EntitiesTypes[][] = [];
 
@@ -81,7 +81,7 @@ export class BattleField {
     this.cells[position.y][position.x] = instance;
   }
 
-  isCellEmpty(position: Position): Boolean {
+  isCellEmpty(position: Position): boolean {
     if (!this.isInitialized) return false;
     const cell = this.getCell(position);
     return typeof cell === 'undefined' || cell === EntitiesTypes.EMPTY;

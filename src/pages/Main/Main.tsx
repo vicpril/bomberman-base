@@ -7,6 +7,8 @@ import { Menu } from 'components/molecules/Menu/Menu';
 import { useHistory } from 'react-router-dom';
 import classnames from 'classnames';
 import { useTranslation } from 'react-i18next';
+import { authAPI } from 'api/auth';
+import { useMountEffect } from 'utils/useMountEffect';
 
 export type MainPageProps = {
   className?: string
@@ -15,7 +17,23 @@ export type MainPageProps = {
 export const Main: FC<MainPageProps> = ({ className }) => {
   const { t } = useTranslation();
   const history = useHistory();
+
+  useMountEffect(() => {
+    if (!authAPI.isAuth()) {
+      history.replace('/login');
+    }
+  });
+
   const onPlayClickHandler = () => history.push('/game');
+
+  const logoutHandler = async () => {
+    try {
+      await authAPI.logout();
+      history.replace('/login');
+    } catch (error) {
+      console.error('~ error', error);
+    }
+  };
 
   const items = [
     { title: 'settings', onClick: () => history.push('/') },
@@ -48,7 +66,7 @@ export const Main: FC<MainPageProps> = ({ className }) => {
         title={t('logout')}
         styleOption="secondary"
         size="l"
-        onClick={() => history.push('/login')}
+        onClick={logoutHandler}
       />
     </div>
   );

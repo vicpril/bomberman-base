@@ -2,11 +2,12 @@
     "compilerOptions": {
         "lib": [
             "dom",
+            "dom.iterable",
             "es2017"
         ],
         "module": "commonjs",
         "moduleResolution": "node",
-        "target": "es5",
+        "target": "es6",
         "jsx": "react",
         "importHelpers": true,
         "noUnusedLocals": true,
@@ -28,6 +29,9 @@
             "typings/**/*.d.ts",
             "node_modules/@types"
         ],
+        "plugins": [
+            { "transform": "typescript-is/lib/transform-inline/transformer" }
+        ]
     },
     "include": [
         "src",
@@ -35,6 +39,7 @@
         "./node_modules/@types"
     ],
     "exclude": [
-        "**/*.js"
+        "**/*.js",
+        "./dist/**/*"
     ]
 }

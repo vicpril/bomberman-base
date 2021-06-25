@@ -21,7 +21,7 @@ class GameService {
 
     private timerID: number = 0;
 
-    startGame(reset: Boolean = true) {
+    startGame(reset: boolean = true) {
       this.timer.set(0);
       this.status.set(GameStatus.SHOW_STAGE);
       if (reset) {

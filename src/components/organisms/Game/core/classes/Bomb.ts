@@ -13,7 +13,7 @@ export class Bomb implements IEntity {
 
   radius = GRID * 0.4;
 
-  alive: Boolean = true;
+  alive: boolean = true;
 
   timer: number = 3000;
 

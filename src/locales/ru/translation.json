@@ -32,7 +32,6 @@
     "name": "имя",
     "last_name": "фамилия",
     "e-mail": "почта",
-    "phone": "телефон",
     "password": "пароль",
     "repeat": "подтверждение",
     "settings": "настройки",
@@ -56,5 +55,19 @@
     "start_new_topic": "новая тема",
     "new_post": "новое сообщение",
     "type_your_message_here": "введите ваше сообщение",
-    "post": "отправить"
+    "post": "отправить",
+    "save": "сохранить",
+    "email": "e-mail",
+    "first_name": "имя",
+    "second_name": "фамилия",
+    "display_name": "ник",
+    "phone": "телефон",
+    "updated_successfully":"данные успешно обновлены",
+    "no_account_?":"еще нет аккаунта?",
+    "register_!":"зарегистрируйся!",
+    "just_play_!":"чисто поиграть!",
+    "or":"или",
+    "loading...":"загрузка..."
+
+
 }

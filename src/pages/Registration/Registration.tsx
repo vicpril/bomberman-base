@@ -1,45 +1,72 @@
 import './styles.css';
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { GDButton } from 'components/atoms/GDButton/GDButton';
-import { Form } from 'components/molecules/Form/Form';
-import classnames from 'classnames';
+import { FormMessageStatus, SubmitFormMethod } from 'components/molecules/Form/types';
 import { useTranslation } from 'react-i18next';
-import { BackButton } from 'components/molecules/BackButton/BackButton';
+import { authAPI } from 'api/auth';
+import { useHistory } from 'react-router-dom';
+import { useApiRequestFactory } from 'utils/api-factory';
+import { Form } from 'components/molecules/Form/Form';
+import { useMountEffect } from 'utils/useMountEffect';
+import { RefistrationFormFields } from './types';
+import { registerFormFields } from './constants';
 
-const loginFormFields = [
-  { id: 'first_name', title: 'name' },
-  { id: 'second_name', title: 'last_name' },
-  { id: 'email', title: 'e-mail', type: 'email' },
-  { id: 'phone', title: 'phone', type: 'tel' },
-  { id: 'login', title: 'login' },
-  { id: 'password', title: 'password', type: 'password' },
-  { id: 'verify_password', title: 'repeat', type: 'password' },
-];
-
-export type RegistrationPageProps = {
-  className?: string
-}
-
-export const Registration: FC<RegistrationPageProps> = ({ className }) => {
+export const Registration: FC = () => {
   const { t } = useTranslation();
+  const history = useHistory();
+  const { request: register } = useApiRequestFactory(authAPI.register);
 
-  loginFormFields.forEach((field) => {
-    field.title = t(field.title);
+  useMountEffect(() => {
+    if (authAPI.isAuth()) {
+      history.replace('/');
+    }
   });
 
-  return (
-    <div className={classnames(['page', className])}>
-      <h1 className="page__title">{t('registration')}</h1>
-      <Form className="register-form" fields={loginFormFields} />
-      <GDButton
-        title={t('submit')}
-        styleOption="primary"
-        size="l"
-        onClick={() => null}
-      />
+  const [errorMessage, setErrorMessage] = useState('');
 
-      <div className="page__footer-buttons">
-        <BackButton />
+  const submitHandler: SubmitFormMethod<RefistrationFormFields> = async (data) => {
+    try {
+      const response = await register(data);
+      if (response.id) {
+        setErrorMessage('');
+        // TODO store user
+        history.replace('/');
+      }
+    } catch (error) {
+      setErrorMessage(error.message);
+    }
+  };
+
+  const registerForm = (
+    <Form
+      className="register-form"
+      fields={registerFormFields}
+      textSubmitButton={t('submit')}
+      onSubmit={submitHandler}
+      message={errorMessage}
+      messageClass={FormMessageStatus.error}
+    />
+  );
+
+  const pageTitle = t('registration');
+
+  const backHandler = () => {
+    history.goBack();
+  };
+  return (
+    <div className="page">
+      <div className="page__header">
+        <h1 className="page__title">{pageTitle}</h1>
+      </div>
+      {registerForm}
+      <div className="page__footer">
+        <GDButton
+          className="page__footer-item"
+          title="back"
+          styleOption="secondary"
+          size="l"
+          onClick={backHandler}
+        />
       </div>
     </div>
   );

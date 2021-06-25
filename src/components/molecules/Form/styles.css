@@ -4,10 +4,40 @@
   align-items: flex-end;
   white-space: nowrap;
   font-size: 38px;
+  padding: 1rem;
+
+  &.isInvalid {
+    border: 2px solid var(--dangerColor);
+  }
 }
 
-.form__error-label {
+.form__input {
+  font-family: var(--mainTextFontFamily);
+}
+
+.form_submit__button {
+  align-self: center;
+}
+
+.form__label {
   justify-self: center;
   align-self: center;
-  color: var(--dangerColor);
+  margin: 0 auto;
+  font-size: 38px;
+
+  &__success {
+    color: var(--successColor);
+  }
+
+  &__error {
+    color: var(--dangerColor);
+  }
+
+  &__warning {
+    color: var(--warningColor);
+  }
+
+  &__default {
+    color: var(--white);
+  }
 }

@@ -56,5 +56,15 @@
     "start_new_topic": "start new topic",
     "new_post": "new post",
     "type_your_message_here": "type your message here",
-    "post": "post"
+    "post": "post",
+    "save": "save",
+    "email": "email",
+    "first_name": "first name",
+    "second_name": "second name",
+    "display_name": "display name",
+    "updated_successfully":"updated successfully",
+    "no_account_?":"no account ?",
+    "register_!":"register !",
+    "just_play_!":"just play !",
+    "loading...":"loading..."
 }

@@ -4,7 +4,7 @@ import { Position } from '../types/PositionType';
 export interface IEntity {
   type: EntitiesTypes;
   pos: Position;
-  alive: Boolean;
+  alive: boolean;
 
   render(): void;
 

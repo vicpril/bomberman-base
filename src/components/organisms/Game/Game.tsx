@@ -1,5 +1,6 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 
+import { useMountEffect } from 'utils/useMountEffect';
 import { GameHeader } from './GameHeader/GameHeader';
 import { GameContent } from './GameContent/GameContent';
 import { GameFooter } from './GameFooter/GameFooter';
@@ -13,7 +14,7 @@ export const Game: FC = () => {
   const timer = useObservable(gameService.timer);
   const bombs = useObservable(gameService.bombs);
 
-  useEffect(() => () => gameService.exitGame(), []);
+  useMountEffect(() => () => gameService.exitGame());
 
   return (
     <div className="game-container">

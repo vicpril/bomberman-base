@@ -45,7 +45,12 @@ export const Forum: FC<ForumPageProps> = ({ className }) => {
 
       <div className="page__footer-buttons">
         <BackButton />
-        <GDButton title={t('start_new_topic')} styleOption="secondary" size="l" onClick={() => history.push('/topic')}/>
+        <GDButton
+          title={t('start_new_topic')}
+          styleOption="secondary"
+          size="l"
+          onClick={() => history.push('/topic')}
+        />
       </div>
     </div>
   );

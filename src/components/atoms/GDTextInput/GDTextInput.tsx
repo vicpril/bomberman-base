@@ -3,19 +3,20 @@ import React, { ChangeEventHandler, FC, FocusEventHandler } from 'react';
 import classNames from 'classnames';
 
 export type GDTextInputProps = {
-  id: string
-  title: string
-  name?: string
-  type?: string
-  className?: string
-  placeholder?: string
-  value?: string
-  onChange?: ChangeEventHandler<HTMLInputElement>
-  onBlur?: FocusEventHandler<HTMLInputElement>
+  id: string,
+  title: string,
+  name?: string,
+  type?: string,
+  className?: string,
+  placeholder?: string,
+  value?: string | number,
+  onChange?: ChangeEventHandler<HTMLInputElement>,
+  onBlur?: FocusEventHandler<HTMLInputElement>,
+  isInvalid?: boolean,
 }
 
 export const GDTextInput: FC<GDTextInputProps> = ({
-  className, placeholder, title, id, name, type, value, onChange, onBlur,
+  className, placeholder, title, id, name, type = 'text', value, onChange, onBlur,
 }) => {
   const titleString = `${title}:`;
   return (
