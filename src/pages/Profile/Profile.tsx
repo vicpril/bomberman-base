@@ -8,7 +8,7 @@ import { useHistory } from 'react-router-dom';
 import { authAPI } from 'api/auth';
 import { useMountEffect } from 'utils/useMountEffect';
 import { useSelector } from 'react-redux';
-import { selectUserInfo } from 'redux/user/userSlice';
+import { selectUserInfo } from 'redux/user/userSelectors';
 import { getUserInfoAsync } from 'redux/user/userActions';
 import { useBoundAction } from 'hooks/useBoundAction';
 

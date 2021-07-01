@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { UserResponse } from 'api/types';
-import { RootState } from 'redux/store';
 import { resourcesAPI } from 'api/resources';
 import avatarDummy from 'assets/images/logo_img_base.png';
 import { getUserInfoAsync } from './userActions';
@@ -11,6 +10,7 @@ type UserInfo = UserResponse & {
 
 type UserState = {
     userInfo: UserInfo
+    theme: 'light' | 'dark'
 }
 
 const initialState: UserState = {
@@ -25,12 +25,16 @@ const initialState: UserState = {
     avatar: null,
     avatarSrc: avatarDummy,
   },
+  theme: 'dark',
 };
 
 export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
+    toggleTheme: (state) => {
+      state.theme = state.theme === 'dark' ? 'light' : 'dark';
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getUserInfoAsync.fulfilled, (state, action) => {
@@ -48,4 +52,4 @@ export const userSlice = createSlice({
 
 export const userReducer = userSlice.reducer;
 
-export const selectUserInfo = (state: RootState) => state.user.userInfo;
+export const { toggleTheme } = userSlice.actions;

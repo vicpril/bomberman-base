@@ -6,18 +6,14 @@ import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ThemeSwitch } from 'components/molecules/ThemeSwitch/ThemeSwitch';
 
-type NavHeaderProps = {
-  toggleTheme: () => void;
-}
-
-export const NavHeader: FC<NavHeaderProps> = ({ toggleTheme }) => {
+export const NavHeader: FC = () => {
   const { t } = useTranslation();
   const location = useLocation();
   const { pathname } = location;
 
   return (
     <div className={classNames('nav-header')}>
-      <ThemeSwitch toggleTheme={toggleTheme} />
+      <ThemeSwitch />
 
       <div>
         <Link

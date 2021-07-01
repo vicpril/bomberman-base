@@ -15,7 +15,7 @@
   --xsmallFontSize: 18px;
 }
 
-.app-container.alt-theme {
+.app-container.theme_light {
   --appBackgroundColor: #e2e2e2;
   --activityColor: #7ac041;
   --dangerColor: #e70404;

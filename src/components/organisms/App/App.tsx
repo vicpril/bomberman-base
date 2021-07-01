@@ -1,5 +1,5 @@
 import './App.css';
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { Forum } from 'pages/Forum/Forum';
 import { Game } from 'pages/Game/Game';
@@ -16,19 +16,17 @@ import { Main } from 'pages/Main/Main';
 import { NavHeader } from 'components/organisms/NavHeader/NavHeader';
 import classNames from 'classnames';
 import { ErrorBoundary } from 'components/organisms/ErrorBoundary/ErrorBoundary';
+import { useSelector } from 'react-redux';
+import { selectTheme } from 'redux/user/userSelectors';
 
 export const App: FC = () => {
-  const [isAltThemeOn, setIsAltThemeOn] = useState(false);
-
-  const toggleTheme = () => {
-    setIsAltThemeOn(!isAltThemeOn);
-  };
+  const theme = useSelector(selectTheme);
 
   return (
-    <div className={classNames(['app-container', { 'alt-theme': isAltThemeOn }])}>
+    <div className={classNames(['app-container', `theme_${theme}`])}>
       <BrowserRouter>
         <ErrorBoundary>
-          <NavHeader toggleTheme={toggleTheme} />
+          <NavHeader />
         </ErrorBoundary>
 
         <Switch>
