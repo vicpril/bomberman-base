@@ -1,3 +1,7 @@
+export enum Movements {
+  NONE, UP, RIGHT, DOWN, LEFT
+}
+
 /**
  *        0 -1
  *
@@ -10,9 +14,10 @@ export type DirectionType = {
   y: 0 | 1 | -1;
 };
 
-export const DIRECTIONS: DirectionType[] = [
-  { x: 0, y: -1 }, // up
-  { x: 1, y: 0 }, // right
-  { x: 0, y: 1 }, // down
-  { x: -1, y: 0 }, // left
-];
+export const DIRECTIONS: Record<Movements, DirectionType> = {
+  [Movements.NONE]: { x: 0, y: 0 }, // stay
+  [Movements.UP]: { x: 0, y: -1 }, // up
+  [Movements.RIGHT]: { x: 1, y: 0 }, // right
+  [Movements.DOWN]: { x: 0, y: 1 }, // down
+  [Movements.LEFT]: { x: -1, y: 0 }, // left
+};

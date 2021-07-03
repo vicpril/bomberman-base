@@ -53,17 +53,24 @@ export class BattleField {
       cells[rIdx] = [];
 
       row.forEach((cell, cIdx) => {
-        if (
-          cell === EntitiesTypes.EMPTY
-          && Math.random() < SOFT_WALL_PROBABILITY
-        ) {
-          cells[rIdx][cIdx] = EntitiesTypes.WALL_SOFT;
-        } else
-        if (cell === EntitiesTypes.EMPTY_REQUIRED) {
-          cells[rIdx][cIdx] = EntitiesTypes.EMPTY;
-        } else
-        if (cell === EntitiesTypes.WALL) {
-          cells[rIdx][cIdx] = EntitiesTypes.WALL;
+        switch (cell) {
+          case EntitiesTypes.EMPTY:
+            if (Math.random() < SOFT_WALL_PROBABILITY) {
+              cells[rIdx][cIdx] = EntitiesTypes.WALL_SOFT;
+            }
+            break;
+
+          case EntitiesTypes.EMPTY_REQUIRED:
+            cells[rIdx][cIdx] = EntitiesTypes.EMPTY;
+            break;
+
+          case EntitiesTypes.WALL:
+            cells[rIdx][cIdx] = EntitiesTypes.WALL;
+            break;
+
+          default:
+            cells[rIdx][cIdx] = EntitiesTypes.EMPTY;
+            break;
         }
       });
     });

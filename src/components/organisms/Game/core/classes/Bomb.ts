@@ -70,8 +70,10 @@ export class Bomb implements IEntity {
 
     BF.clearCell(this.pos);
 
+    const scoreToWin = SCORE_WIN_PER_STAGE * gameService.stage.get();
+
     // create Explosions per each directions
-    DIRECTIONS.forEach((dir: DirectionType) => {
+    Object.values(DIRECTIONS).forEach((dir: DirectionType) => {
       for (let i = 0; i < this.blownSize; i++) {
         // calculate position
         const pos: Position = {
@@ -79,7 +81,6 @@ export class Bomb implements IEntity {
           y: this.pos.y + dir.y * i,
         };
         const cell = BF.getCell(pos);
-
         if (cell === EntitiesTypes.WALL) return;
 
         // create Explosion in cell
@@ -89,30 +90,25 @@ export class Bomb implements IEntity {
         // clear cell
         BF.clearCell(pos);
 
-        // contact with another bomb
-        if (cell === EntitiesTypes.BOMB) {
-          const nextBomb = BF.findEntity(EntitiesTypes.BOMB, pos);
-          nextBomb?.blowUp();
-        }
+        switch (cell) {
+          case EntitiesTypes.BOMB:
+            // contact with another bomb - blow it up
+            BF.findEntity(EntitiesTypes.BOMB, pos)?.blowUp();
+            return; // stop explosion this side
 
-        if (cell === EntitiesTypes.PLAYER) {
-          BF.gameOver(); return;
-        }
+          case EntitiesTypes.WALL_SOFT:
+            gameService.increaseScore(1);
+            if (gameService.score.get() >= scoreToWin) {
+              BF.winStage(); return;
+            }
+            return; // stop explosion this side
 
-        if (cell === EntitiesTypes.WALL_SOFT) {
-          gameService.increaseScore(1);
-        }
+          case EntitiesTypes.PLAYER:
+            BF.gameOver();
+            return;
 
-        const scoreToWin = SCORE_WIN_PER_STAGE * gameService.stage.get();
-        if (gameService.score.get() >= scoreToWin) {
-          BF.winStage(); return;
-        }
-
-        if (cell !== EntitiesTypes.EMPTY
-          && cell !== EntitiesTypes.BOMB
-          // && cell !== EntitiesTypes.PLAYER
-        ) {
-          return;
+          default:
+            break;
         }
       }
     });
