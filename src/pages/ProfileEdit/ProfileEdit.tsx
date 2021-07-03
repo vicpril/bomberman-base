@@ -1,108 +1,69 @@
 import './styles.css';
 import React, {
   ChangeEventHandler,
-  FC, useCallback, useEffect, useRef, useState,
+  FC, useCallback, useEffect, useMemo,
 } from 'react';
 import { useTranslation } from 'react-i18next';
-import { authAPI } from 'api/auth';
-import { useHistory, Link } from 'react-router-dom';
-import { UserResponse } from 'api/types';
+import { Link } from 'react-router-dom';
 import { FormProfile } from 'components/organisms/FormProfile/FormProfile';
-import { usersAPI } from 'api/users';
 import { SubmitedProfileData } from 'components/organisms/FormProfile/types';
-import { useApiRequestFactory } from 'utils/api-factory';
 import { FormMessageStatus } from 'components/molecules/Form/types';
 import { BackButton } from 'components/molecules/BackButton/BackButton';
 import { GDButton } from 'components/atoms/GDButton/GDButton';
-import classNames from 'classnames';
-import { useMountEffect } from 'utils/useMountEffect';
+import { FormUpdateAvatar } from 'components/organisms/FormUpdateAvatar/FormUpdateAvatar';
+import { useMountEffect } from 'hooks/useMountEffect';
+import { useBoundAction } from 'hooks/useBoundAction';
+import { getUserInfoAsync, updateUserAsync } from 'redux/user/userActions';
+import { useSelector } from 'react-redux';
+import { getUserState, userActions } from 'redux/user/userSlice';
+import { useFormMessages } from 'hooks/useFormMessages';
 
 export const ProfileEdit: FC = () => {
   const { t } = useTranslation();
-  const history = useHistory();
+
+  const getUserInfoAsyncBounded = useBoundAction(getUserInfoAsync);
+  const updateUserInfoBounded = useBoundAction(userActions.update);
+  const clearRequestBounded = useBoundAction(userActions.clearRequestState);
+  const updateUserInfoAsyncBounded = useBoundAction(updateUserAsync);
 
   const {
-    request: getUserInfo, isLoading: isUserLoading,
-  } = useApiRequestFactory(authAPI.getUserInfo);
-  const {
-    request: updateUser, isLoading: isUserUpdating,
-  } = useApiRequestFactory(usersAPI.update);
-  const {
-    request: uploadAvatar, isLoading: isAvatarUploading,
-  } = useApiRequestFactory(usersAPI.changeAvatar);
+    userInfo, isLoading, isUpdatedSuccessful, error,
+  } = useSelector(getUserState);
 
-  const isLoading = isUserLoading || isUserUpdating || isAvatarUploading;
+  useMountEffect(() => getUserInfoAsyncBounded());
 
-  const [profile, setProfile] = useState({} as UserResponse);
-
-  const fetchProfile = async () => {
-    try {
-      const result = await getUserInfo();
-      setProfile(() => result);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  useMountEffect(() => {
-    if (!authAPI.isAuth()) {
-      history.replace('/login');
-    }
-    fetchProfile();
-  });
-
-  const [formMessage, setFormMessage] = useState('');
-  const [formMessageStatus, setFormMessageStatus] = useState(FormMessageStatus.default);
-  const setMessage = (text: string, type: FormMessageStatus = FormMessageStatus.default): void => {
-    setFormMessage(() => text);
-    setFormMessageStatus(type);
-  };
-
-  const pageTitle = t('profile');
+  const { message, status, buildMessage } = useFormMessages();
 
   const submitHandler = async (data: SubmitedProfileData) => {
-    const requestData = { ...data, login: profile.login };
-    setFormMessage('');
-    try {
-      await updateUser(requestData);
-      setMessage(t('updated_successfully'), FormMessageStatus.success);
-    } catch (error) {
-      setMessage(error.message, FormMessageStatus.error);
-    }
-  };
-
-  useEffect(() => {
-    const text = t('loading...');
-    if (isLoading) {
-      setMessage(text, FormMessageStatus.warning);
-    } else {
-      setFormMessage((prev) => (prev === text ? '' : prev));
-    }
-  }, [isLoading, t]);
-
-  const formAvatar = useRef<HTMLFormElement>(null);
-
-  const changeAvatarHandler: ChangeEventHandler<HTMLInputElement> = async () => {
-    if (formAvatar?.current) {
-      const formData = new FormData(formAvatar.current);
-      setFormMessage('');
-      try {
-        await uploadAvatar(formData);
-        setMessage(t('updated_successfully'), FormMessageStatus.success);
-      } catch (error) {
-        setMessage(error.message, FormMessageStatus.error);
-      }
-    }
+    const requestData = { ...data, login: userInfo.login };
+    updateUserInfoAsyncBounded(requestData);
   };
 
   const changeInputHandler = useCallback(
     (key: string): ChangeEventHandler<HTMLInputElement> => (e) => {
-      setProfile(() => ({
-        ...profile,
+      const newProfile = {
+        ...userInfo,
         [key]: e.target.value,
-      }));
-    }, [profile],
+      };
+      updateUserInfoBounded(newProfile);
+    }, [userInfo, updateUserInfoBounded],
   );
+
+  useMemo(() => {
+    if (isUpdatedSuccessful) {
+      buildMessage(t('updated_successfully'), FormMessageStatus.success);
+    } else if (isLoading) {
+      buildMessage(t('loading...'), FormMessageStatus.warning);
+    } else if (error) {
+      buildMessage(error.message ?? '', FormMessageStatus.error);
+    } else {
+      buildMessage('');
+    }
+  }, [isUpdatedSuccessful, error, isLoading, buildMessage, t]);
+
+  useEffect(() => () => { clearRequestBounded(); }, [clearRequestBounded]);
+
+  const pageTitle = t('userInfo');
 
   return (
     <div className="page">
@@ -110,23 +71,19 @@ export const ProfileEdit: FC = () => {
         <h1 className="page__title">{pageTitle}</h1>
       </div>
       <FormProfile
-        user={profile}
+        user={userInfo}
         onSubmit={submitHandler}
         onChangeInput={changeInputHandler}
-        message={formMessage}
-        messageClass={formMessageStatus}
+        message={message}
+        messageClass={status}
       />
-      <div className="profile-edit-actions">
-        <form ref={formAvatar}>
-          <label htmlFor="avatar" className={classNames(['btn', 'btn-secondary', 'size_l', 'profile__upload_avatar__label'])}>
-            {t('upload_avatar')}
-            <input type="file" name="avatar" id="avatar" onChange={changeAvatarHandler} />
-          </label>
+      <div className="userInfo-edit-actions">
 
-          <Link to="/profile-password-edit">
-            <GDButton title={t('change_password')} size="l" styleOption="secondary" />
-          </Link>
-        </form>
+        <FormUpdateAvatar />
+
+        <Link to="/profile-password-edit">
+          <GDButton title={t('change_password')} size="l" styleOption="secondary" />
+        </Link>
       </div>
       <div className="page__footer-buttons">
         <BackButton />

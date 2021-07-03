@@ -1,7 +1,7 @@
 import './styles.css';
 import classNames from 'classnames';
 import React, { Component, ErrorInfo, ReactNode } from 'react';
-import { withTranslation, WithTranslation } from 'react-i18next';
+import { WithTranslation, withTranslation } from 'react-i18next';
 
 type ErrorBoundaryProps = WithTranslation & {
     children: ReactNode

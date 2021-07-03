@@ -2,7 +2,7 @@ import './GameContent.css';
 import React, { FC, useMemo } from 'react';
 import { GDButton } from 'components/atoms/GDButton/GDButton';
 import { useTranslation } from 'react-i18next';
-import { gameService, GameStatus } from '../services/gameService';
+import { GameStatus, gameService } from '../services/gameService';
 import { Canvas as CanvasComponent } from '../Canvas/Canvas';
 import { GameContentInside } from './GameContentInside';
 
@@ -36,10 +36,22 @@ export const GameContent: FC<GameContentProps> = ({ gameStatus, stage }) => {
         return <CanvasComponent key={Date.now()} />;
 
       case GameStatus.STAGE_COMPLETED:
-        return <GameContentInside text={t('victory')} buttonText={t('continue')} onButtonClick={nextStageGameHandler} />;
+        return (
+          <GameContentInside
+            text={t('victory')}
+            buttonText={t('continue')}
+            onButtonClick={nextStageGameHandler}
+          />
+        );
 
       case GameStatus.FINISHED:
-        return <GameContentInside text={t('game_over')} buttonText={t('play_again')} onButtonClick={startGameHandler} />;
+        return (
+          <GameContentInside
+            text={t('game_over')}
+            buttonText={t('play_again')}
+            onButtonClick={startGameHandler}
+          />
+        );
     }
   }, [gameStatus, stageText, t]);
 

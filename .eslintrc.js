@@ -46,6 +46,7 @@ module.exports = {
     'no-param-reassign': [2, { props: false }],
     'react/jsx-props-no-spreading': 'off',
     camelcase: 'off',
+    'max-len': ['error', { code: 120 }],
   },
   settings: {
     'import/resolver': {

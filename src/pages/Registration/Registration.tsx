@@ -1,41 +1,42 @@
 import './styles.css';
-import React, { FC, useState } from 'react';
+import React, { FC, useMemo } from 'react';
 import { GDButton } from 'components/atoms/GDButton/GDButton';
 import { FormMessageStatus, SubmitFormMethod } from 'components/molecules/Form/types';
 import { useTranslation } from 'react-i18next';
-import { authAPI } from 'api/auth';
 import { useHistory } from 'react-router-dom';
-import { useApiRequestFactory } from 'utils/api-factory';
 import { Form } from 'components/molecules/Form/Form';
-import { useMountEffect } from 'utils/useMountEffect';
-import { RefistrationFormFields } from './types';
+import { useSelector } from 'react-redux';
+import { getUserState } from 'redux/user/userSlice';
+import { useBoundAction } from 'hooks/useBoundAction';
+import { registerAsync } from 'redux/user/userActions';
+import { useFormMessages } from 'hooks/useFormMessages';
 import { registerFormFields } from './constants';
+import { RefistrationFormFields } from './types';
 
 export const Registration: FC = () => {
   const { t } = useTranslation();
   const history = useHistory();
-  const { request: register } = useApiRequestFactory(authAPI.register);
 
-  useMountEffect(() => {
-    if (authAPI.isAuth()) {
-      history.replace('/');
-    }
-  });
+  const { error, isAuth, isLoading } = useSelector(getUserState);
+  const registerAsyncBuonded = useBoundAction(registerAsync);
 
-  const [errorMessage, setErrorMessage] = useState('');
+  const { message, status, buildMessage } = useFormMessages();
 
   const submitHandler: SubmitFormMethod<RefistrationFormFields> = async (data) => {
-    try {
-      const response = await register(data);
-      if (response.id) {
-        setErrorMessage('');
-        // TODO store user
-        history.replace('/');
-      }
-    } catch (error) {
-      setErrorMessage(error.message);
-    }
+    registerAsyncBuonded(data);
   };
+
+  useMemo(() => {
+    if (isAuth) {
+      history.replace('/');
+    } else if (isLoading) {
+      buildMessage(t('loading...'), FormMessageStatus.warning);
+    } else if (error) {
+      buildMessage(error.message ?? '', FormMessageStatus.error);
+    } else {
+      buildMessage('');
+    }
+  }, [error, isAuth, isLoading, history, buildMessage, t]);
 
   const registerForm = (
     <Form
@@ -43,8 +44,8 @@ export const Registration: FC = () => {
       fields={registerFormFields}
       textSubmitButton={t('submit')}
       onSubmit={submitHandler}
-      message={errorMessage}
-      messageClass={FormMessageStatus.error}
+      message={message}
+      messageClass={status}
     />
   );
 

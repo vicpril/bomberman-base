@@ -1,5 +1,5 @@
 import './styles.css';
-import React, { FC, useState } from 'react';
+import React, { FC, useMemo } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { GDLogo } from 'components/atoms/GDLogo/GDLogo';
 import { GDButton } from 'components/atoms/GDButton/GDButton';
@@ -7,9 +7,11 @@ import { Form } from 'components/molecules/Form/Form';
 import logoImage from 'assets/images/logo_img_base.png';
 import { useTranslation } from 'react-i18next';
 import { FormMessageStatus, SubmitFormMethod } from 'components/molecules/Form/types';
-import { authAPI } from 'api/auth';
-import { useApiRequestFactory } from 'utils/api-factory';
-import { useMountEffect } from 'utils/useMountEffect';
+import { loginAsync } from 'redux/user/userActions';
+import { useBoundAction } from 'hooks/useBoundAction';
+import { useSelector } from 'react-redux';
+import { getUserState } from 'redux/user/userSlice';
+import { useFormMessages } from 'hooks/useFormMessages';
 import { LoginFormFields } from './types';
 import { loginFormFields } from './constants';
 
@@ -17,34 +19,34 @@ export const Login: FC = () => {
   const { t } = useTranslation();
   const history = useHistory();
 
-  useMountEffect(() => {
-    if (authAPI.isAuth()) {
-      history.replace('/');
-    }
-  });
+  const { error, isAuth, isLoading } = useSelector(getUserState);
+  const loginAsyncBounded = useBoundAction(loginAsync);
 
-  const [errorMessage, setErrorMessage] = useState('');
-
-  const { request: login } = useApiRequestFactory(authAPI.login);
+  const { message, status, buildMessage } = useFormMessages();
 
   const submitHandler: SubmitFormMethod<LoginFormFields> = async (data) => {
-    try {
-      await login(data);
-      setErrorMessage('');
-      // TODO store user
-      history.replace('/');
-    } catch (error) {
-      setErrorMessage(error.message);
-    }
+    loginAsyncBounded(data);
   };
+
+  useMemo(() => {
+    if (isAuth) {
+      history.replace('/');
+    } else if (isLoading) {
+      buildMessage(t('loading...'), FormMessageStatus.warning);
+    } else if (error) {
+      buildMessage(error.message ?? '', FormMessageStatus.error);
+    } else {
+      buildMessage('');
+    }
+  }, [error, isAuth, isLoading, history, buildMessage, t]);
 
   const formComponent = (
     <Form
       fields={loginFormFields}
       textSubmitButton={t('boom !')}
       onSubmit={submitHandler}
-      message={errorMessage}
-      messageClass={FormMessageStatus.error}
+      message={message}
+      messageClass={status}
     />
   );
 

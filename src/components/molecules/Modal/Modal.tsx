@@ -42,21 +42,53 @@ export const Modal: FC<ModalProps> = ({
   const typeSwitch = () => {
     switch (type) {
       case 'info':
-        return <GDButton className={classnames('modal__button')} title={t('ok')} styleOption="secondary" size="l" onClick={actionHandler(onSubmit)} />;
+        return (
+          <GDButton
+            className={classnames('modal__button')}
+            title={t('ok')}
+            styleOption="secondary"
+            size="l"
+            onClick={actionHandler(onSubmit)}
+          />
+        );
 
       case 'confirm':
         return (
           <>
-            <GDButton className={classnames('modal__button')} title={t('ok')} styleOption="secondary" size="l" onClick={actionHandler(onSubmit)} />
-            <GDButton className={classnames('modal__button')} title={t('cancel')} styleOption="secondary" size="l" onClick={actionHandler(onReject)} />
+            <GDButton
+              className={classnames('modal__button')}
+              title={t('ok')}
+              styleOption="secondary"
+              size="l"
+              onClick={actionHandler(onSubmit)}
+            />
+            <GDButton
+              className={classnames('modal__button')}
+              title={t('cancel')}
+              styleOption="secondary"
+              size="l"
+              onClick={actionHandler(onReject)}
+            />
           </>
         );
 
       case 'y/n':
         return (
           <>
-            <GDButton className={classnames('modal__button')} title={t('yes')} styleOption="secondary" size="l" onClick={actionHandler(onSubmit)} />
-            <GDButton className={classnames('modal__button')} title={t('no')} styleOption="secondary" size="l" onClick={actionHandler(onReject)} />
+            <GDButton
+              className={classnames('modal__button')}
+              title={t('yes')}
+              styleOption="secondary"
+              size="l"
+              onClick={actionHandler(onSubmit)}
+            />
+            <GDButton
+              className={classnames('modal__button')}
+              title={t('no')}
+              styleOption="secondary"
+              size="l"
+              onClick={actionHandler(onReject)}
+            />
           </>
         );
 

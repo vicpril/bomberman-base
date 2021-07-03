@@ -6,7 +6,7 @@ import { BackButton } from 'components/molecules/BackButton/BackButton';
 import { GDButton } from 'components/atoms/GDButton/GDButton';
 import { useHistory } from 'react-router-dom';
 import { authAPI } from 'api/auth';
-import { useMountEffect } from 'utils/useMountEffect';
+import { useMountEffect } from 'hooks/useMountEffect';
 import { useSelector } from 'react-redux';
 import { selectUserInfo } from 'redux/user/userSelectors';
 import { getUserInfoAsync } from 'redux/user/userActions';

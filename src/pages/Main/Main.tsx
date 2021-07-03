@@ -1,5 +1,5 @@
 import './styles.css';
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import logoImage from 'assets/images/logo_img_base.png';
 import { GDLogo } from 'components/atoms/GDLogo/GDLogo';
 import { GDButton } from 'components/atoms/GDButton/GDButton';
@@ -7,8 +7,10 @@ import { Menu } from 'components/molecules/Menu/Menu';
 import { useHistory } from 'react-router-dom';
 import classnames from 'classnames';
 import { useTranslation } from 'react-i18next';
-import { authAPI } from 'api/auth';
-import { useMountEffect } from 'utils/useMountEffect';
+import { useBoundAction } from 'hooks/useBoundAction';
+import { logoutAsync } from 'redux/user/userActions';
+import { useSelector } from 'react-redux';
+import { getUserState } from 'redux/user/userSlice';
 
 export type MainPageProps = {
   className?: string
@@ -18,22 +20,16 @@ export const Main: FC<MainPageProps> = ({ className }) => {
   const { t } = useTranslation();
   const history = useHistory();
 
-  useMountEffect(() => {
-    if (!authAPI.isAuth()) {
-      history.replace('/login');
-    }
-  });
+  const logoutAsyncBounded = useBoundAction(logoutAsync);
+  const { isAuth } = useSelector(getUserState);
 
   const onPlayClickHandler = () => history.push('/game');
 
-  const logoutHandler = async () => {
-    try {
-      await authAPI.logout();
-      history.replace('/login');
-    } catch (error) {
-      console.error('~ error', error);
-    }
-  };
+  const logoutHandler = () => logoutAsyncBounded();
+
+  useEffect(() => {
+    if (!isAuth) { history.replace('/login'); }
+  }, [isAuth, history]);
 
   const items = [
     { title: 'settings', onClick: () => history.push('/') },

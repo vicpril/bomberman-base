@@ -2,6 +2,15 @@
   margin-top: auto;
 }
 
+.userInfo-edit-actions {
+  display: flex;
+  align-items: center;
+
+  & .btn {
+    margin: auto;
+  }
+}
+
 .profile__upload_avatar__label {
   > input {
     display: none;

@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { useTranslation } from 'react-i18next';
 import { BackButton } from 'components/molecules/BackButton/BackButton';
 import { useHistory } from 'react-router-dom';
-import { dummyTopicTitle, dummyPosts } from 'pages/Topic/constants';
+import { dummyPosts, dummyTopicTitle } from 'pages/Topic/constants';
 
 export type TopicPageProps = {
   className?: string

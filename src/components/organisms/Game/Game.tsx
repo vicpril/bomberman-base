@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import { useMountEffect } from 'utils/useMountEffect';
+import { useMountEffect } from 'hooks/useMountEffect';
 import { GameHeader } from './GameHeader/GameHeader';
 import { GameContent } from './GameContent/GameContent';
 import { GameFooter } from './GameFooter/GameFooter';
