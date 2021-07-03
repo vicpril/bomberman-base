@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BackButton check i18n setup 1`] = `
+<button
+  className="btn btn-secondary size_l"
+  onClick={[Function]}
+  type="button"
+>
+  back
+</button>
+`;

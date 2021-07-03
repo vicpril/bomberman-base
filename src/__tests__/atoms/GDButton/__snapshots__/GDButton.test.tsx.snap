@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GDButton renders with all props passed 1`] = `
+<button
+  className="btn btn-secondary size_l extra-class-name"
+  onClick={[Function]}
+  type="submit"
+>
+  title
+</button>
+`;
+
+exports[`GDButton renders with default props 1`] = `
+<button
+  className="btn btn-primary size_m"
+  type="button"
+>
+  title
+</button>
+`;

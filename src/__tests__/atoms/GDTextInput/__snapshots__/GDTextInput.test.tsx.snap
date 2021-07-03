@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GDTextInput renders with all props passed 1`] = `
+<label
+  className="input-label"
+  htmlFor="name"
+>
+  name:
+  <input
+    className="input-field_standard class-name"
+    id="name"
+    name="name"
+    onBlur={[Function]}
+    onChange={[Function]}
+    placeholder="placeholder value"
+    type="text"
+    value="value"
+  />
+</label>
+`;
+
+exports[`GDTextInput renders with default props 1`] = `
+<label
+  className="input-label"
+  htmlFor="name"
+>
+  name:
+  <input
+    className="input-field_standard"
+    id="name"
+    name="name"
+    type="text"
+  />
+</label>
+`;
