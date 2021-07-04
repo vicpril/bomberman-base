@@ -3,6 +3,7 @@ import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { store } from 'redux/store';
+import { startServiceWorker } from 'serviceWorker';
 import { App } from './components/organisms/App/App';
 import './i18n';
 
@@ -16,3 +17,5 @@ ReactDOM.render(
   </React.StrictMode>,
   document.getElementById('root'),
 );
+
+startServiceWorker();

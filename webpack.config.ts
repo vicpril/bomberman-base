@@ -3,6 +3,7 @@ import { Configuration as WebpackDevServerConfiguration } from 'webpack-dev-serv
 import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
+import WorkboxPlugin from 'workbox-webpack-plugin';
 
 type Configuration = WebpackConfiguration & {
   devServer?: WebpackDevServerConfiguration
@@ -55,6 +56,10 @@ const config: Configuration = {
       patterns: [
         { from: './src/locales', to: 'locales' },
       ],
+    }),
+    new WorkboxPlugin.GenerateSW({
+      clientsClaim: true,
+      skipWaiting: true,
     }),
   ],
 };
