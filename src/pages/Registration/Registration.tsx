@@ -17,7 +17,7 @@ export const Registration: FC = () => {
   const { t } = useTranslation();
   const history = useHistory();
 
-  const { error, isAuth, isLoading } = useSelector(getUserState);
+  const { error, isLoading } = useSelector(getUserState);
   const registerAsyncBuonded = useBoundAction(registerAsync);
 
   const { message, status, buildMessage } = useFormMessages();
@@ -27,16 +27,14 @@ export const Registration: FC = () => {
   };
 
   useMemo(() => {
-    if (isAuth) {
-      history.replace('/');
-    } else if (isLoading) {
+    if (isLoading) {
       buildMessage(t('loading...'), FormMessageStatus.warning);
     } else if (error) {
       buildMessage(error.message ?? '', FormMessageStatus.error);
     } else {
       buildMessage('');
     }
-  }, [error, isAuth, isLoading, history, buildMessage, t]);
+  }, [error, isLoading, buildMessage, t]);
 
   const registerForm = (
     <Form

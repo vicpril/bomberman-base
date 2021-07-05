@@ -1,5 +1,5 @@
 import './styles.css';
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 import logoImage from 'assets/images/logo_img_base.png';
 import { GDLogo } from 'components/atoms/GDLogo/GDLogo';
 import { GDButton } from 'components/atoms/GDButton/GDButton';
@@ -9,8 +9,6 @@ import classnames from 'classnames';
 import { useTranslation } from 'react-i18next';
 import { useBoundAction } from 'hooks/useBoundAction';
 import { logoutAsync } from 'redux/user/userActions';
-import { useSelector } from 'react-redux';
-import { getUserState } from 'redux/user/userSlice';
 
 export type MainPageProps = {
   className?: string
@@ -21,15 +19,10 @@ export const Main: FC<MainPageProps> = ({ className }) => {
   const history = useHistory();
 
   const logoutAsyncBounded = useBoundAction(logoutAsync);
-  const { isAuth } = useSelector(getUserState);
 
   const onPlayClickHandler = () => history.push('/game');
 
   const logoutHandler = () => logoutAsyncBounded();
-
-  useEffect(() => {
-    if (!isAuth) { history.replace('/login'); }
-  }, [isAuth, history]);
 
   const items = [
     { title: 'settings', onClick: () => history.push('/') },

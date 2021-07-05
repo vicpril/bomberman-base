@@ -18,6 +18,7 @@ import classNames from 'classnames';
 import { ErrorBoundary } from 'components/organisms/ErrorBoundary/ErrorBoundary';
 import { useSelector } from 'react-redux';
 import { selectTheme } from 'redux/user/userSelectors';
+import { PrivateRoute } from 'components/organisms/PrivateRoute/PrivateRoute';
 
 export const App: FC = () => {
   const theme = useSelector(selectTheme);
@@ -30,23 +31,26 @@ export const App: FC = () => {
         </ErrorBoundary>
 
         <Switch>
-          <Route exact path="/">
-            <ErrorBoundary>
-              <Main />
-            </ErrorBoundary>
-          </Route>
+          <PrivateRoute
+            exact
+            path="/"
+            to="/login"
+            component={() => <ErrorBoundary><Main /></ErrorBoundary>}
+          />
 
-          <Route path="/login">
-            <ErrorBoundary>
-              <Login />
-            </ErrorBoundary>
-          </Route>
+          <PrivateRoute
+            path="/login"
+            to="/"
+            redirectIfAuth
+            component={() => <ErrorBoundary><Login /></ErrorBoundary>}
+          />
 
-          <Route path="/registration">
-            <ErrorBoundary>
-              <Registration />
-            </ErrorBoundary>
-          </Route>
+          <PrivateRoute
+            path="/registration"
+            to="/"
+            redirectIfAuth
+            component={() => <ErrorBoundary><Registration /></ErrorBoundary>}
+          />
 
           <Route path="/forum">
             <ErrorBoundary>
@@ -66,23 +70,23 @@ export const App: FC = () => {
             </ErrorBoundary>
           </Route>
 
-          <Route path="/profile">
-            <ErrorBoundary>
-              <Profile />
-            </ErrorBoundary>
-          </Route>
+          <PrivateRoute
+            path="/profile"
+            to="/login"
+            component={() => <ErrorBoundary><Profile /></ErrorBoundary>}
+          />
 
-          <Route path="/profile-edit">
-            <ErrorBoundary>
-              <ProfileEdit />
-            </ErrorBoundary>
-          </Route>
+          <PrivateRoute
+            path="/profile-edit"
+            to="/login"
+            component={() => <ErrorBoundary><ProfileEdit /></ErrorBoundary>}
+          />
 
-          <Route path="/profile-password-edit">
-            <ErrorBoundary>
-              <ProfilePasswordEdit />
-            </ErrorBoundary>
-          </Route>
+          <PrivateRoute
+            path="/profile-password-edit"
+            to="/login"
+            component={() => <ErrorBoundary><ProfilePasswordEdit /></ErrorBoundary>}
+          />
 
           <Route path="/topic">
             <ErrorBoundary>

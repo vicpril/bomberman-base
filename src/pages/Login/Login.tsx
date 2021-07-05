@@ -1,6 +1,6 @@
 import './styles.css';
 import React, { FC, useMemo } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { GDLogo } from 'components/atoms/GDLogo/GDLogo';
 import { GDButton } from 'components/atoms/GDButton/GDButton';
 import { Form } from 'components/molecules/Form/Form';
@@ -17,9 +17,8 @@ import { loginFormFields } from './constants';
 
 export const Login: FC = () => {
   const { t } = useTranslation();
-  const history = useHistory();
 
-  const { error, isAuth, isLoading } = useSelector(getUserState);
+  const { error, isLoading } = useSelector(getUserState);
   const loginAsyncBounded = useBoundAction(loginAsync);
 
   const { message, status, buildMessage } = useFormMessages();
@@ -29,16 +28,14 @@ export const Login: FC = () => {
   };
 
   useMemo(() => {
-    if (isAuth) {
-      history.replace('/');
-    } else if (isLoading) {
+    if (isLoading) {
       buildMessage(t('loading...'), FormMessageStatus.warning);
     } else if (error) {
       buildMessage(error.message ?? '', FormMessageStatus.error);
     } else {
       buildMessage('');
     }
-  }, [error, isAuth, isLoading, history, buildMessage, t]);
+  }, [error, isLoading, buildMessage, t]);
 
   const formComponent = (
     <Form

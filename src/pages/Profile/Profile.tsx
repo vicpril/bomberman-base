@@ -5,7 +5,6 @@ import { useTranslation } from 'react-i18next';
 import { BackButton } from 'components/molecules/BackButton/BackButton';
 import { GDButton } from 'components/atoms/GDButton/GDButton';
 import { useHistory } from 'react-router-dom';
-import { authAPI } from 'api/auth';
 import { useMountEffect } from 'hooks/useMountEffect';
 import { useSelector } from 'react-redux';
 import { selectUserInfo } from 'redux/user/userSelectors';
@@ -25,13 +24,7 @@ export const Profile: FC<ProfilePageProps> = ({ className }) => {
     avatarSrc, login, first_name, phone, second_name, email,
   } = useSelector(selectUserInfo);
 
-  useMountEffect(() => {
-    if (!authAPI.isAuth()) {
-      history.replace('/login');
-    }
-
-    getUserInfoAsyncBounded();
-  });
+  useMountEffect(() => getUserInfoAsyncBounded());
 
   return (
     <div className={classnames(['page', className])}>
