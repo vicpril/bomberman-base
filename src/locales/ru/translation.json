@@ -62,14 +62,16 @@
     "second_name": "фамилия",
     "display_name": "ник",
     "phone": "телефон",
-    "updated_successfully":"данные успешно обновлены",
-    "no_account_?":"еще нет аккаунта?",
-    "register_!":"зарегистрируйся!",
-    "just_play_!":"чисто поиграть!",
-    "loading...":"загрузка...",
+    "updated_successfully": "данные успешно обновлены",
+    "no_account_?": "еще нет аккаунта?",
+    "register_!": "зарегистрируйся!",
+    "just_play_!": "чисто поиграть!",
+    "loading...": "загрузка...",
     "are_you_sure": "вы уверены",
     "yes": "да",
     "no": "нет",
     "cancel": "отмена",
-    "ok": "ок"
+    "ok": "ок",
+    "enter_fullscreen_mode": "полноэкранный режим",
+    "exit_fullscreen_mode": "выйти из полноэкранного режима"
 }

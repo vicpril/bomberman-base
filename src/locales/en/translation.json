@@ -62,14 +62,16 @@
     "first_name": "first name",
     "second_name": "second name",
     "display_name": "display name",
-    "updated_successfully":"updated successfully",
-    "no_account_?":"no account ?",
-    "register_!":"register !",
-    "just_play_!":"just play !",
-    "loading...":"loading...",
+    "updated_successfully": "updated successfully",
+    "no_account_?": "no account ?",
+    "register_!": "register !",
+    "just_play_!": "just play !",
+    "loading...": "loading...",
     "are_you_sure": "are you sure",
     "yes": "yes",
     "no": "no",
     "cancel": "cancel",
-    "ok": "ok"
+    "ok": "ok",
+    "enter_fullscreen_mode": "enter fullscreen mode",
+    "exit_fullscreen_mode": "exit fullscreen mode"
 }

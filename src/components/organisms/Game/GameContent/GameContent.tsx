@@ -2,15 +2,17 @@ import './GameContent.css';
 import React, { FC, useMemo } from 'react';
 import { GDButton } from 'components/atoms/GDButton/GDButton';
 import { useTranslation } from 'react-i18next';
+import { FullScreenHandle } from 'react-full-screen';
 import { GameStatus, gameService } from '../services/gameService';
 import { Canvas as CanvasComponent } from '../Canvas/Canvas';
 import { GameContentInside } from './GameContentInside';
 
 type GameContentProps = {
   gameStatus: GameStatus,
-  stage: number
+  stage: number,
+  fullScreenHandle: FullScreenHandle
 }
-export const GameContent: FC<GameContentProps> = ({ gameStatus, stage }) => {
+export const GameContent: FC<GameContentProps> = ({ gameStatus, stage, fullScreenHandle }) => {
   const { t } = useTranslation();
 
   const startGameHandler = () => {
@@ -27,8 +29,14 @@ export const GameContent: FC<GameContentProps> = ({ gameStatus, stage }) => {
     switch (gameStatus) {
       default:
       case GameStatus.NOT_STARTED:
-        return <GDButton title={t('start_game')} size="l" onClick={startGameHandler} />;
-
+        return (
+          <>
+            <GDButton title={t('start_game')} size="l" onClick={startGameHandler} />
+            {fullScreenHandle.active
+              ? <GDButton title={t('exit_fullscreen_mode')} size="l" onClick={fullScreenHandle.exit} />
+              : <GDButton title={t('enter_fullscreen_mode')} size="l" onClick={fullScreenHandle.enter} />}
+          </>
+        );
       case GameStatus.SHOW_STAGE:
         return <GameContentInside text={stageText} />;
 
@@ -53,10 +61,10 @@ export const GameContent: FC<GameContentProps> = ({ gameStatus, stage }) => {
           />
         );
     }
-  }, [gameStatus, stageText, t]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [gameStatus, stageText, t, fullScreenHandle.active]);
 
   return (
-
     <div className="game-content">
       <div className="content-wrapper">
         {content}

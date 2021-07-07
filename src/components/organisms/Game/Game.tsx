@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 
 import { useMountEffect } from 'hooks/useMountEffect';
+import { FullScreen, useFullScreenHandle } from 'react-full-screen';
 import { GameHeader } from './GameHeader/GameHeader';
 import { GameContent } from './GameContent/GameContent';
 import { GameFooter } from './GameFooter/GameFooter';
@@ -13,14 +14,17 @@ export const Game: FC = () => {
   const score = useObservable(gameService.score);
   const timer = useObservable(gameService.timer);
   const bombs = useObservable(gameService.bombs);
+  const fullScreenHandle = useFullScreenHandle();
 
   useMountEffect(() => () => gameService.exitGame());
 
   return (
-    <div className="game-container">
-      <GameHeader score={score} timer={timer} bombs={bombs} />
-      <GameContent gameStatus={status} stage={stage} />
-      <GameFooter />
-    </div>
+    <FullScreen handle={fullScreenHandle}>
+      <div className="game-container">
+        <GameHeader score={score} timer={timer} bombs={bombs} />
+        <GameContent gameStatus={status} stage={stage} fullScreenHandle={fullScreenHandle} />
+        <GameFooter />
+      </div>
+    </FullScreen>
   );
 };
