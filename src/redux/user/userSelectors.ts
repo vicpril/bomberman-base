@@ -1,4 +1,14 @@
+import { createSelector } from '@reduxjs/toolkit';
 import { RootState } from 'redux/store';
 
-export const selectUserInfo = (state: RootState) => state.user.userInfo;
-export const selectTheme = (state: RootState) => state.user.theme;
+const selectUser = (state: RootState) => state.user;
+
+export const selectUserInfo = createSelector(
+  selectUser,
+  (user) => user.userInfo,
+);
+
+export const selectTheme = createSelector(
+  selectUser,
+  (user) => user.theme,
+);
