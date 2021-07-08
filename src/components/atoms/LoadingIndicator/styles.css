@@ -1,0 +1,30 @@
+.loading-indicator {
+  height: 100px;
+  width: 100px;
+  position: absolute;
+  right: 30px;
+  bottom: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+
+  &__image {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+@-webkit-keyframes rotating {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+
+  to {
+    -webkit-transform: rotate(-360deg);
+  }
+}
+
+.rotating {
+  -webkit-animation: rotating 0.5s linear infinite;
+}

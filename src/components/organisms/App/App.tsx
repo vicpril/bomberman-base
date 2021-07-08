@@ -19,6 +19,7 @@ import { ErrorBoundary } from 'components/organisms/ErrorBoundary/ErrorBoundary'
 import { useSelector } from 'react-redux';
 import { selectTheme } from 'redux/user/userSelectors';
 import { PrivateRoute } from 'components/organisms/PrivateRoute/PrivateRoute';
+import { LoadingIndicator } from 'components/atoms/LoadingIndicator/LoadingIndicator';
 
 export const App: FC = () => {
   const theme = useSelector(selectTheme);
@@ -107,6 +108,8 @@ export const App: FC = () => {
           </Route>
         </Switch>
       </BrowserRouter>
+
+      <LoadingIndicator />
     </div>
   );
 };
