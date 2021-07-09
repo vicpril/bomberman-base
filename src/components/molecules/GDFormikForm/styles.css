@@ -1,0 +1,23 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  white-space: nowrap;
+  font-size: 38px;
+  padding: 1rem;
+}
+
+.form__input {
+  font-family: var(--mainTextFontFamily);
+}
+
+.form__submit-button {
+  align-self: center;
+}
+
+.form__error-label {
+  justify-self: center;
+  align-self: center;
+  height: 1em;
+  color: var(--dangerColor);
+}

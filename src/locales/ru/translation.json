@@ -32,6 +32,7 @@
     "name": "имя",
     "last_name": "фамилия",
     "e-mail": "почта",
+    "phone": "телефон",
     "password": "пароль",
     "repeat": "подтверждение",
     "settings": "настройки",
@@ -61,7 +62,6 @@
     "first_name": "имя",
     "second_name": "фамилия",
     "display_name": "ник",
-    "phone": "телефон",
     "updated_successfully": "данные успешно обновлены",
     "no_account_?": "еще нет аккаунта?",
     "register_!": "зарегистрируйся!",
@@ -73,5 +73,11 @@
     "cancel": "отмена",
     "ok": "ок",
     "enter_fullscreen_mode": "полноэкранный режим",
-    "exit_fullscreen_mode": "выйти из полноэкранного режима"
+    "exit_fullscreen_mode": "выйти из полноэкранного режима",
+    "required": "обязательное поле",
+    "too_short" : "недостаточная длинна",
+    "too_long": "ограничение по длине",
+    "invalid_format": "неверный формат",
+    "letters_only": "только буквы",
+    "passwords_not_matches": "пароли не совпадают"
 }

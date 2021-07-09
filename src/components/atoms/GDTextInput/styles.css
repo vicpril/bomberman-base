@@ -3,16 +3,26 @@
   margin-bottom: 18px;
 }
 
-.input-field_standard {
+.input-label_invalid {
+  color: var(--dangerColor);
+}
+
+.input-field {
   background-color: transparent;
   margin-left: 12px;
   box-shadow: none;
   border: none;
-  border-bottom: 2px solid var(--mainTextColor);
+  border-bottom: 2px solid;
   color: var(--mainTextColor);
+  border-color: var(--mainTextColor);
   text-transform: uppercase;
 
   &:focus-visible {
     outline: none;
+  }
+
+  &_invalid {
+    color: var(--dangerColor);
+    border-color: var(--dangerColor);
   }
 }

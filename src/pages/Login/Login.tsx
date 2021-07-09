@@ -3,49 +3,38 @@ import React, { FC, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { GDLogo } from 'components/atoms/GDLogo/GDLogo';
 import { GDButton } from 'components/atoms/GDButton/GDButton';
-import { Form } from 'components/molecules/Form/Form';
 import logoImage from 'assets/images/logo_img_base.png';
 import { useTranslation } from 'react-i18next';
-import { FormMessageStatus, SubmitFormMethod } from 'components/molecules/Form/types';
 import { loginAsync } from 'redux/user/userActions';
 import { useBoundAction } from 'hooks/useBoundAction';
 import { useSelector } from 'react-redux';
 import { getUserState } from 'redux/user/userSlice';
-import { useFormMessages } from 'hooks/useFormMessages';
-import { LoginFormFields } from './types';
-import { loginFormFields } from './constants';
+import { Modal } from 'components/molecules/Modal/Modal';
+import { useModal } from 'components/molecules/Modal/useModal';
+import { TSubmitFormMethod } from 'components/molecules/GDFormikForm/types';
+import { GDFormikForm } from 'components/molecules/GDFormikForm/GDFormikForm';
+import { TLoginFormFields } from './types';
+import { loginFormFields, validationSchemaConstructor } from './constants';
 
 export const Login: FC = () => {
   const { t } = useTranslation();
+  const modal = useModal();
+  const validationSchema = useMemo(() => validationSchemaConstructor(t), [t]);
 
   const { error, isLoading } = useSelector(getUserState);
   const loginAsyncBounded = useBoundAction(loginAsync);
 
-  const { message, status, buildMessage } = useFormMessages();
-
-  const submitHandler: SubmitFormMethod<LoginFormFields> = async (data) => {
+  const submitHandler: TSubmitFormMethod<TLoginFormFields> = async (data) => {
     loginAsyncBounded(data);
   };
 
   useMemo(() => {
-    if (isLoading) {
-      buildMessage(t('loading...'), FormMessageStatus.warning);
-    } else if (error) {
-      buildMessage(error.message ?? '', FormMessageStatus.error);
+    if (error) {
+      modal.show(error.message ?? '');
     } else {
-      buildMessage('');
+      modal.hide();
     }
-  }, [error, isLoading, buildMessage, t]);
-
-  const formComponent = (
-    <Form
-      fields={loginFormFields}
-      textSubmitButton={t('boom !')}
-      onSubmit={submitHandler}
-      message={message}
-      messageClass={status}
-    />
-  );
+  }, [error, isLoading, t]);
 
   const textNoAccount = t('no_account_?');
   const textRegister = t('register_!');
@@ -78,8 +67,14 @@ export const Login: FC = () => {
 
   return (
     <div className="page login-page">
+      <Modal {...modal.bind} />
       <GDLogo logoImage={logoImage} />
-      {formComponent}
+      <GDFormikForm
+        fields={Object.values(loginFormFields)}
+        validationSchema={validationSchema}
+        textSubmitButton={t('submit')}
+        onSubmit={submitHandler}
+      />
       {actionComponent}
     </div>
   );

@@ -1,7 +1,0 @@
-.profile-form {
-  margin-top: 0;
-
-  & > .form__label.hidden {
-    visibility: hidden;
-  }
-}

@@ -1,63 +1,55 @@
 import './styles.css';
 import React, { FC, useMemo } from 'react';
 import { GDButton } from 'components/atoms/GDButton/GDButton';
-import { FormMessageStatus, SubmitFormMethod } from 'components/molecules/Form/types';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
-import { Form } from 'components/molecules/Form/Form';
 import { useSelector } from 'react-redux';
 import { getUserState } from 'redux/user/userSlice';
 import { useBoundAction } from 'hooks/useBoundAction';
 import { registerAsync } from 'redux/user/userActions';
-import { useFormMessages } from 'hooks/useFormMessages';
-import { registerFormFields } from './constants';
-import { RefistrationFormFields } from './types';
+import { Modal } from 'components/molecules/Modal/Modal';
+import { useModal } from 'components/molecules/Modal/useModal';
+import { GDFormikForm } from 'components/molecules/GDFormikForm/GDFormikForm';
+import { TSubmitFormMethod } from 'components/molecules/GDFormikForm/types';
+import { registerFormFields, validationSchemaConstructor } from './constants';
+import { TRegistrationFormFields } from './types';
 
 export const Registration: FC = () => {
   const { t } = useTranslation();
   const history = useHistory();
+  const modal = useModal();
+  const validationSchema = useMemo(() => validationSchemaConstructor(t), [t]);
 
   const { error, isLoading } = useSelector(getUserState);
-  const registerAsyncBuonded = useBoundAction(registerAsync);
+  const registerAsyncBounded = useBoundAction(registerAsync);
 
-  const { message, status, buildMessage } = useFormMessages();
-
-  const submitHandler: SubmitFormMethod<RefistrationFormFields> = async (data) => {
-    registerAsyncBuonded(data);
+  const submitHandler: TSubmitFormMethod<TRegistrationFormFields> = async (data) => {
+    registerAsyncBounded(data);
   };
 
   useMemo(() => {
-    if (isLoading) {
-      buildMessage(t('loading...'), FormMessageStatus.warning);
-    } else if (error) {
-      buildMessage(error.message ?? '', FormMessageStatus.error);
+    if (error) {
+      modal.show(error.message ?? '');
     } else {
-      buildMessage('');
+      modal.hide();
     }
-  }, [error, isLoading, buildMessage, t]);
-
-  const registerForm = (
-    <Form
-      className="register-form"
-      fields={registerFormFields}
-      textSubmitButton={t('submit')}
-      onSubmit={submitHandler}
-      message={message}
-      messageClass={status}
-    />
-  );
-
-  const pageTitle = t('registration');
+  }, [error, isLoading, history, t]);
 
   const backHandler = () => {
     history.goBack();
   };
   return (
     <div className="page">
+      <Modal {...modal.bind} />
       <div className="page__header">
-        <h1 className="page__title">{pageTitle}</h1>
+        <h1 className="page__title">{t('registration')}</h1>
       </div>
-      {registerForm}
+      <GDFormikForm
+        fields={Object.values(registerFormFields)}
+        validationSchema={validationSchema}
+        textSubmitButton={t('submit')}
+        onSubmit={submitHandler}
+      />
       <div className="page__footer">
         <GDButton
           className="page__footer-item"

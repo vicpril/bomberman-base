@@ -12,25 +12,28 @@ export type GDTextInputProps = {
   value?: string | number,
   onChange?: ChangeEventHandler<HTMLInputElement>,
   onBlur?: FocusEventHandler<HTMLInputElement>,
+  onFocus?: FocusEventHandler<HTMLInputElement>,
   isInvalid?: boolean,
 }
 
 export const GDTextInput: FC<GDTextInputProps> = ({
-  className, placeholder, title, id, name, type = 'text', value, onChange, onBlur,
+  className, placeholder, title, id, type = 'text', value, onChange, onBlur, onFocus, isInvalid,
 }) => {
   const titleString = `${title}:`;
+
   return (
-    <label htmlFor={id} className={classNames('input-label')}>
+    <label htmlFor={id} className={classNames(isInvalid && 'input-label_invalid', 'input-label')}>
       {titleString}
       <input
         placeholder={placeholder}
-        className={classNames(['input-field_standard', className])}
+        className={classNames('input-field', isInvalid && 'input-field_invalid', className)}
         type={type}
         id={id}
-        name={name || title}
+        name={id}
         value={value}
         onChange={onChange}
         onBlur={onBlur}
+        onFocus={onFocus}
       />
     </label>
   );

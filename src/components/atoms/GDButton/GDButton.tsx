@@ -10,6 +10,7 @@ export type GDButtonProps = {
   className?: string
   size?: GDSizeOption
   type?: 'submit' | 'reset' | 'button'
+  disabled?: boolean
 }
 
 export const GDButton: FC<GDButtonProps> = ({
@@ -19,10 +20,12 @@ export const GDButton: FC<GDButtonProps> = ({
   className,
   size = 'm',
   type = 'button',
+  disabled = false,
 }) => (
   <button
     type={type}
     onClick={onClick}
+    disabled={disabled}
     className={classNames(['btn', `btn-${styleOption}`, `size_${size}`, className])}
   >
     {title}

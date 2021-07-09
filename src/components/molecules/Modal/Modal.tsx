@@ -3,29 +3,30 @@ import React, { FC } from 'react';
 import classnames from 'classnames';
 import { GDButton } from 'components/atoms/GDButton/GDButton';
 import { useTranslation } from 'react-i18next';
+import { TModalDisplay, TModalType } from 'components/molecules/Modal/types';
 
-export type ModalProps = {
-  title: string
-  type?: 'info' | 'confirm' | 'y/n' | 'custom'
+export type TModalProps = {
+  title?: string
+  type?: TModalType
   onSubmit?: () => void
   onReject?: () => void
   customActions?: {
     actionTitle: string
     callback: () => void
   }[]
-  display: string
-  setDisplay?: (state: 'active' | 'hidden') => void
+  display?: TModalDisplay
+  hide?: () => void
   className?: string
 }
 
-export const Modal: FC<ModalProps> = ({
-  title,
+export const Modal: FC<TModalProps> = ({
+  title = '',
   type = 'info',
   onSubmit,
   onReject,
   customActions,
-  display,
-  setDisplay,
+  display = 'hidden',
+  hide,
   className,
 }) => {
   const { t } = useTranslation();
@@ -34,8 +35,8 @@ export const Modal: FC<ModalProps> = ({
     if (callback) {
       callback();
     }
-    if (setDisplay) {
-      setDisplay('hidden');
+    if (hide) {
+      hide();
     }
   };
 
@@ -91,6 +92,9 @@ export const Modal: FC<ModalProps> = ({
             />
           </>
         );
+
+      case 'banner':
+        return <></>;
 
       case 'custom':
         return customActions?.map(({ actionTitle, callback }) => (
