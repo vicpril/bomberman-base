@@ -79,5 +79,6 @@
     "too_long": "ограничение по длине",
     "invalid_format": "неверный формат",
     "letters_only": "только буквы",
-    "passwords_not_matches": "пароли не совпадают"
+    "passwords_not_matches": "пароли не совпадают",
+    "no_data": "нет данных"
 }

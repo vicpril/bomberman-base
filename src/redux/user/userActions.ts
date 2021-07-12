@@ -7,17 +7,17 @@ import { usersAPI } from 'api/users';
 import { setIsLoadingShown } from 'redux/requestStatus/requestStatusActions';
 
 export enum UserActionType {
-  info = 'user/getUserInfoAsync',
-  login = 'user/loginAsync',
-  logout = 'user/logoutAsync',
-  register = 'user/registerAsync',
-  update = 'user/updateUserAsync',
-  changePassword= 'user/changePasswordAsync',
-  changeAvatar = 'user/changeAvatarAsync',
+  INFO = 'user/getUserInfoAsync',
+  LOGIN = 'user/loginAsync',
+  LOGOUT = 'user/logoutAsync',
+  REGISTER = 'user/registerAsync',
+  UPDATE = 'user/updateUserAsync',
+  CHANGE_PASSWORD = 'user/changePasswordAsync',
+  CHANGE_AVATAR = 'user/changeAvatarAsync',
  }
 
 export const getUserInfoAsync = createAsyncThunk(
-  UserActionType.info,
+  UserActionType.INFO,
   async (nodata, thunkAPI) => {
     thunkAPI.dispatch(setIsLoadingShown(true));
     try {
@@ -30,7 +30,7 @@ export const getUserInfoAsync = createAsyncThunk(
 );
 
 export const loginAsync = createAsyncThunk(
-  UserActionType.login,
+  UserActionType.LOGIN,
   async (data: SignInRequest) => {
     const result = await authAPI.login(data);
     return result;
@@ -38,7 +38,7 @@ export const loginAsync = createAsyncThunk(
 );
 
 export const logoutAsync = createAsyncThunk(
-  UserActionType.logout,
+  UserActionType.LOGOUT,
   async () => {
     const result = await authAPI.logout();
     return result;
@@ -46,7 +46,7 @@ export const logoutAsync = createAsyncThunk(
 );
 
 export const registerAsync = createAsyncThunk(
-  UserActionType.register,
+  UserActionType.REGISTER,
   async (data: SignUpRequest) => {
     const result = await authAPI.register(data);
     return result;
@@ -54,7 +54,7 @@ export const registerAsync = createAsyncThunk(
 );
 
 export const updateUserAsync = createAsyncThunk(
-  UserActionType.update,
+  UserActionType.UPDATE,
   async (data: UserRequest) => {
     const result = await usersAPI.update(data);
     return result;
@@ -62,7 +62,7 @@ export const updateUserAsync = createAsyncThunk(
 );
 
 export const changePasswordAsync = createAsyncThunk(
-  UserActionType.changePassword,
+  UserActionType.CHANGE_PASSWORD,
   async (data: ChangePasswordRequest) => {
     const result = await usersAPI.changePassword(data);
     return result;
@@ -70,7 +70,7 @@ export const changePasswordAsync = createAsyncThunk(
 );
 
 export const changeAvatarAsync = createAsyncThunk(
-  UserActionType.changeAvatar,
+  UserActionType.CHANGE_AVATAR,
   async (data: FormData) => {
     const result = await usersAPI.changeAvatar(data);
     return result;

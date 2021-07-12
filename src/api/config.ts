@@ -14,6 +14,10 @@ export const PATHS = {
     changePassword: `${API_BASE_URL}/user/password`,
     uploadAvatar: `${API_BASE_URL}/user/profile/avatar`,
   },
+  leaderboard: {
+    addLeader: `${API_BASE_URL}/leaderboard`,
+    getLeaderboard: `${API_BASE_URL}/leaderboard/all`,
+  },
   resources: {
     getUrl: `${API_BASE_URL}/resources`,
   },

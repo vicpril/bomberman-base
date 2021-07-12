@@ -75,3 +75,25 @@ export type ChangePasswordResponse = 'OK'
 export type ChangeAvatarRequest = {
   avatar: File
 }
+
+export type Leader = {
+  user: string
+  scoreFieldGD: number
+}
+
+export type AddLeaderRequest = {
+  data: Leader
+  ratingFieldName: string
+}
+
+export type AddLeaderResponse = 'OK'
+
+export type GetLeaderboardRequest = {
+  ratingFieldName: string
+  cursor: number
+  limit: number
+}
+
+export type GetLeaderboardResponse = {
+  data: Leader
+}[]

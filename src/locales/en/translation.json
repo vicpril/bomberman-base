@@ -79,5 +79,6 @@
     "too_long": "too long",
     "invalid_format": "invalid format",
     "letters_only": "letters only",
-    "passwords_not_matches": "passwords not matches"
+    "passwords_not_matches": "passwords not matches",
+    "no_data": "no data"
 }
