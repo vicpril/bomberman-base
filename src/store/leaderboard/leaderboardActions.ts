@@ -1,7 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { leaderboardAPI } from 'api/leaderboard';
 import { AddLeaderRequest, GetLeaderboardRequest } from 'api/types';
-import {setIsLoadingShown} from "redux/requestStatus/requestStatusActions";
+import { setIsLoadingShown } from 'store/requestStatus/requestStatusActions';
 
 export enum LeaderboardActionType {
   GET_LEADERBOARD = 'leaderboard/getLeaderboardAsync',
@@ -22,7 +22,7 @@ export const getLeaderboardAsync = createAsyncThunk(
     thunkAPI.dispatch(setIsLoadingShown(true));
     try {
       const leaderboard = await leaderboardAPI.getLeaderboard(data);
-      return leaderboard
+      return leaderboard;
     } finally {
       thunkAPI.dispatch(setIsLoadingShown(false));
     }

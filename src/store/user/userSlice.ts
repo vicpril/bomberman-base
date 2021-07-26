@@ -4,8 +4,9 @@ import {
 import { AUTH_TOKEN_NAME } from 'api/config';
 import { resourcesAPI } from 'api/resources';
 import avatarDummy from 'assets/images/logo_img_base.png';
-import { RootState } from 'redux/store';
+import { RootState } from 'store/store';
 import { UserResponse } from 'api/types';
+import { isServer } from 'utils/ssrUtils';
 import {
   changeAvatarAsync,
   changePasswordAsync,
@@ -38,7 +39,9 @@ const initialState: UserState = {
     avatarSrc: avatarDummy,
   },
   theme: 'dark',
-  isAuth: Boolean(localStorage.getItem(AUTH_TOKEN_NAME)),
+  // Сначала на сервере выставляется true, потом клиент вызывает setAuthOnLoadTMPBounded и узнает реальный isAuth.
+  // ВЫПИЛИТЬ когда мидлвара на сервере сможет определять isAuth
+  isAuth: true,
   isLoading: false,
   isUpdatedSuccessful: false,
   error: null,
@@ -60,7 +63,7 @@ function isFulfilledAction(action: AnyAction): action is FulfilledAction {
   return action.type.endsWith('/fulfilled');
 }
 
-const setAuth = (state: UserState, auth: boolean): void => {
+export const setAuth = (state: UserState, auth: boolean): void => {
   if (auth) {
     localStorage.setItem(AUTH_TOKEN_NAME, '1');
   } else {
@@ -84,6 +87,10 @@ export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
+    setAuthOnLoadTMP: (state) => {
+      const isAuthTMP = isServer ? false : !!localStorage.getItem(AUTH_TOKEN_NAME);
+      state.isAuth = isAuthTMP;
+    },
     toggleTheme: (state) => {
       state.theme = state.theme === 'dark' ? 'light' : 'dark';
     },

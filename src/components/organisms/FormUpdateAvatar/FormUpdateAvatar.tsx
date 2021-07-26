@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { useBoundAction } from 'hooks/useBoundAction';
 import React, { ChangeEventHandler, FC, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { changeAvatarAsync } from 'redux/user/userActions';
+import { changeAvatarAsync } from 'store/user/userActions';
 
 export const FormUpdateAvatar: FC = () => {
   const { t } = useTranslation();

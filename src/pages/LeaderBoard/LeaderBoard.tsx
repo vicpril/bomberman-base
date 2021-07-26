@@ -5,10 +5,10 @@ import { useTranslation } from 'react-i18next';
 import { BackButton } from 'components/molecules/BackButton/BackButton';
 import { SEPARATOR, SEPARATOR_LENGTH, RECORDS_PER_PAGE } from 'pages/LeaderBoard/constants';
 import { useBoundAction } from 'hooks/useBoundAction';
-import { getLeaderboardAsync } from 'redux/leaderboard/leaderboardActions';
+import { getLeaderboardAsync } from 'store/leaderboard/leaderboardActions';
 import { useMountEffect } from 'hooks/useMountEffect';
 import { useSelector } from 'react-redux';
-import { selectLeaderboard } from 'redux/leaderboard/leaderboardSelectors';
+import { selectLeaderboard } from 'store/leaderboard/leaderboardSelectors';
 
 export const LeaderBoard: FC = () => {
   const { t } = useTranslation();
@@ -28,6 +28,7 @@ export const LeaderBoard: FC = () => {
 
   return (
     <div className={classnames(['page'])}>
+
       <h1 className="page__title">{t('leaderboard')}</h1>
 
       <div className="page__content">

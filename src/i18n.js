@@ -14,6 +14,9 @@ i18n
     // Стандартный язык
     fallbackLng: 'en',
     debug: false,
+    react: {
+      useSuspense: false,
+    },
     // Распознавание и кэширование языковых кук
     detection: {
       order: ['queryString', 'cookie'],

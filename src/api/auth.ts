@@ -1,6 +1,9 @@
 import { is } from 'typescript-is';
 import { callApi } from '../utils/api-wrapper';
-import { AUTH_TOKEN_NAME, PATHS } from './config';
+import {
+  AUTH_TOKEN_NAME,
+  PATHS,
+} from './config';
 import {
   ERROR_RESPONSE_DATA,
   LogOutResponse,
@@ -22,7 +25,6 @@ export const authAPI = {
       });
 
       if (response.data && is<SignInResponse>(response.data)) {
-        localStorage.setItem(AUTH_TOKEN_NAME, 'OK');
         return response.data;
       }
       throw new Error(ERROR_RESPONSE_DATA);
@@ -40,7 +42,6 @@ export const authAPI = {
       });
 
       if (response.data && is<LogOutResponse>(response.data)) {
-        localStorage.removeItem(AUTH_TOKEN_NAME);
         return response.data;
       }
       throw new Error(ERROR_RESPONSE_DATA);
@@ -59,9 +60,6 @@ export const authAPI = {
       });
 
       if (response.data && is<SignUpResponse>(response.data)) {
-        if (response.data.id) {
-          localStorage.setItem(AUTH_TOKEN_NAME, 'OK');
-        }
         return response.data;
       }
       throw new Error(ERROR_RESPONSE_DATA);

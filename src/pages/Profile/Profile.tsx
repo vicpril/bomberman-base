@@ -7,8 +7,8 @@ import { GDButton } from 'components/atoms/GDButton/GDButton';
 import { useHistory } from 'react-router-dom';
 import { useMountEffect } from 'hooks/useMountEffect';
 import { useSelector } from 'react-redux';
-import { selectUserInfo } from 'redux/user/userSelectors';
-import { getUserInfoAsync } from 'redux/user/userActions';
+import { selectUserInfo } from 'store/user/userSelectors';
+import { getUserInfoAsync } from 'store/user/userActions';
 import { useBoundAction } from 'hooks/useBoundAction';
 
 export type ProfilePageProps = {

@@ -6,7 +6,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { ThemeSwitch } from 'components/molecules/ThemeSwitch/ThemeSwitch';
 import { useSelector } from 'react-redux';
-import { getUserState } from 'redux/user/userSlice';
+import { getUserState } from 'store/user/userSlice';
 
 export const NavHeader: FC = () => {
   const { t } = useTranslation();

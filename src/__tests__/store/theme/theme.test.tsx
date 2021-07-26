@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom/extend-expect';
 
-import { store } from 'redux/store';
-import { toggleTheme } from 'redux/user/userSlice';
+import { store } from 'store/store';
+import { toggleTheme } from 'store/user/userSlice';
 
 describe('Theme checking', () => {
   it('default is dark theme', () => {

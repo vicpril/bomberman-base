@@ -4,7 +4,7 @@ import {
   ChangePasswordRequest, SignInRequest, SignUpRequest, UserRequest,
 } from 'api/types';
 import { usersAPI } from 'api/users';
-import { setIsLoadingShown } from 'redux/requestStatus/requestStatusActions';
+import { setIsLoadingShown } from 'store/requestStatus/requestStatusActions';
 
 export enum UserActionType {
   INFO = 'user/getUserInfoAsync',

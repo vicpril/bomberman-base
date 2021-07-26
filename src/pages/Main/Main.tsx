@@ -8,7 +8,7 @@ import { useHistory } from 'react-router-dom';
 import classnames from 'classnames';
 import { useTranslation } from 'react-i18next';
 import { useBoundAction } from 'hooks/useBoundAction';
-import { logoutAsync } from 'redux/user/userActions';
+import { logoutAsync } from 'store/user/userActions';
 
 export type MainPageProps = {
   className?: string

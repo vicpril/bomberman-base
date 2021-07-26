@@ -1,21 +1,21 @@
 import './styles/styles.css';
-import React, { Suspense } from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react';
+import { hydrate } from 'react-dom';
 import { Provider } from 'react-redux';
-import { store } from 'redux/store';
-import { startServiceWorker } from 'serviceWorker';
+import { store } from 'store/store';
+import { ConnectedRouter } from 'connected-react-router';
+import { createBrowserHistory } from 'history';
 import { App } from './components/organisms/App/App';
 import './i18n';
 
-ReactDOM.render(
+const history = createBrowserHistory();
+
+hydrate((
   <React.StrictMode>
     <Provider store={store}>
-      <Suspense fallback={<div>Loading...</div>}>
+      <ConnectedRouter history={history}>
         <App />
-      </Suspense>
+      </ConnectedRouter>
     </Provider>
-  </React.StrictMode>,
-  document.getElementById('root'),
-);
-
-startServiceWorker();
+  </React.StrictMode>),
+document.getElementById('root'));

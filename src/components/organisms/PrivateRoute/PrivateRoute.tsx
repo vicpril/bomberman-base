@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { Route, Redirect } from 'react-router-dom';
-import { getUserState } from 'redux/user/userSlice';
+import { getUserState } from 'store/user/userSlice';
 
 type PrivateRouteProps = {
   to: `/${string}`,

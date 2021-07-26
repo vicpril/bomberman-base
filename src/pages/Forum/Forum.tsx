@@ -18,11 +18,12 @@ export const Forum: FC<ForumPageProps> = ({ className }) => {
 
   return (
     <div className={classNames(['page', className])}>
+
       <h1 className="page__title">{t('forum')}</h1>
 
       <div className="forum">
         <span className="forum__header">
-          {listHeader.map((item) => <GDButton title={item} styleOption="secondary" size="l" />)}
+          {listHeader.map((item) => <GDButton key={item} title={item} styleOption="secondary" size="l" />)}
         </span>
         <div className="forum__topics-list">
           {dummyTopics.map(({
@@ -31,8 +32,9 @@ export const Forum: FC<ForumPageProps> = ({ className }) => {
             postCount,
             viewsCount,
             lastReplay,
-          }) => (
-            <span className="forum__topic-list-item">
+          }, index) => (
+            // eslint-disable-next-line react/no-array-index-key
+            <span key={index} className="forum__topic-list-item">
               <span className="forum__topic-list-item_align-left">{topic}</span>
               <span>{author}</span>
               <span>{postCount}</span>
