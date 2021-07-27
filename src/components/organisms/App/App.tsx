@@ -31,6 +31,13 @@ export const App: FC = hot(() => {
   const setAuthOnLoadTMPBounded = useBoundAction(userActions.setAuthOnLoadTMP);
   useMountEffect(() => {
     setAuthOnLoadTMPBounded();
+    const difficultComputationWorker = new Worker('worker.js');
+    difficultComputationWorker.postMessage({ a: 1, b: 14 });
+
+    difficultComputationWorker.addEventListener('message', (e) => {
+      // eslint-disable-next-line no-console
+      console.log('Computation result received in component', e);
+    }, false);
   });
 
   return (
