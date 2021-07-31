@@ -94,6 +94,9 @@ export const userSlice = createSlice({
     toggleTheme: (state) => {
       state.theme = state.theme === 'dark' ? 'light' : 'dark';
     },
+    login(state) {
+      setAuth(state, true);
+    },
     logout(state) {
       setAuth(state, false);
     },
@@ -149,7 +152,7 @@ export const userSlice = createSlice({
 
 export const userReducer = userSlice.reducer;
 
-export const { toggleTheme } = userSlice.actions;
+export const { toggleTheme, login } = userSlice.actions;
 export const userActions = userSlice.actions;
 
 export const selectUserInfo = (state: RootState) => state.user.userInfo;

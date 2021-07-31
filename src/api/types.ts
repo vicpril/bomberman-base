@@ -52,17 +52,17 @@ export type UserResponse = {
   display_name: string | null,
   login: string,
   email: string,
-  phone: string,
+  phone: string | null,
   avatar: string | null,
 }
 
 export type UserRequest = {
-  first_name:string | null,
-  second_name:string | null,
-  display_name:string | null,
-  login:string,
-  email:string,
-  phone:string,
+  first_name: string | null,
+  second_name: string | null,
+  display_name: string | null,
+  login: string,
+  email: string,
+  phone: string,
 }
 
 export type ChangePasswordRequest = {
@@ -97,3 +97,24 @@ export type GetLeaderboardRequest = {
 export type GetLeaderboardResponse = {
   data: Leader
 }[]
+
+export type OAuthServiceIdRequest = {
+  redirect_uri: string
+}
+
+export type OAuthServiceIdResponse = {
+  service_id: string
+}
+
+export type OauthSignInRequest = {
+  code: string
+  redirect_uri: string
+}
+
+export type OauthSignInResponse = 'OK'
+
+export type OAuthYandexRequest = {
+  code?: string
+  error?: any
+  state?: string
+}

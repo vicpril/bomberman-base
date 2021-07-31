@@ -80,5 +80,6 @@
     "invalid_format": "неверный формат",
     "letters_only": "только буквы",
     "passwords_not_matches": "пароли не совпадают",
-    "no_data": "нет данных"
+    "no_data": "нет данных",
+    "login_with_yandex": "войти через яндекс"
 }

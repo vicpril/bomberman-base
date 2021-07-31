@@ -80,5 +80,6 @@
     "invalid_format": "invalid format",
     "letters_only": "letters only",
     "passwords_not_matches": "passwords not matches",
-    "no_data": "no data"
+    "no_data": "no data",
+    "login_with_yandex": "login with yandex"
 }

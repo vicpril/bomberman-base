@@ -21,4 +21,8 @@ export const PATHS = {
   resources: {
     getUrl: `${API_BASE_URL}/resources`,
   },
+  oauth: {
+    getServiceId: `${API_BASE_URL}/oauth/yandex/service-id`,
+    signIn: `${API_BASE_URL}/oauth/yandex`,
+  },
 };
