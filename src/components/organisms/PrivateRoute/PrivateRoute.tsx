@@ -4,19 +4,19 @@ import { Route, Redirect } from 'react-router-dom';
 import { getUserState } from 'store/user/userSlice';
 
 type PrivateRouteProps = {
-  to: `/${string}`,
+  redirectTo: `/${string}`,
   redirectIfAuth?: boolean,
-  path: `/${string}`,
+  path: string,
   component: FC,
   exact?: boolean
 }
 
 export const PrivateRoute: FC<PrivateRouteProps> = ({
-  to, redirectIfAuth = false, component, ...rest
+  redirectTo, redirectIfAuth = false, component, ...rest
 }) => {
   const { isAuth } = useSelector(getUserState);
 
   return isAuth === redirectIfAuth
-    ? <Redirect to={to} />
+    ? <Redirect to={redirectTo} />
     : <Route component={component} {...rest} />;
 };
