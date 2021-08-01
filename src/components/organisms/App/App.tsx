@@ -14,6 +14,7 @@ import { useMountEffect } from 'hooks/useMountEffect';
 import { routes } from 'routes';
 import { OAuthController } from 'services/oauth';
 import { useHistory } from 'react-router';
+import { startAllWorkers } from 'webWorkers/startAllWorkers';
 import { RouteBuilder } from '../RouteBuilder/RouteBuilder';
 
 export const App: FC = hot(() => {
@@ -27,13 +28,8 @@ export const App: FC = hot(() => {
 
   useMountEffect(() => {
     setAuthOnLoadTMPBounded();
-    const difficultComputationWorker = new Worker('worker.js');
-    difficultComputationWorker.postMessage({ a: 1, b: 14 });
 
-    difficultComputationWorker.addEventListener('message', (e) => {
-      // eslint-disable-next-line no-console
-      console.log('Computation result received in component', e);
-    }, false);
+    startAllWorkers();
 
     const code = new URLSearchParams(search).get('code');
     if (code) {

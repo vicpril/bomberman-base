@@ -4,6 +4,7 @@ import {
 import path from 'path';
 import CopyPlugin from 'copy-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 import { DIST_DIR, SRC_DIR, IS_DEV } from './env';
 import fileLoader from './loaders/file';
@@ -20,7 +21,6 @@ const config: Configuration = {
       IS_DEV && 'css-hot-loader/hotModuleReplacement',
       path.join(SRC_DIR, 'index'),
     ].filter(Boolean) as unknown,
-    worker: [path.join(SRC_DIR, 'worker')],
   } as Entry,
   output: {
     path: DIST_DIR,
@@ -39,17 +39,18 @@ const config: Configuration = {
     ],
   },
   plugins: [
+    new HtmlWebpackPlugin({
+      template: './src/backupHtml/offline.html',
+      filename: 'offline.html',
+    }),
     new CopyPlugin({
       patterns: [
         { from: path.join(SRC_DIR, 'locales'), to: 'locales' },
-      ],
+        { from: path.join(SRC_DIR, 'webWorkers/serviceWorker.js'), to: '' },
+        { from: path.join(SRC_DIR, 'webWorkers/computationWorker.js'), to: '' }],
     }),
     new HotModuleReplacementPlugin(),
     new MiniCssExtractPlugin({ filename: '[name].css' }),
-    // new WorkboxPlugin.GenerateSW({
-    //   clientsClaim: true,
-    //   skipWaiting: true,
-    // }),
     new ProvidePlugin({
       process: 'process/browser',
     }),
