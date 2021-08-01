@@ -77,7 +77,7 @@ export type ChangeAvatarRequest = {
 }
 
 export type Leader = {
-  user: string
+  displayName: string
   scoreFieldGD: number
 }
 

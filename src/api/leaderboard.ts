@@ -6,7 +6,7 @@ import {
   GetLeaderboardRequest,
   GetLeaderboardResponse,
 } from 'api/types';
-import { callApi } from '../utils/api-wrapper';
+import { callApi } from 'utils/api-wrapper';
 import { PATHS } from './config';
 
 export const leaderboardAPI = {
