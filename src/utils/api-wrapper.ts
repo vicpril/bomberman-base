@@ -1,8 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import { ApiRequestProps, ApiResponse, ResponseStatus } from 'api/types';
 import { AUTH_TOKEN_NAME } from 'api/config';
-import { store } from 'store/store';
-import { userActions } from 'store/user/userSlice';
 
 const axiosInstance = axios.create({});
 
@@ -31,7 +29,10 @@ export const callApi: (params: ApiRequestProps) => Promise<ApiResponse> = async 
         return true;
       }
       if (status === 401) {
-        store.dispatch(userActions.logout());
+        // убрал диспатч, т.к. он создает циклические импорты
+        // либо как-то меняют порядок импортов.
+        // Вследствие чего при сборке редюсеров userSlice еще undefined.
+        // store.dispatch(userActions.logout());
       }
       return false;
     },

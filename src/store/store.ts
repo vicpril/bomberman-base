@@ -29,6 +29,9 @@ export const createRootReducer = (hist: History) => combineReducers({
   leaderboard: leaderboardReducer,
 });
 
+// TODO: конфигурировать при запуске сервера только один стор на сервере.
+// Сейчас конфигурируется 2 и тот, который экспортируется из 'store/store' - на сервере не используется.
+
 // Используется только на клиенте с preloadedState, на сервере стор конфигурируется в serverRenderMiddleware
 // тк его нужно создавать заново для каждого запроса
 export const store = configureStore({
