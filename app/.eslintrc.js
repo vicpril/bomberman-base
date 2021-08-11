@@ -16,8 +16,9 @@ module.exports = {
     },
     ecmaVersion: 12,
     sourceType: 'module',
-    project: './app/tsconfig.json'
+    project: './tsconfig.json',
   },
+  ignorePatterns: ['.eslintrc.js', 'webpack.config.ts'],
   plugins: [
     'react',
     '@typescript-eslint',

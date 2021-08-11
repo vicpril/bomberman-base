@@ -4,9 +4,11 @@ import { IS_DEV } from '../../webpackConfigs/env';
 import config from '../../webpackConfigs/client.config';
 import { IndexController } from './controllers/IndexController';
 import { webpackMiddlewares } from './middlewares/webpackMiddleware';
-import { getUsers } from './views/users';
 import { sequelize } from './models';
-import { User } from './models/User';
+import { ThemesController } from './controllers/ThemesController';
+import { ThemesService } from './services/ThemesService';
+import { UsersController } from './controllers/UsersController';
+import { UsersService } from './services/UsersService';
 
 const port = 5000;
 
@@ -15,8 +17,17 @@ export const startServer = async () => {
   await sequelize.sync({ force: true });
 
   // Создаем юзера после подключения к базе, чтобы нам было что отдать с ручки
-  User.create({
+  UsersService.create({
     name: 'Steve',
+  });
+
+  ThemesService.create({
+    name: 'light',
+    description: 'light theme description',
+  });
+  ThemesService.create({
+    name: 'dark',
+    description: 'dark theme profound description',
   });
 
   const app = express();
@@ -33,7 +44,10 @@ export const startServer = async () => {
   }
   app.use(express.static(path.join(__dirname, '../dist')));
 
-  app.get('/api/users', getUsers);
+  app.get('/api/users', UsersController.getAll);
+  app.get('/api/themes', ThemesController.getAll);
+  app.get('/api/themes/:themeId', ThemesController.findOne);
+  app.post('/api/themes/create', ThemesController.create);
 
   app.get(['/*'], IndexController.index);
 
