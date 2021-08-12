@@ -5,6 +5,8 @@ import dotenv from 'dotenv';
 import { User } from './User';
 import { UserTheme } from './UserTheme';
 import { SiteTheme } from './SiteTheme';
+import { Topic } from './Topic';
+import { Comment } from './Comment';
 
 dotenv.config();
 
@@ -18,7 +20,7 @@ const sequelizeOptions: SequelizeOptions = {
   username: POSTGRES_USER || 'postgres',
   password: POSTGRES_PASSWORD || 'newPassword',
   database: POSTGRES_DB || 'gamedev_db',
-  models: [User, UserTheme, SiteTheme],
+  models: [User, UserTheme, SiteTheme, Topic, Comment],
   dialect: 'postgres',
 };
 

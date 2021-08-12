@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { RESPONSE_WRONG_REQUEST_DATA_TEXT } from 'server/constants';
+import { RESPONSE_WRONG_REQUEST_DATA_TEXT } from 'server/config';
 import { CreateThemeRequest, ThemesService } from 'server/services/ThemesService';
 import { is } from 'typescript-is';
 
