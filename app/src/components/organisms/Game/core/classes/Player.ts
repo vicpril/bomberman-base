@@ -1,6 +1,7 @@
 import { KeyboardEvent } from 'react';
 import {
-  DEGREE_360,
+  ANIMATION_FRAMES_PLAYER,
+  ANIMATION_INTERVAL_PLAYER,
   GRID,
   PLAYER_BOMB_BLOWS_SIZE,
   PLAYER_HAS_BOMBS,
@@ -14,6 +15,8 @@ import { getBattleField } from './BattleField';
 import { gameService } from '../../services/gameService';
 import { MovingEntity } from './MovingEntity';
 import { Movements } from '../types/DirectionsType';
+import { FrameActions, FrameEntities } from '../types/SpriteTypes';
+import { getSpritesPlayerInstance } from './SpritesPlayer';
 
 export class Player extends MovingEntity implements IEntity {
   type = EntitiesTypes.PLAYER;
@@ -28,8 +31,13 @@ export class Player extends MovingEntity implements IEntity {
 
   bombBlownSize = PLAYER_BOMB_BLOWS_SIZE;
 
-  // for render
-  private radius = GRID * 0.3;
+  private frames: number = ANIMATION_FRAMES_PLAYER;
+
+  private currentFrame: number = 0;
+
+  private animationInterval: number = ANIMATION_INTERVAL_PLAYER;
+
+  private interval: number = ANIMATION_INTERVAL_PLAYER;
 
   constructor(private canvasCtx: CanvasRenderingContext2D) {
     super({
@@ -71,12 +79,49 @@ export class Player extends MovingEntity implements IEntity {
     document.removeEventListener('keyup', this.handleKeyupEvent as () => {});
   }
 
+  animationRefresh = (dt: number) => {
+    if (this.direction === Movements.NONE) {
+      this.currentFrame = 0;
+      return;
+    }
+    this.interval -= dt;
+    if (this.interval < 0) {
+      this.interval = this.animationInterval;
+      if (this.currentFrame === this.frames) {
+        this.currentFrame = 0;
+      } else {
+        this.currentFrame += 1;
+      }
+    }
+  }
+
+  action: FrameActions = FrameActions.DOWN;
+
   canvasAnimation = () => {
-    this.canvasCtx.save();
-    this.canvasCtx.fillStyle = 'white';
-    this.canvasCtx.beginPath();
-    this.canvasCtx.arc(this.coords.x, this.coords.y, this.radius, 0, DEGREE_360);
-    this.canvasCtx.fill();
+    switch (this.direction) {
+      case Movements.DOWN:
+        this.action = FrameActions.DOWN;
+        break;
+      case Movements.UP:
+        this.action = FrameActions.UP;
+        break;
+      case Movements.RIGHT:
+        this.action = FrameActions.RIGHT;
+        break;
+      case Movements.LEFT:
+        this.action = FrameActions.LEFT;
+        break;
+      default:
+        break;
+    }
+    getSpritesPlayerInstance()
+      .draw(
+        this.canvasCtx,
+        this.coords,
+        FrameEntities.PLAYER,
+        this.action,
+        this.currentFrame,
+      );
   }
 
   placeBomb(): void {

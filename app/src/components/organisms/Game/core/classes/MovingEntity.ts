@@ -24,7 +24,7 @@ export abstract class MovingEntity {
 
   speed: number;
 
-  private direction: Movements = Movements.NONE
+  protected direction: Movements = Movements.NONE
 
   constructor(options: MovingEntityOptions) {
     this.speed = options.speed;
@@ -51,7 +51,10 @@ export abstract class MovingEntity {
     this.isStoping = true;
   }
 
+  abstract animationRefresh: (dt: number) => void
+
   refresh(dt: number) {
+    this.animationRefresh(dt);
     if (this.direction !== Movements.NONE) {
       this.nextPos = this.nextPos ?? this.getNextPos(this.direction);
 

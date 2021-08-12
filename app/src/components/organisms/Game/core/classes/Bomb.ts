@@ -1,12 +1,16 @@
-import { DEGREE_360, GRID, SCORE_WIN_PER_STAGE } from '../config';
+import {
+  ANIMATION_FRAMES_BOMB, ANIMATION_INTERVAL_BOMB, GRID, SCORE_WIN_PER_STAGE,
+} from '../config';
 import { EntitiesTypes } from '../types/EntitiesTypes';
-import { DIRECTIONS, DirectionType } from '../types/DirectionsType';
+import { defineDirection, DIRECTIONS, Movements } from '../types/DirectionsType';
 import { IEntity } from '../interfaces/IEntity';
-import { Explosion } from './Explosion';
+import { Explosion, ExplosionFrameDirection } from './Explosion';
 import { getBattleField } from './BattleField';
 import { Player } from './Player';
 import { Position } from '../types/PositionType';
 import { gameService } from '../../services/gameService';
+import { FrameActions, FrameEntities } from '../types/SpriteTypes';
+import { getSpritesBombInstance } from './SpritesBomb';
 
 export class Bomb implements IEntity {
   type = EntitiesTypes.BOMB;
@@ -16,6 +20,14 @@ export class Bomb implements IEntity {
   alive: boolean = true;
 
   timer: number = 3000;
+
+  private frames: number = ANIMATION_FRAMES_BOMB;
+
+  private currentFrame: number = 0;
+
+  private animationInterval: number = ANIMATION_INTERVAL_BOMB;
+
+  private interval: number = ANIMATION_INTERVAL_BOMB;
 
   constructor(
     private canvasCtx: CanvasRenderingContext2D,
@@ -28,10 +40,14 @@ export class Bomb implements IEntity {
     const x = (this.pos.x + 0.5) * GRID;
     const y = (this.pos.y + 0.5) * GRID;
 
-    this.canvasCtx.fillStyle = 'black';
-    this.canvasCtx.beginPath();
-    this.canvasCtx.arc(x, y, this.radius, 0, DEGREE_360);
-    this.canvasCtx.fill();
+    getSpritesBombInstance()
+      .draw(
+        this.canvasCtx,
+        { x, y },
+        FrameEntities.BOMB,
+        FrameActions.PERMANENT,
+        this.currentFrame,
+      );
   }
 
   refresh(dt: number): void {
@@ -44,12 +60,14 @@ export class Bomb implements IEntity {
     }
 
     // bomb animation
-    // change every 0.5s
-    const interval = Math.ceil(this.timer / 500);
-    if (interval % 2 === 0) {
-      this.radius = GRID * 0.4;
-    } else {
-      this.radius = GRID * 0.45;
+    this.interval -= dt;
+    if (this.interval < 0) {
+      this.interval = this.animationInterval;
+      if (this.currentFrame === this.frames) {
+        this.currentFrame = 0;
+      } else {
+        this.currentFrame += 1;
+      }
     }
   }
 
@@ -73,7 +91,7 @@ export class Bomb implements IEntity {
     const scoreToWin = SCORE_WIN_PER_STAGE * gameService.stage.get();
 
     // create Explosions per each directions
-    Object.values(DIRECTIONS).forEach((dir: DirectionType) => {
+    Object.values(DIRECTIONS).forEach((dir) => {
       for (let i = 0; i < this.blownSize; i++) {
         // calculate position
         const pos: Position = {
@@ -85,7 +103,17 @@ export class Bomb implements IEntity {
 
         // create Explosion in cell
         const isCenter = i === 0;
-        BF.addEntity(new Explosion(this.canvasCtx, pos, dir, isCenter));
+        const isEnd = i === this.blownSize - 1;
+        let direction: ExplosionFrameDirection;
+        switch (defineDirection(dir)) {
+          default:
+          case Movements.UP: direction = FrameActions.UP; break;
+          case Movements.RIGHT: direction = FrameActions.RIGHT; break;
+          case Movements.DOWN: direction = FrameActions.DOWN; break;
+          case Movements.LEFT: direction = FrameActions.LEFT; break;
+        }
+
+        BF.addEntity(new Explosion(this.canvasCtx, pos, direction, isCenter, isEnd));
 
         // clear cell
         BF.clearCell(pos);
