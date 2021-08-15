@@ -1,5 +1,6 @@
 import path from 'path';
 import express from 'express';
+import cookieParser from 'cookie-parser';
 import { IS_DEV } from '../../webpackConfigs/env';
 import config from '../../webpackConfigs/client.config';
 import { webpackMiddlewares } from './middlewares/webpackMiddleware';
@@ -38,6 +39,7 @@ export const startServer = async () => {
       extended: true,
     }),
   );
+  app.use(cookieParser());
 
   if (IS_DEV) {
     app.use(webpackMiddlewares(config));

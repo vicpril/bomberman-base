@@ -4,7 +4,7 @@ import { ErrorBoundary } from 'components/organisms/ErrorBoundary/ErrorBoundary'
 import { Route } from 'react-router';
 import { PrivateRoute } from '../PrivateRoute/PrivateRoute';
 
-export const RouteBuilder: FC<Omit<RouteType, 'fetchData'>> = ({ privateRoute, ...routeProps }) => (
+export const RouteBuilder: FC<RouteType> = ({ privateRoute, ...routeProps }) => (
   <ErrorBoundary>
     {
       privateRoute

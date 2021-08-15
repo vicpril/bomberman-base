@@ -1,12 +1,10 @@
 import {
-  AnyAction, AsyncThunk, SerializedError, createSlice,
+  AnyAction, AsyncThunk, SerializedError, createSlice, PayloadAction,
 } from '@reduxjs/toolkit';
-import { AUTH_TOKEN_NAME } from 'api/config';
 import { resourcesAPI } from 'api/resources';
 import avatarDummy from 'assets/images/logo_img_base.png';
 import { RootState } from 'store/store';
 import { UserResponse } from 'api/types';
-import { isServer } from 'utils/ssrUtils';
 import {
   changeAvatarAsync,
   changePasswordAsync,
@@ -39,9 +37,7 @@ const initialState: UserState = {
     avatarSrc: avatarDummy,
   },
   theme: 'dark',
-  // Сначала на сервере выставляется true, потом клиент вызывает setAuthOnLoadTMPBounded и узнает реальный isAuth.
-  // ВЫПИЛИТЬ когда мидлвара на сервере сможет определять isAuth
-  isAuth: true,
+  isAuth: false,
   isLoading: false,
   isUpdatedSuccessful: false,
   error: null,
@@ -63,15 +59,6 @@ function isFulfilledAction(action: AnyAction): action is FulfilledAction {
   return action.type.endsWith('/fulfilled');
 }
 
-export const setAuth = (state: UserState, auth: boolean): void => {
-  if (auth) {
-    localStorage.setItem(AUTH_TOKEN_NAME, '1');
-  } else {
-    localStorage.removeItem(AUTH_TOKEN_NAME);
-  }
-  state.isAuth = auth;
-};
-
 const saveUserData = (state: UserState, payload: UserResponse) => {
   const avatarSrc = payload.avatar
     ? resourcesAPI.getResourceURL(payload.avatar)
@@ -87,18 +74,11 @@ export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setAuthOnLoadTMP: (state) => {
-      const isAuthTMP = isServer ? false : !!localStorage.getItem(AUTH_TOKEN_NAME);
-      state.isAuth = isAuthTMP;
+    setAuth: (state, action: PayloadAction<boolean>) => {
+      state.isAuth = action.payload;
     },
     toggleTheme: (state) => {
       state.theme = state.theme === 'dark' ? 'light' : 'dark';
-    },
-    login(state) {
-      setAuth(state, true);
-    },
-    logout(state) {
-      setAuth(state, false);
     },
     update(state, action) {
       saveUserData(state, action.payload);
@@ -114,9 +94,15 @@ export const userSlice = createSlice({
     builder.addCase(getUserInfoAsync.fulfilled, (state, action) => {
       saveUserData(state, action.payload);
     });
-    builder.addCase(loginAsync.fulfilled, (state) => setAuth(state, true));
-    builder.addCase(logoutAsync.fulfilled, (state) => setAuth(state, false));
-    builder.addCase(registerAsync.fulfilled, (state) => setAuth(state, true));
+    builder.addCase(loginAsync.fulfilled, (state) => {
+      state.isAuth = true;
+    });
+    builder.addCase(logoutAsync.fulfilled, (state) => {
+      state.isAuth = false;
+    });
+    builder.addCase(registerAsync.fulfilled, (state) => {
+      state.isAuth = false;
+    });
 
     // updated cases
     builder.addCase(updateUserAsync.fulfilled, (state, action) => {
@@ -152,7 +138,7 @@ export const userSlice = createSlice({
 
 export const userReducer = userSlice.reducer;
 
-export const { toggleTheme, login } = userSlice.actions;
+export const { toggleTheme, setAuth } = userSlice.actions;
 export const userActions = userSlice.actions;
 
 export const selectUserInfo = (state: RootState) => state.user.userInfo;

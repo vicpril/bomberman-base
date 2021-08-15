@@ -1,5 +1,4 @@
-import { Dispatch, FC } from 'react';
-import { match } from 'react-router';
+import { FC } from 'react';
 import { Main } from 'pages/Main/Main';
 import { Login } from 'pages/Login/Login';
 import { Registration } from 'pages/Registration/Registration';
@@ -12,12 +11,6 @@ import { ProfilePasswordEdit } from 'pages/ProfilePasswordEdit/ProfilePasswordEd
 import { Topic } from 'pages/Topic/Topic';
 import { NewPost } from 'pages/NewPost/NewPost';
 import { Error } from 'pages/Error/Error';
-import { toggleTheme } from 'store/user/userSlice';
-
-type RouterFetchDataArgs = {
-  dispatch: Dispatch<any>;
-  match: match<{ slug: string }>;
-};
 
 export type RouteType = {
   path: string,
@@ -27,7 +20,6 @@ export type RouteType = {
     redirectTo: `/${string}`,
     redirectIfAuth?: boolean,
   },
-  fetchData?: (args: RouterFetchDataArgs) => void
 }
 
 type RoutesType = RouteType[]
@@ -39,10 +31,6 @@ export const routes: RoutesType = [
     exact: true,
     privateRoute: {
       redirectTo: '/login',
-    },
-    // для примера переключим темку только на главной странице
-    fetchData({ dispatch }: RouterFetchDataArgs) {
-      dispatch(toggleTheme());
     },
   },
   {

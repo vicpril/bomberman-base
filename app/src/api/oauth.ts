@@ -12,7 +12,6 @@ export const oauthAPI = {
         method: 'get',
         url: PATHS.oauth.getServiceId,
         data,
-        authRequired: true,
       });
 
       if (response.data && is<OAuthServiceIdResponse>(response.data)) {
@@ -30,7 +29,6 @@ export const oauthAPI = {
         method: 'post',
         url: PATHS.oauth.signIn,
         data,
-        authRequired: false,
       });
 
       if (response.data && is<OauthSignInResponse>(response.data)) {

@@ -16,7 +16,6 @@ export const usersAPI = {
         method: 'put',
         url: PATHS.users.updateProfile,
         data,
-        authRequired: true,
       });
 
       if (response.data && is<UserResponse>(response.data)) {
@@ -34,7 +33,6 @@ export const usersAPI = {
         method: 'put',
         url: PATHS.users.changePassword,
         data,
-        authRequired: true,
       });
 
       if (response.data && is<ChangePasswordResponse>(response.data)) {
@@ -53,7 +51,6 @@ export const usersAPI = {
         url: PATHS.users.uploadAvatar,
         data,
         formData: true,
-        authRequired: true,
       });
 
       if (response.data && is<UserResponse>(response.data)) {

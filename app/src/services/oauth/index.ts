@@ -30,7 +30,6 @@ export const OAuthController = {
         code,
         redirect_uri: REDIRECT_URI_OAUTH,
       });
-      console.log('DONE!');
 
       // TODO dispatch get user info && isAuth = true
     } catch (error) {

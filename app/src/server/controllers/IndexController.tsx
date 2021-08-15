@@ -1,8 +1,7 @@
-import url from 'url';
 import { renderToStaticMarkup } from 'react-dom/server';
 import React from 'react';
 import { App } from 'components/organisms/App/App';
-import { StaticRouterContext, matchPath } from 'react-router';
+import { StaticRouterContext } from 'react-router';
 import { RootState, createRootReducer } from 'store/store';
 import { Provider } from 'react-redux';
 import { StaticRouter } from 'react-router-dom';
@@ -10,7 +9,8 @@ import { Request, Response } from 'express';
 import { configureStore } from '@reduxjs/toolkit';
 import { createMemoryHistory } from 'history';
 
-import { routes } from 'routes';
+import { toggleTheme, setAuth } from 'store/user/userSlice';
+import { checkIsAuth } from 'server/services/AuthCheckService';
 
 function makeHTMLPage(content: string, reduxState: RootState) {
   return `
@@ -76,36 +76,16 @@ export const IndexController = {
         .send(makeHTMLPage(appContentHTML, reduxState));
     };
 
-    const dataRequirements: (Promise<void> | void)[] = [];
-
-    /**
-     * Call the fetchData method on the component-page
-     * that corresponds to the current url (by router).
-     *
-     * We use `some` method to simulate working of the routes in react-router-dom
-     * inside the Switch — selects the first found route.
-     */
-    routes.some((route) => {
-      const { fetchData: fetchMethod } = route;
-      const match = matchPath<{ slug: string }>(
-        url.parse(location).pathname as string,
-        route,
-      );
-
-      if (match && fetchMethod) {
-        dataRequirements.push(
-          fetchMethod({
-            dispatch: store.dispatch,
-            match,
-          }),
-        );
-      }
-
-      return Boolean(match);
-    });
+    // Не нужно сюда добавлять запросы на апи других серверов
+    // SSR должен работать быстро
+    const isAuth = checkIsAuth(req);
+    const reduxActionsOnServer = [
+      store.dispatch(toggleTheme()),
+      store.dispatch(setAuth(isAuth)),
+    ];
 
     // When all async actions will be finished
-    return Promise.all(dataRequirements)
+    return Promise.all(reduxActionsOnServer)
       .then(() => {
         renderApp();
       })

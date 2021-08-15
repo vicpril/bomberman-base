@@ -1,6 +1,5 @@
-export const AUTH_TOKEN_NAME = 'bomberman_auth_token';
-
-export const API_BASE_URL = 'https://ya-praktikum.tech/api/v2';
+// TODO: Сделать чтобы работало на проде перед деплоем (через переменные окружения)
+export const API_BASE_URL = 'http://localhost:5000/api/v1/yandex-api';
 
 export const PATHS = {
   auth: {

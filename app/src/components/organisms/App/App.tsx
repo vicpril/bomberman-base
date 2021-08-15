@@ -23,18 +23,15 @@ export const App: FC = hot(() => {
   const history = useHistory();
   const { search } = useLocation();
 
-  const setAuthOnLoadTMPBounded = useBoundAction(userActions.setAuthOnLoadTMP);
-  const setAuthAfterOauth = useBoundAction(userActions.login);
+  const setAuthAfterOauth = useBoundAction(userActions.setAuth);
 
   useMountEffect(() => {
-    setAuthOnLoadTMPBounded();
-
     startAllWorkers();
 
     const code = new URLSearchParams(search).get('code');
     if (code) {
       OAuthController.signIn(code).then(() => {
-        setAuthAfterOauth();
+        setAuthAfterOauth(true);
         history.replace('/');
       });
     }
@@ -46,10 +43,8 @@ export const App: FC = hot(() => {
         <NavHeader />
       </ErrorBoundary>
       <Switch>
-        {// Метод fetchData используется только при инициализации хранилища, в основном, чтобы диспатчить перед рендером
-        // В компоненте роутов этот метод не нужен, поэтому я его убираю из routeProps.
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-          routes.map(({ fetchData, ...routeProps }) => <RouteBuilder key={routeProps.path} {...routeProps} />)
+        {
+          routes.map((routeProps) => <RouteBuilder key={routeProps.path} {...routeProps} />)
         }
       </Switch>
       <LoadingIndicator />

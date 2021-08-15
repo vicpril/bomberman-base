@@ -16,7 +16,6 @@ export const leaderboardAPI = {
         method: 'post',
         url: PATHS.leaderboard.addLeader,
         data,
-        authRequired: true,
       });
 
       if (response.data && is<AddLeaderResponse>(response.data)) {
@@ -34,7 +33,6 @@ export const leaderboardAPI = {
         method: 'post',
         url: PATHS.leaderboard.getLeaderboard,
         data,
-        authRequired: false,
       });
 
       if (response.data && is<GetLeaderboardResponse>(response.data)) {

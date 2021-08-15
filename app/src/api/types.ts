@@ -8,19 +8,7 @@ export type ApiRequestProps = {
   url: string,
   data?: any,
   params?: any,
-  authRequired?: boolean,
   formData?: boolean
-}
-
-export enum ResponseStatus {
-  SUCCESS,
-  FAILED
-}
-
-export type ApiResponse = {
-  status: ResponseStatus
-  data?: any,
-  error?: string | null
 }
 
 export type SignInRequest = {
