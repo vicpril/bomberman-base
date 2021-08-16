@@ -25,7 +25,9 @@ import { loginFormFields, validationSchemaConstructor } from './constants';
 export const Login: FC = () => {
   const { t } = useTranslation();
   const modal = useModal();
-  const validationSchema = useMemo(() => validationSchemaConstructor(t), [t]);
+  // 't' в useMemo влияет на правильную работу ssr
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const validationSchema = useMemo(() => validationSchemaConstructor(t), []);
 
   const { error, isLoading } = useSelector(getUserState);
   const loginAsyncBounded = useBoundAction(loginAsync);
@@ -42,7 +44,7 @@ export const Login: FC = () => {
       modal.hide();
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [error, isLoading, t]);
+  }, [error, isLoading]);
 
   const [yandexOAuthUrl, setYandexOauthUrl] = useState('');
   const yandexOAuthText = t('login_with_yandex');
