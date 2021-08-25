@@ -1,9 +1,8 @@
-.post {
+.new-topic {
   display: flex;
   flex-direction: column;
   width: 80vw;
-  height: 50vh;
-  //height: 100%;
+  height: 100%;
 }
 
 .post__title {
@@ -15,19 +14,17 @@
   justify-content: space-between;
 }
 
-.post__input-container {
-  height: 100%;
+.new-topic__input-container {
   padding: 2%;
   border-top: 2px solid var(--mainTextColor);
   border-bottom: 2px solid var(--mainTextColor);
 }
 
-.post__text {
+.new-topic__text {
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
   width: 100%;
-  height: 100%;
   background-color: var(--appBackgroundColor);
   outline: none;
   resize: none;
@@ -36,6 +33,6 @@
   font-size: var(--smallFontSize);
 }
 
-.post__text::placeholder {
+.new-topic__text::placeholder {
   color: var(--activityColor);
 }

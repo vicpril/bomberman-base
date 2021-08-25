@@ -11,6 +11,7 @@ import { ProfilePasswordEdit } from 'pages/ProfilePasswordEdit/ProfilePasswordEd
 import { Topic } from 'pages/Topic/Topic';
 import { NewPost } from 'pages/NewPost/NewPost';
 import { Error } from 'pages/Error/Error';
+import { NewTopic } from 'pages/NewTopic/NewTopic';
 
 export type RouteType = {
   path: string,
@@ -20,6 +21,10 @@ export type RouteType = {
     redirectTo: `/${string}`,
     redirectIfAuth?: boolean,
   },
+}
+
+export type TopicRouteParamsType = {
+  topicId?: string | undefined
 }
 
 type RoutesType = RouteType[]
@@ -83,12 +88,16 @@ export const routes: RoutesType = [
     },
   },
   {
-    path: '/topic',
+    path: '/topic/:topicId',
     component: Topic,
   },
   {
     path: '/new-post',
     component: NewPost,
+  },
+  {
+    path: '/new-topic',
+    component: NewTopic,
   },
   {
     path: '*',

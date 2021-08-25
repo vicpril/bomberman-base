@@ -1,0 +1,33 @@
+.paginator {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.paginator__list {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: var(--smallFontSize);
+}
+
+.paginator__item {
+  padding: 0.15em;
+  margin: 0.1em;
+  cursor: pointer;
+  color: var(--mainTextColor);
+  background-color: var(--appBackgroundColor);
+  border: 3px solid var(--appBackgroundColor);
+}
+
+.paginator__item:hover {
+  border-color: var(--activityColor);
+}
+
+.paginator__item_active {
+  background-color: var(--activityColor);
+  border-color: var(--activityColor);
+}

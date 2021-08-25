@@ -53,7 +53,8 @@
     "posts": "сообщений",
     "views": "просмотров",
     "last_reply": "последний ответ",
-    "start_new_topic": "новая тема",
+    "start_new_topic": "создать",
+    "new_topic": "новая тема",
     "new_post": "новое сообщение",
     "type_your_message_here": "введите ваше сообщение",
     "post": "отправить",
@@ -81,5 +82,6 @@
     "letters_only": "только буквы",
     "passwords_not_matches": "пароли не совпадают",
     "no_data": "нет данных",
-    "login_with_yandex": "войти через яндекс"
+    "login_with_yandex": "войти через яндекс",
+    "enter_topic_title": "заголовок темы"
 }

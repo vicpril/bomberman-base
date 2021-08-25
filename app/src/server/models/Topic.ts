@@ -33,6 +33,6 @@ export class Topic extends Model {
 
   increaseViews(): void {
     this.views += 1;
-    this.save();
+    this.save({ silent: true });
   }
 }

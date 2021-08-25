@@ -28,4 +28,7 @@ export class Comment extends Model {
 
   @Column(DataType.TEXT)
   text!: string;
+
+  @Column(DataType.TEXT)
+  avatar!: string;
 }

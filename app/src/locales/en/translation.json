@@ -54,6 +54,7 @@
     "views": "views",
     "last_reply": "last reply",
     "start_new_topic": "start new topic",
+    "new_topic": "new topic",
     "new_post": "new post",
     "type_your_message_here": "type your message here",
     "post": "post",
@@ -81,5 +82,7 @@
     "letters_only": "letters only",
     "passwords_not_matches": "passwords not matches",
     "no_data": "no data",
-    "login_with_yandex": "login with yandex"
+    "login_with_yandex": "login with yandex",
+    "new_topic": "new topic",
+    "enter_topic_title": "topic title"
 }

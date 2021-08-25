@@ -1,8 +1,8 @@
 .topic {
   display: flex;
   flex-direction: column;
-  width: 100%;
-  height: 50vw;
+  width: 80vw;
+  height: 50vh;
 }
 
 .topic__title {
@@ -12,7 +12,7 @@
 .topic__posts-list {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  height: 50vh;
   padding: 2%;
   gap: 1%;
   border-top: 2px solid var(--mainTextColor);
@@ -33,6 +33,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-width: 100px;
+}
+
+.topic__username {
+  text-align: center;
+  width: 80%;
 }
 
 .topic__content-container {
@@ -40,6 +46,13 @@
   flex-direction: column;
   align-items: flex-start;
   width: 100%;
+  box-sizing: border-box;
+}
+
+.topic__content-text {
+  max-width: 90%;
+  display: inline-block;
+  overflow-wrap: break-word;
 }
 
 .topic__avatar-container {

@@ -4,6 +4,7 @@ import { leaderboardReducer } from 'store/leaderboard/leaderboardSlice';
 import { connectRouter } from 'connected-react-router';
 import { History, createBrowserHistory, createMemoryHistory } from 'history';
 import { isServer } from 'utils/ssrUtils';
+import { forumReducer } from 'store/forum/forumSlice';
 import { requestStatusReducer } from './requestStatus/requestStatusSlice';
 import { userReducer } from './user/userSlice';
 
@@ -27,6 +28,7 @@ export const createRootReducer = (hist: History) => combineReducers({
   user: userReducer,
   requestStatus: requestStatusReducer,
   leaderboard: leaderboardReducer,
+  forum: forumReducer,
 });
 
 // TODO: конфигурировать при запуске сервера только один стор на сервере.

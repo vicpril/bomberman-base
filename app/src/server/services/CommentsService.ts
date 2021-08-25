@@ -8,6 +8,7 @@ export type CreateCommentRequest = {
   topicId: number | string,
   username: string,
   text: string
+  avatar: string | null
 }
 
 export type ReadCommentsRequest = {
@@ -26,6 +27,7 @@ export class CommentsService implements BaseRESTService {
     text: data.text,
     topicId: data.topicId,
     username: data.username,
+    avatar: data.avatar,
   })
 
   public static request = (data: ReadCommentsRequest) => Comment.findAndCountAll({

@@ -25,10 +25,9 @@ export const Main: FC<MainPageProps> = ({ className }) => {
   const logoutHandler = () => logoutAsyncBounded();
 
   const items = [
-    { title: 'settings', onClick: () => history.push('/') },
     { title: 'profile', onClick: () => history.push('/profile') },
     { title: 'leaderboard', onClick: () => history.push('/leaderboard') },
-    { title: 'forum', onClick: () => history.push('/') },
+    { title: 'forum', onClick: () => history.push('/forum') },
   ];
 
   items.forEach((item) => {

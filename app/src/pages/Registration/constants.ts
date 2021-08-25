@@ -12,8 +12,9 @@ export const registerFormFields: TRegistrationFormFields = {
   verify_password: { id: 'verify_password', title: 'repeat', type: 'password' },
 };
 
-// eslint-disable-next-line max-len
-const phoneRegExp = /^((\+[1-9]{1,4}[\\-]*)|(\([0-9]{2,3}\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[\\-]*[0-9]{3,4}?$/;
+const phoneRegExp = (
+  /^((\+[1-9]{1,4}[\\-]*)|(\([0-9]{2,3}\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[\\-]*[0-9]{3,4}?$/
+);
 
 export const validationSchemaConstructor = (t: TFunction) => Yup.object().shape({
   login: Yup.string()

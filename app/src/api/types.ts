@@ -106,3 +106,84 @@ export type OAuthYandexRequest = {
   error?: any
   state?: string
 }
+
+export type Topic = {
+  id: number
+  title: string
+  owner: string
+  views: number
+  createdAt: string
+  updatedAt: string
+  commentsCount: string
+}
+
+export type CommentsResponseTopic = {
+  id: number
+  title: string
+  owner: string
+  views: number
+  createdAt: string
+  updatedAt: string
+}
+
+export type AddTopicRequest = {
+  username: string
+  title: string
+}
+
+export type AddTopicResponse = 'OK'
+
+export type GetTopicsResponse = {
+  totalItems: number
+  results: Topic[]
+  totalPages: number
+  currentPage: number
+}
+
+export type GetTopicResponse = {
+  id: number,
+  title: string,
+  owner: string,
+  views: number,
+  createdAt: string,
+  updatedAt: string,
+  comments: Omit<Comment, 'topic'>[],
+}
+
+export type Comment = {
+  id: number
+  username: string
+  topicId: number
+  text: string
+  createdAt: string
+  updatedAt: string
+  topic: CommentsResponseTopic
+  avatar: string | null
+}
+
+export type GetCommentsRequest = {
+  topicId: number
+  page?: number
+}
+
+export type GetCommentsResponse = {
+  results: Comment[]
+  totalItems: number
+  totalPages: number
+  currentPage: number
+}
+
+export type AddCommentRequest = {
+  topicId: number | string,
+  username: string,
+  text: string
+  avatar: string | null
+}
+
+export type WatchTopicResponse = 'OK'
+
+export type AddCommentResponse = any
+
+export type DeleteCommentRequest = any
+
+export type DeleteCommentResponse = any
