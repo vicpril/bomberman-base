@@ -1,5 +1,3 @@
-/* eslint-disable no-restricted-globals */
-
 const calculateStuff = (a, b) => a + b + 10;
 
 this.addEventListener('message', (e) => {

@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import { getCookieFromRequest, setCookies } from 'server/utils';
 import fetch, { RequestInit } from 'node-fetch';
 
-const yandexApiBaseUrl = 'https://ya-praktikum.tech/api/v2';
+export const yandexApiBaseUrl = 'https://ya-praktikum.tech/api/v2';
 
 export class YandexAPiController {
   public static async redirectRequest(req: Request, res: Response) {

@@ -33,6 +33,10 @@ export type SignUpResponse = {
   id: number
 }
 
+export type GetThemeResponse = {
+  themeId: string;
+}
+
 export type UserResponse = {
   id: number,
   first_name: string | null,

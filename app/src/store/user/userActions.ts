@@ -5,6 +5,7 @@ import {
 } from 'api/types';
 import { usersAPI } from 'api/users';
 import { setIsLoadingShown } from 'store/requestStatus/requestStatusActions';
+import { RootState } from 'store/store';
 
 export enum UserActionType {
   INFO = 'user/getUserInfoAsync',
@@ -14,6 +15,8 @@ export enum UserActionType {
   UPDATE = 'user/updateUserAsync',
   CHANGE_PASSWORD = 'user/changePasswordAsync',
   CHANGE_AVATAR = 'user/changeAvatarAsync',
+  GET_THEME = 'user/getUserThemeAsync',
+  TOGGLE_THEME = 'user/toggleUserThemeAsync',
  }
 
 export const getUserInfoAsync = createAsyncThunk(
@@ -74,5 +77,35 @@ export const changeAvatarAsync = createAsyncThunk(
   async (data: FormData) => {
     const result = await usersAPI.changeAvatar(data);
     return result;
+  },
+);
+
+export const getUserThemeAsync = createAsyncThunk<'light' | 'dark', null, {state: RootState}>(
+  UserActionType.GET_THEME,
+  async (nodata, thunkAPI) => {
+    thunkAPI.dispatch(setIsLoadingShown(false));
+    try {
+      const userTheme = await usersAPI.getTheme();
+      const themeName = userTheme.themeId === '1' ? 'dark' : 'light';
+      return themeName;
+    } finally {
+      thunkAPI.dispatch(setIsLoadingShown(false));
+    }
+  },
+);
+
+export const toggleUserThemeAsync = createAsyncThunk<Promise<any>, null, {state: RootState}>(
+  UserActionType.TOGGLE_THEME,
+  async (nodata, thunkAPI) => {
+    if (!thunkAPI.getState().user.isAuth) return null;
+
+    const state = thunkAPI.getState();
+
+    // Тема сменилась локально в момент pending
+    const themeToSetName = state.user.theme;
+    const themeToSetId = themeToSetName === 'light' ? 2 : 1;
+
+    const response = await usersAPI.setTheme(themeToSetId);
+    return response;
   },
 );

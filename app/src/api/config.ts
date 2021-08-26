@@ -13,6 +13,7 @@ export const PATHS = {
     updateProfile: `${PROXY_YANDEX_API_URL}/user/profile`,
     changePassword: `${PROXY_YANDEX_API_URL}/user/password`,
     uploadAvatar: `${PROXY_YANDEX_API_URL}/user/profile/avatar`,
+    theme: `${BASE_API_URL}/themes/mytheme`,
   },
   leaderboard: {
     addLeader: `${PROXY_YANDEX_API_URL}/leaderboard`,

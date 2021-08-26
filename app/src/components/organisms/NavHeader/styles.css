@@ -11,6 +11,7 @@
     color: var(--mainTextColor);
     font-size: 24px;
     padding: 15px;
+    transition: var(--transitionTime);
 
     &_active {
       background-color: var(--activityColor);

@@ -8,6 +8,11 @@ export const selectUserInfo = createSelector(
   (user) => user.userInfo,
 );
 
+export const selectIsAuth = createSelector(
+  selectUser,
+  (user) => user.isAuth,
+);
+
 export const selectTheme = createSelector(
   selectUser,
   (user) => user.theme,

@@ -5,9 +5,7 @@ import { IS_DEV } from '../../webpackConfigs/env';
 import config from '../../webpackConfigs/client.config';
 import { webpackMiddlewares } from './middlewares/webpackMiddleware';
 import { sequelize } from './models';
-import { ThemesController } from './controllers/ThemesController';
 import { ThemesService } from './services/ThemesService';
-import { UsersController } from './controllers/UsersController';
 import { UsersService } from './services/UsersService';
 import router from './routes';
 
@@ -19,6 +17,7 @@ export const startServer = async () => {
 
   // Создаем юзера после подключения к базе, чтобы нам было что отдать с ручки
   UsersService.create({
+    id: 1,
     name: 'Steve',
   });
 
@@ -45,11 +44,6 @@ export const startServer = async () => {
     app.use(webpackMiddlewares(config));
   }
   app.use(express.static(path.join(__dirname, '../dist')));
-
-  app.get('/api/users', UsersController.getAll);
-  app.get('/api/themes', ThemesController.getAll);
-  app.get('/api/themes/:themeId', ThemesController.findOne);
-  app.post('/api/themes/create', ThemesController.create);
 
   app.use(router);
 

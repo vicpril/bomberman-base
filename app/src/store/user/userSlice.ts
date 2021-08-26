@@ -8,7 +8,7 @@ import { UserResponse } from 'api/types';
 import {
   changeAvatarAsync,
   changePasswordAsync,
-  getUserInfoAsync, loginAsync, logoutAsync, registerAsync, updateUserAsync,
+  getUserInfoAsync, getUserThemeAsync, loginAsync, logoutAsync, registerAsync, toggleUserThemeAsync, updateUserAsync,
 } from './userActions';
 
 type UserInfo = UserResponse & {
@@ -77,8 +77,8 @@ export const userSlice = createSlice({
     setAuth: (state, action: PayloadAction<boolean>) => {
       state.isAuth = action.payload;
     },
-    toggleTheme: (state) => {
-      state.theme = state.theme === 'dark' ? 'light' : 'dark';
+    setThemeLocally: (state, action: PayloadAction<'light' | 'dark'>) => {
+      state.theme = action.payload;
     },
     update(state, action) {
       saveUserData(state, action.payload);
@@ -120,6 +120,14 @@ export const userSlice = createSlice({
     builder.addCase(changeAvatarAsync.pending, (state) => { state.isUpdatedSuccessful = false; });
     builder.addCase(changeAvatarAsync.rejected, (state) => { state.isUpdatedSuccessful = false; });
 
+    // theme cases
+    builder.addCase(toggleUserThemeAsync.pending, (state) => {
+      state.theme = state.theme === 'light' ? 'dark' : 'light';
+    });
+    builder.addCase(getUserThemeAsync.fulfilled, (state, action) => {
+      state.theme = action.payload;
+    });
+
     // global matchers
     builder.addMatcher(isPendingAction, (state) => {
       state.error = null;
@@ -138,7 +146,7 @@ export const userSlice = createSlice({
 
 export const userReducer = userSlice.reducer;
 
-export const { toggleTheme, setAuth } = userSlice.actions;
+export const { setThemeLocally, setAuth } = userSlice.actions;
 export const userActions = userSlice.actions;
 
 export const selectUserInfo = (state: RootState) => state.user.userInfo;

@@ -9,7 +9,7 @@ import { Request, Response } from 'express';
 import { configureStore } from '@reduxjs/toolkit';
 import { createMemoryHistory } from 'history';
 
-import { toggleTheme, setAuth } from 'store/user/userSlice';
+import { setAuth } from 'store/user/userSlice';
 import { checkIsAuth } from 'server/services/AuthCheckService';
 
 function makeHTMLPage(content: string, reduxState: RootState) {
@@ -80,7 +80,6 @@ export const IndexController = {
     // SSR должен работать быстро
     const isAuth = checkIsAuth(req);
     const reduxActionsOnServer = [
-      store.dispatch(toggleTheme()),
       store.dispatch(setAuth(isAuth)),
     ];
 

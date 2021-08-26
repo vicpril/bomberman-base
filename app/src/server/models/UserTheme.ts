@@ -1,5 +1,5 @@
 import {
-  Model, Table, Column, PrimaryKey, DataType, AutoIncrement, AllowNull, ForeignKey,
+  Model, Table, Column, PrimaryKey, DataType, AllowNull, ForeignKey,
 } from 'sequelize-typescript';
 import { SiteTheme } from './SiteTheme';
 import { User } from './User';
@@ -10,21 +10,13 @@ import { User } from './User';
   tableName: 'user_theme',
 })
 export class UserTheme extends Model {
-    @AutoIncrement
     @PrimaryKey
+    @ForeignKey(() => User)
     @Column(DataType.INTEGER)
-    id!: number;
+    ownerId!: number;
 
     @AllowNull(false)
     @Column(DataType.STRING)
     @ForeignKey(() => SiteTheme)
     themeId!: string;
-
-    @ForeignKey(() => User)
-    @AllowNull(false)
-    @Column({
-      type: DataType.INTEGER,
-      field: 'owner_id',
-    })
-    ownerId!: string;
 }

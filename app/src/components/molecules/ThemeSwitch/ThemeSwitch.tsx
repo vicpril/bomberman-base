@@ -2,12 +2,12 @@ import './styles.css';
 import React, { FC } from 'react';
 import classNames from 'classnames';
 import { useBoundAction } from 'hooks/useBoundAction';
-import { toggleTheme } from 'store/user/userSlice';
+import { toggleUserThemeAsync } from 'store/user/userActions';
 import { useSelector } from 'react-redux';
 import { selectTheme } from 'store/user/userSelectors';
 
 export const ThemeSwitch: FC = () => {
-  const toggleThemeBounded = useBoundAction(toggleTheme);
+  const toggleThemeBounded = useBoundAction(toggleUserThemeAsync);
   const theme = useSelector(selectTheme);
   const checked = theme === 'light';
 

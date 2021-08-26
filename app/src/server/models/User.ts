@@ -1,5 +1,5 @@
 import {
-  Model, Table, Column, PrimaryKey, DataType, AutoIncrement,
+  Model, Table, Column, PrimaryKey, DataType,
 } from 'sequelize-typescript';
 
 @Table({
@@ -7,7 +7,6 @@ import {
   timestamps: false,
 })
 export class User extends Model {
-    @AutoIncrement
     @PrimaryKey
     @Column(DataType.INTEGER)
     id!: number;

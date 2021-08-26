@@ -11,6 +11,15 @@
   box-sizing: border-box;
   background-color: var(--appBackgroundColor);
   font-family: var(--mainTextFontFamily);
+  transition: var(--transitionTime);
+}
+
+.btn, h1, span {
+  transition: var(--transitionTime);
+}
+
+.btn:hover, button span {
+  transition: 0s;
 }
 
 h1 {

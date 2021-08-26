@@ -20,7 +20,6 @@
     right: 0;
     bottom: 0;
     background-color: #ccc;
-    -webkit-transition: 0.4s;
     transition: 0.4s;
 
     &::before {
@@ -31,7 +30,6 @@
       left: 4px;
       bottom: 4px;
       background-color: white;
-      -webkit-transition: 0.4s;
       transition: 0.4s;
     }
 
@@ -54,7 +52,5 @@ input:focus + .theme-switcher__slider {
 }
 
 input:checked + .theme-switcher__slider::before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
   transform: translateX(26px);
 }

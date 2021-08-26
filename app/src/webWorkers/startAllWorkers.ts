@@ -21,6 +21,11 @@ const startComputationWorker = () => {
 };
 
 export function startAllWorkers() {
+  if (location.href.startsWith('http://localhost')) {
+    // Запускаем воркеров только в продакшн режиме, чтобы в dev корректно работал hmr
+    return;
+  }
+
   startServiceWorker();
   startComputationWorker();
 }

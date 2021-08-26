@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom/extend-expect';
 
 import { store } from 'store/store';
-import { toggleTheme } from 'store/user/userSlice';
+import { setThemeLocally } from 'store/user/userSlice';
 
 describe('Theme checking', () => {
   it('default is dark theme', () => {
@@ -10,13 +10,13 @@ describe('Theme checking', () => {
   });
 
   it('switch theme to light', () => {
-    store.dispatch(toggleTheme());
+    store.dispatch(setThemeLocally('light'));
     const themeState = store.getState().user.theme;
     expect(themeState).toBe('light');
   });
 
   it('switch theme back to dark', () => {
-    store.dispatch(toggleTheme());
+    store.dispatch(setThemeLocally('dark'));
     const themeState = store.getState().user.theme;
     expect(themeState).toBe('dark');
   });

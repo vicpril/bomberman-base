@@ -13,6 +13,7 @@
   --mediumFontSize: 38px;
   --smallFontSize: 32px;
   --xsmallFontSize: 18px;
+  --transitionTime: 0.5s;
 }
 
 .app-container.theme_light {

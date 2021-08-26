@@ -99,3 +99,50 @@
 - #### `DELETE /api/v1/comments/:id`
   Удалить комментарий по id
   **Response** - ОК
+
+
+## THEMES
+- #### `GET /api/v1/themes`
+  Получить список доступных тем  
+  **Response**
+  ```
+  [
+      {
+          "id": 1,
+          "name": "light",
+          "description": "light theme description"
+      },
+      {
+          "id": 2,
+          "name": "dark",
+          "description": "dark theme profound description"
+      }
+  ]
+  ```
+
+- #### `GET /api/v1/themes/mytheme`
+  Получить выбранную тему юзера  
+  **Response**
+  ```
+  {
+    "ownerId": 85902,
+    "themeId": "0"
+  }
+  ```
+
+- #### `PUT /api/v1/themes/mytheme`
+  Задать выбранную тему юзера  
+  **Request**
+  ```
+  {"themeId": 0}
+  ```
+  **Response**
+  ```
+  [
+      {
+          "ownerId": 85902,
+          "themeId": "1"
+      },
+      null
+  ]
+  ```

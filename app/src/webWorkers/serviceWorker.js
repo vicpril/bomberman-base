@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable no-restricted-globals */
 const CACHE_NAME = 'gamedev-cache-v1';
 
 const URLS = [
