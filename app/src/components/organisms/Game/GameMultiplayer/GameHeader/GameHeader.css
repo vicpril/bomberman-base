@@ -1,0 +1,19 @@
+.game-header {
+  display: flex;
+  justify-content: space-around;
+  color: var(--mainTextColor);
+  margin: 15px 0;
+
+  & span {
+    font-size: 32px;
+
+    &.status {
+      &.victory{
+        color: var(--successColor);
+      }
+      &.defeat{
+        color: var(--dangerColor);
+      }
+    }
+  }
+}

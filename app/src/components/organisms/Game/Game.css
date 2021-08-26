@@ -1,0 +1,8 @@
+.game-start_screen {
+  min-height: 704px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: auto 0;
+}

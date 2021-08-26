@@ -1,0 +1,6 @@
+.game-footer {
+  width: 100%;
+  text-align: center;
+  flex-flow: column;
+  margin: 20px 0;
+}

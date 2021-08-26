@@ -1,6 +1,7 @@
 import path from 'path';
 import express from 'express';
 import cookieParser from 'cookie-parser';
+
 import { IS_DEV } from '../../webpackConfigs/env';
 import config from '../../webpackConfigs/client.config';
 import { webpackMiddlewares } from './middlewares/webpackMiddleware';
@@ -10,6 +11,8 @@ import { UsersService } from './services/UsersService';
 import router from './routes';
 
 const port = 5000;
+
+const app = express();
 
 export const startServer = async () => {
   // Форс дропает все таблицы каждый раз при запуске сервера, пока мы вносим много изменений в базы это удобно
@@ -29,8 +32,6 @@ export const startServer = async () => {
     name: 'dark',
     description: 'dark theme profound description',
   });
-
-  const app = express();
 
   app.use(express.json());
   app.use(

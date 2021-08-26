@@ -83,5 +83,10 @@
     "passwords_not_matches": "пароли не совпадают",
     "no_data": "нет данных",
     "login_with_yandex": "войти через яндекс",
-    "enter_topic_title": "заголовок темы"
+    "enter_topic_title": "заголовок темы",
+    "game-starts-in": "игра начнется через",
+    "waiting-an-opponent": "ждем оппонента",
+    "single_player": "одиночная игра",
+    "multi_player": "мультиплеер",
+    "defeat": "поражение"
 }

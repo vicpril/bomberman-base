@@ -83,6 +83,10 @@
     "passwords_not_matches": "passwords not matches",
     "no_data": "no data",
     "login_with_yandex": "login with yandex",
-    "new_topic": "new topic",
-    "enter_topic_title": "topic title"
+    "enter_topic_title": "topic title",
+    "game-starts-in": "game starts in",
+    "waiting-an-opponent": "waiting an opponent",
+    "single_player": "single player",
+    "multi_player": "multiplayer",
+    "defeat": "defeat"
 }
