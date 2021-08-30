@@ -4,7 +4,7 @@ import {
 
 @Table({
   timestamps: false,
-  paranoid: true,
+  // paranoid: true,
   tableName: 'site_theme',
 })
 export class SiteTheme extends Model {

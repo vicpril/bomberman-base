@@ -2,13 +2,14 @@ import { GameStatus } from 'game/core/classes/Game';
 import http, { Server } from 'http';
 import { Server as ServerIO, Socket } from 'socket.io';
 import express from 'express';
+import { BASE_URL } from '../../api/config';
 import { store } from './store';
 import { routes } from './routes';
 
 export const createServerIo = (server: Server) => {
   const serverIo = new ServerIO(server, {
     cors: {
-      origin: 'http://localhost:5000',
+      origin: BASE_URL,
       methods: ['GET'],
       credentials: true,
     },

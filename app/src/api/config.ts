@@ -1,6 +1,11 @@
+import { IS_PROD } from '../../webpackConfigs/env';
+
 // TODO: Сделать чтобы работало на проде перед деплоем (через переменные окружения)
-export const PROXY_YANDEX_API_URL = 'http://localhost:5000/api/v1/yandex-api';
-export const BASE_API_URL = 'http://localhost:5000/api/v1';
+export const BASE_URL = IS_PROD ? 'http://84.201.187.16' : 'http://localhost:5000';
+
+export const PROXY_YANDEX_API_URL = `${BASE_URL}/api/v1/yandex-api`;
+export const BASE_API_URL = `${BASE_URL}/api/v1`;
+export const SOCKETS_API_URL = IS_PROD ? BASE_URL : 'http://localhost:5001';
 
 export const PATHS = {
   auth: {

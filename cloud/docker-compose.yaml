@@ -6,8 +6,8 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./postgresdata:/var/lib/postgresql/data
-      - ./migrations/dbinit.sql:/docker-entrypoint-initdb.d/dbinit.sql
+      - /var/local/db/postgresdata:/var/lib/postgresql/data
+      - /var/local/db/migrations/dbinit.sql:/docker-entrypoint-initdb.d/dbinit.sql
     restart: always
     env_file:
       ./.env
@@ -17,17 +17,13 @@ services:
       - ssr
       - sockets
     restart: always
-    build:
-      dockerfile: Dockerfile
-      context: ./nginx
+    image: cr.yandex/crp96m81iaqbn2j2o9du/bomberman_nginx:latest
     ports:
       - "80:80"
       - "443:443"
 
   ssr:
-    build:
-      dockerfile: DockerfileSSR
-      context: ./app
+    image: cr.yandex/crp96m81iaqbn2j2o9du/bomberman_ssr:latest
     depends_on:
       - postgres
     environment:
@@ -36,20 +32,14 @@ services:
     restart: always
     env_file:
       ./.env
-    # ports:
-    #   - "5000"
 
   sockets:
-    build:
-      dockerfile: DockerfileSockets
-      context: ./app
+    image: cr.yandex/crp96m81iaqbn2j2o9du/bomberman_sockets:latest
     environment:
       NODE_ENV: production
     restart: always
     env_file:
       ./.env
-    # ports:
-    #   - "5001"
 
   pgadmin:
     container_name: pgadmin_gd

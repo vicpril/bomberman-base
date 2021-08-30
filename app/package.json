@@ -6,6 +6,7 @@
   "scripts": {
     "clean": "rimraf dist distServer",
     "build": "npm run clean; NODE_ENV=production webpack --mode=production",
+    "build:sockets": "npm run clean; NODE_ENV=production webpack --config ./webpackConfigs/sockets.config.ts --mode=production",
     "start": "NODE_ENV=production npm-run-all --parallel --print-label start:server start:sockets",
     "start:server": "NODE_ENV=production node src/server/index.js",
     "start:sockets": "NODE_ENV=production node src/game/server-side/index.js",
@@ -13,6 +14,8 @@
     "dev:webpack": "npm run clean; webpack --mode=development",
     "dev:server": "node src/server/index.js",
     "dev:sockets": "node src/game/server-side/index.js",
+    "docker:publish": "../cloud/docker-publish.sh",
+    "docker:reload": "../cloud/docker-reload.sh",
     "test": "npx jest",
     "test:store": "npx jest store/*",
     "stylelint:fix": "npx stylelint \"**/*.css\" --fix",

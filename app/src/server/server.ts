@@ -5,10 +5,13 @@ import cookieParser from 'cookie-parser';
 import { IS_DEV } from '../../webpackConfigs/env';
 import config from '../../webpackConfigs/client.config';
 import { webpackMiddlewares } from './middlewares/webpackMiddleware';
-import { sequelize } from './models';
 import { ThemesService } from './services/ThemesService';
-import { UsersService } from './services/UsersService';
 import router from './routes';
+import { User } from './models/User';
+import { Topic } from './models/Topic';
+import { Comment } from './models/Comment';
+import { SiteTheme } from './models/SiteTheme';
+import { UserTheme } from './models/UserTheme';
 
 const port = 5000;
 
@@ -16,22 +19,16 @@ const app = express();
 
 export const startServer = async () => {
   // Форс дропает все таблицы каждый раз при запуске сервера, пока мы вносим много изменений в базы это удобно
-  await sequelize.sync({ force: true });
+  // await sequelize.sync({ force: true });
 
-  // Создаем юзера после подключения к базе, чтобы нам было что отдать с ручки
-  UsersService.create({
-    id: 1,
-    name: 'Steve',
-  });
+  // Нужно выдержать последовательность создания таблиц, чтобы не было ошибок с ключами
+  User.sync();
+  Topic.sync();
+  Comment.sync();
+  SiteTheme.sync();
+  UserTheme.sync();
 
-  ThemesService.create({
-    name: 'light',
-    description: 'light theme description',
-  });
-  ThemesService.create({
-    name: 'dark',
-    description: 'dark theme profound description',
-  });
+  ThemesService.init();
 
   app.use(express.json());
   app.use(

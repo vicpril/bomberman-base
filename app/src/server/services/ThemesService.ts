@@ -8,7 +8,12 @@ export type CreateThemeRequest = {
 }
 
 export class ThemesService implements BaseRESTService {
-    public static create = (data: CreateThemeRequest) => SiteTheme.create(data);
+    public static create = (data: CreateThemeRequest) => SiteTheme.findOrCreate(
+      {
+        where: { name: data.name },
+        defaults: data,
+      },
+    );
 
     public static findUserTheme = async (id: string) => {
       let userTheme = await UserTheme.findByPk(id);
@@ -25,4 +30,15 @@ export class ThemesService implements BaseRESTService {
     public static updateUserTheme = async (id: string, themeId: string) => UserTheme.upsert({ ownerId: id, themeId })
 
     public static getAllSiteThemes = () => SiteTheme.findAll();
+
+    public static init = () => {
+      ThemesService.create({
+        name: 'light',
+        description: 'light theme description',
+      });
+      ThemesService.create({
+        name: 'dark',
+        description: 'dark theme profound description',
+      });
+    }
 }
