@@ -1,0 +1,79 @@
+name: CI/CD
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+    env:
+      VERSION: latest
+
+    steps:
+       
+      - name: Check Out Repo 
+        uses: actions/checkout@v2
+
+
+      - name: Build and push nginx
+        uses: docker/build-push-action@v2
+        with:
+          context: ./nginx
+          file: ./nginx/Dockerfile
+          push: true
+          tags: cr.yandex/${{secrets.REMOTE_REGISTRY_ID}}/bomberman_nginx:${{env.VERSION}}
+
+
+      - name: Build and push ssr
+        uses: docker/build-push-action@v2
+        env:
+            DATABASE_URL: ${{secrets.DATABASE_URL}}
+            POSTGRES_USER: ${{secrets.POSTGRES_USER}}
+            POSTGRES_PASSWORD: ${{secrets.POSTGRES_PASSWORD}}
+            POSTGRES_DB: ${{secrets.POSTGRES_DB}}
+            POSTGRES_HOST: ${{secrets.POSTGRES_HOST}}
+            PGADMIN_DEFAULT_EMAIL: ${{secrets.PGADMIN_DEFAULT_EMAIL}}
+            PGADMIN_DEFAULT_PASSWORD: ${{secrets.PGADMIN_DEFAULT_PASSWORD}}
+        with:
+          context: ./app
+          file: ./app/DockerfileSSR
+          push: true
+          tags: cr.yandex/${{secrets.REMOTE_REGISTRY_ID}}/bomberman_ssr:${{env.VERSION}}
+          
+          
+      - name: Build and push sockets
+        uses: docker/build-push-action@v2
+        with:
+          context: ./app
+          file: ./app/DockerfileSockets
+          push: true
+          tags: cr.yandex/${{secrets.REMOTE_REGISTRY_ID}}/bomberman_sockets:${{env.VERSION}}
+          
+      - name: Image list
+        run: docker image list
+         
+
+      - name: Pull images
+        uses: appleboy/ssh-action@v0.1.4
+        with: 
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+              docker pull "cr.yandex/${{ secrets.REMOTE_REGISTRY_ID }}/bomberman_sockets:${{env.VERSION}}"
+              docker pull "cr.yandex/${{ secrets.REMOTE_REGISTRY_ID }}/bomberman_ssr:${{env.VERSION}}"
+              docker pull "cr.yandex/${{ secrets.REMOTE_REGISTRY_ID }}/bomberman_nginx:${{env.VERSION}}"
+      - name: Reload remote components
+        uses: appleboy/ssh-action@v0.1.4
+        with: 
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+              cd /var/local/
+              docker-compose down
+              docker-compose up -d --build --force-recreate
+      
