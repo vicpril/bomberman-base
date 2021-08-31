@@ -1,7 +1,7 @@
 import { IS_PROD } from '../../webpackConfigs/env';
 
 // TODO: Сделать чтобы работало на проде перед деплоем (через переменные окружения)
-export const BASE_URL = IS_PROD ? 'http://84.201.187.16' : 'http://localhost:5000';
+export const BASE_URL = IS_PROD ? 'https://turin-bomberman-6.ya-praktikum.tech' : 'http://localhost:5000';
 
 export const PROXY_YANDEX_API_URL = `${BASE_URL}/api/v1/yandex-api`;
 export const BASE_API_URL = `${BASE_URL}/api/v1`;

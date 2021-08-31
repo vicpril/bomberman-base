@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 import { loginAsync } from 'store/user/userActions';
 import { useBoundAction } from 'hooks/useBoundAction';
 import { useSelector } from 'react-redux';
-import { getUserState } from 'store/user/userSlice';
+import { getUserState, userActions } from 'store/user/userSlice';
 import { Modal } from 'components/molecules/Modal/Modal';
 import { useModal } from 'components/molecules/Modal/useModal';
 import { TSubmitFormMethod } from 'components/molecules/GDFormikForm/types';
@@ -30,6 +30,8 @@ export const Login: FC = () => {
   const validationSchema = useMemo(() => validationSchemaConstructor(t), []);
 
   const { error, isLoading } = useSelector(getUserState);
+  const clearRequestBounded = useBoundAction(userActions.clearRequestState);
+
   const loginAsyncBounded = useBoundAction(loginAsync);
   const setIsLoadingBounded = useBoundAction(setIsLoadingShown);
 
@@ -61,7 +63,8 @@ export const Login: FC = () => {
 
   useEffect(() => {
     setIsLoadingBounded(isOAuthLoading);
-  }, [isOAuthLoading, setIsLoadingBounded]);
+    return clearRequestBounded();
+  }, [clearRequestBounded, isOAuthLoading, setIsLoadingBounded]);
 
   const openNewWindow = (): void => {
     window.location.href = yandexOAuthUrl;

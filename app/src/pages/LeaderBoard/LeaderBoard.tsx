@@ -1,5 +1,5 @@
 import './styles.css';
-import React, { FC, useMemo } from 'react';
+import React, { FC, useEffect, useMemo } from 'react';
 import classnames from 'classnames';
 import { useTranslation } from 'react-i18next';
 import { BackButton } from 'components/molecules/BackButton/BackButton';
@@ -9,6 +9,7 @@ import { getLeaderboardAsync } from 'store/leaderboard/leaderboardActions';
 import { useMountEffect } from 'hooks/useMountEffect';
 import { useSelector } from 'react-redux';
 import { selectLeaderboard } from 'store/leaderboard/leaderboardSelectors';
+import { userActions } from 'store/user/userSlice';
 
 export const LeaderBoard: FC = () => {
   const { t } = useTranslation();
@@ -19,6 +20,9 @@ export const LeaderBoard: FC = () => {
   const splitDigits = (value: number): string => (
     value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
   );
+
+  const clearRequestBounded = useBoundAction(userActions.clearRequestState);
+  useEffect(() => () => { clearRequestBounded(); }, [clearRequestBounded]);
 
   useMountEffect(() => getLeaderboardAsyncBounded({
     ratingFieldName: 'scoreFieldGD',

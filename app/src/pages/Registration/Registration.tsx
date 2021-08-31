@@ -1,10 +1,10 @@
 import './styles.css';
-import React, { FC, useMemo } from 'react';
+import React, { FC, useEffect, useMemo } from 'react';
 import { GDButton } from 'components/atoms/GDButton/GDButton';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { getUserState } from 'store/user/userSlice';
+import { getUserState, userActions } from 'store/user/userSlice';
 import { useBoundAction } from 'hooks/useBoundAction';
 import { registerAsync } from 'store/user/userActions';
 import { Modal } from 'components/molecules/Modal/Modal';
@@ -23,11 +23,15 @@ export const Registration: FC = () => {
   const validationSchema = useMemo(() => validationSchemaConstructor(t), []);
 
   const { error, isLoading } = useSelector(getUserState);
+  const clearRequestBounded = useBoundAction(userActions.clearRequestState);
+
   const registerAsyncBounded = useBoundAction(registerAsync);
 
   const submitHandler: TSubmitFormMethod<TRegistrationFormFields> = async (data) => {
     registerAsyncBounded(data);
   };
+
+  useEffect(() => () => { clearRequestBounded(); }, [clearRequestBounded]);
 
   useMemo(() => {
     if (error) {

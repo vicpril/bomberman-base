@@ -13,7 +13,7 @@ import { useSelector } from 'react-redux';
 import { selectTopics } from 'store/forum/forumSelectors';
 import { useMountEffect } from 'hooks/useMountEffect';
 import { Paginator } from 'components/molecules/Paginator/Paginator';
-import { getUserState } from 'store/user/userSlice';
+import { getUserState, userActions } from 'store/user/userSlice';
 import { Topic } from 'api/types';
 import { getUserInfoAsync } from 'store/user/userActions';
 
@@ -33,6 +33,9 @@ export const Forum: FC<ForumPageProps> = ({ className }) => {
   const setActivePageBounded = useBoundAction(setActiveTopicsPage);
   const { isAuth } = useSelector(getUserState);
   const getUserInfoAsyncBounded = useBoundAction(getUserInfoAsync);
+
+  const clearRequestBounded = useBoundAction(userActions.clearRequestState);
+  useEffect(() => () => { clearRequestBounded(); }, [clearRequestBounded]);
 
   useMountEffect(() => getUserInfoAsyncBounded());
   useEffect(() => getTopicsAsyncBounded(activeTopicsPage), [activeTopicsPage, getTopicsAsyncBounded]);
