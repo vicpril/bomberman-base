@@ -50,13 +50,15 @@ export const RoomsController = () => {
 
   const findRoomByPlayerId = (playerId: string) => players.get(playerId) ?? null;
 
-  const removePlayer = (playerId: string) => {
+  const removePlayer = (playerId: string): string[] => {
     const room = findRoomByPlayerId(playerId);
     room?.removePlayer(playerId);
     if (room?.size === 0) {
       removeRoom(room.id);
     }
     players.delete(playerId);
+
+    return room?.playersId ?? [];
   };
 
   return {

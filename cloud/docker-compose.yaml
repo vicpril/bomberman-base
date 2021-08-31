@@ -21,6 +21,8 @@ services:
     ports:
       - "80:80"
       - "443:443"
+    volumes:
+      - "/var/local/sert:/etc/ssl"
 
   ssr:
     image: cr.yandex/crp96m81iaqbn2j2o9du/bomberman_ssr:latest

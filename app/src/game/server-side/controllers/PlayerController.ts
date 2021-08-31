@@ -4,10 +4,6 @@ import { Socket } from 'socket.io';
 import { store } from '../store';
 import { KeyTypes, PlayerAction } from './controlsTypes';
 
-const removePlayer = (id: string) => {
-  store.rooms.removePlayer(id);
-};
-
 export const PlayerController = {
 
   connect: (socket: Socket) => () => {
@@ -23,8 +19,10 @@ export const PlayerController = {
   },
 
   socketDisconnect: (socket: Socket) => (reason: string) => {
-    removePlayer(socket.id);
-    io.emit('player:disconnected', socket.id);
+    const otherSocketsInRoom = store.rooms.removePlayer(socket.id);
+    otherSocketsInRoom.forEach((socketId) => {
+      io.to(socketId).emit('player:disconnected', socket.id);
+    });
     console.log('~ player:disconnected', socket.id, reason);
   },
 
