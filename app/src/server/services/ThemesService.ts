@@ -19,7 +19,7 @@ export class ThemesService implements BaseRESTService {
       let userTheme = await UserTheme.findByPk(id);
 
       if (!userTheme) {
-        userTheme = await UserTheme.create({ ownerId: id, themeId: 0 });
+        userTheme = await UserTheme.create({ ownerId: id, themeId: 1 });
       }
 
       return new Promise((resolve) => {
