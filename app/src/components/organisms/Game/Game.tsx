@@ -93,7 +93,7 @@ export const Game: FC = () => {
           stage={stage}
           fullScreenHandle={fullScreenHandle}
         />
-        <MultiplayerGameFooter />
+        <MultiplayerGameFooter gameStatus={status} />
       </>
     );
 
