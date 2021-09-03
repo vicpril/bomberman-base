@@ -1,4 +1,5 @@
 .leaderboard-page__list {
+  padding: 0;
   list-style-type: none;
   font-size: 40px;
 }
@@ -6,7 +7,7 @@
 .leaderboard-page__list-item {
   display: grid;
   grid-template-areas: "nick dots score";
-  grid-template-columns: 1fr fit-content(100%) 1fr;
+  grid-template-columns: 1fr fit-content(100%) fit-content(100%);
   grid-gap: 7px;
   justify-content: center;
 }

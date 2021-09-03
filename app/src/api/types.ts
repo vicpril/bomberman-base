@@ -2,6 +2,7 @@
 import { Method } from 'axios';
 
 export const ERROR_RESPONSE_DATA = 'Invalid response data!';
+export const SCORE_FIELD_NAME = 'scoreFieldGD';
 
 export type ApiRequestProps = {
   method: Method,

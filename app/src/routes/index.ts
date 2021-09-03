@@ -3,7 +3,7 @@ import { Main } from 'pages/Main/Main';
 import { Login } from 'pages/Login/Login';
 import { Registration } from 'pages/Registration/Registration';
 import { Forum } from 'pages/Forum/Forum';
-import { Game } from 'components/organisms/Game/Game';
+import { Game } from 'pages/Game/Game';
 import { LeaderBoard } from 'pages/LeaderBoard/LeaderBoard';
 import { Profile } from 'pages/Profile/Profile';
 import { ProfileEdit } from 'pages/ProfileEdit/ProfileEdit';
